@@ -22,5 +22,11 @@ namespace TimViec
             new Login().Show();
             this.Hide();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            new Home().Show();
+            this.Close();
+        }
     }
 }

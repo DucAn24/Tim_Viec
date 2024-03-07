@@ -85,6 +85,7 @@
             btnLogin.TabIndex = 28;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
             // checkbxPassworld
             // 
@@ -154,7 +155,7 @@
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(506, 653);
+            pictureBox1.Size = new Size(585, 653);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 19;
             pictureBox1.TabStop = false;
