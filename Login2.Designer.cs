@@ -180,6 +180,7 @@
             ForeColor = Color.FromArgb(164, 165, 169);
             Margin = new Padding(4, 3, 4, 3);
             Name = "Login2";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Login2";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

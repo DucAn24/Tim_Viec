@@ -21,3 +21,4 @@ E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Login.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Login2.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Home.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.sourcelink.json
+E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Information.resources
