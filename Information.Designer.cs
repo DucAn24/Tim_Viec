@@ -56,6 +56,7 @@
             materialMultiLineTextBox26 = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             materialDivider4 = new MaterialSkin.Controls.MaterialDivider();
             materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
+            materialButton1 = new MaterialSkin.Controls.MaterialButton();
             materialCard5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             materialCard4.SuspendLayout();
@@ -554,11 +555,31 @@
             materialLabel7.TabIndex = 0;
             materialLabel7.Text = "Experience";
             // 
+            // materialButton1
+            // 
+            materialButton1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            materialButton1.Depth = 0;
+            materialButton1.HighEmphasis = true;
+            materialButton1.Icon = null;
+            materialButton1.Location = new Point(44, 690);
+            materialButton1.Margin = new Padding(4, 6, 4, 6);
+            materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialButton1.Name = "materialButton1";
+            materialButton1.NoAccentTextColor = Color.Empty;
+            materialButton1.Size = new Size(178, 36);
+            materialButton1.TabIndex = 19;
+            materialButton1.Text = "accept this worker";
+            materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            materialButton1.UseAccentColor = false;
+            materialButton1.UseVisualStyleBackColor = true;
+            // 
             // Information
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1382, 853);
+            Controls.Add(materialButton1);
             Controls.Add(materialCard8);
             Controls.Add(materialCard9);
             Controls.Add(materialCard7);
@@ -578,6 +599,7 @@
             materialCard8.ResumeLayout(false);
             materialCard8.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -609,5 +631,6 @@
         private MaterialSkin.Controls.MaterialMultiLineTextBox2 materialMultiLineTextBox26;
         private MaterialSkin.Controls.MaterialDivider materialDivider4;
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
     }
 }

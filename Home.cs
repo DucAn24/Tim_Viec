@@ -26,16 +26,26 @@ namespace TimViec
 
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.LightBlue900,
-                                                                Primary.LightBlue700,
-                                                                Primary.LightBlue500,
-                                                                Accent.LightBlue200,
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen900,
+                                                                Primary.LightGreen700,
+                                                                Primary.LightGreen500,
+                                                                Accent.LightGreen200,
                                                                 TextShade.WHITE);
+
+            List<MaterialCard> materialCards = new List<MaterialCard> { materialCard6, materialCard14, materialCard12, materialCard10, materialCard15, materialCard16, materialCard17, materialCard18 };
+
+            // Attach a click event handler to each MaterialCard
+            foreach (var materialCard in materialCards)
+            {
+                materialCard.Click += MaterialCard_Click;
+            }
+
+
         }
 
         private void Home_Load(object sender, EventArgs e)
         {
-            AddCardToFlowLayout();
+
         }
 
         private void materialSwitch2_CheckedChanged(object sender, EventArgs e)
@@ -68,107 +78,56 @@ namespace TimViec
             }
         }
 
-        private void tabPage3_Click(object sender, EventArgs e)
+        private void MaterialCard_Click(object sender, EventArgs e)
         {
+            // Determine which MaterialCard was clicked
+            MaterialCard clickedCard = sender as MaterialCard;
 
-        }
-
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void AddControlsToCard(MaterialCard card,System.Drawing.Image image, string label1Text, string label2Text, string label3Text, string label4Text)
-        {
-
-            //create and configure picture box
-            PictureBox pictureBox = new PictureBox();
-            pictureBox.Image = image;
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.Size = new Size(220, 150);
-            pictureBox.Location = new Point(12, 35);
-            pictureBox.Click += (sender, e) => OpenInformationForm();
-            
-
-            // Create and configure label 1
-            Label label1 = new Label();
-            label1.Text = label1Text;
-            label1.AutoSize = true;
-            label1.ForeColor = Color.LightSkyBlue;
-            label1.Font = new Font("Nirmala UI", 12, FontStyle.Bold);
-            label1.Location = new Point(12, 1);
-            label1.Click += (sender, e) => OpenInformationForm();
-
-            // Create and configure label 2
-            Label label2 = new Label();
-            label2.Text = label2Text;
-            label2.AutoSize = true;
-            label2.Location = new Point(12,200);
-            
-
-            // Create and configure label 3
-            Label label3 = new Label();
-            label3.Text = label3Text;
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 230);
-            
-
-            // Create and configure label 4
-            Label label4 = new Label();
-            label4.Text = label4Text;
-            label4.AutoSize = true;
-            label4.Location = new Point(12, 260);
-
-            // add label to the card
-            card.Controls.Add(label1);
-            card.Controls.Add(label2);
-            card.Controls.Add(label3);
-            card.Controls.Add(label4);
-            card.Controls.Add(pictureBox);
-        }
-
-        private void AddCardToFlowLayout()
-        {
-            // Example data for cards
-            List<(string, string, string, string)> labels = new List<(string, string, string, string)>
+            // Create and show the appropriate form based on the clicked MaterialCard
+            switch (clickedCard.Name)
             {
-                ("sua quat", "Label 1-2", "Label 1-3", "Label 1-4"),
-                ("sua may giat", "Label 2-2", "Label 2-3", "Label 2-4"),
-                ("code web", "Label 3-2", "Label 3-3", "Label 3-4")
-            };
+                case "materialCard6":
+                case "materialCard14":
+                case "materialCard12":
+                case "materialCard10":
+                case "materialCard15":
+                case "materialCard16":
+                case "materialCard17":
+                case "materialCard18":
+                    WorkerList form1 = new WorkerList();
+                    form1.Show();
+                    break;
+            }
+        }
 
-            // Example data for image indices in the ImageList
-            List<int> imageIndices = new List<int> { 0, 1, 2 };
-
-            //loop all label and image
-            for (int i = 0; i < labels.Count; i++)
+        private void btnImportImage_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                // Create a new card
-                MaterialCard card = new MaterialCard();
-                card.Width = 250; // Set card width as needed
-                card.Height = 320;
-                card.Margin = new Padding(10);
-
-                // Get image from ImageList by index
-                System.Drawing.Image image = imageList2.Images[imageIndices[i]];
-
-                // Add controls to the card with corresponding information
-                AddControlsToCard(card, image, labels[i].Item1, labels[i].Item2, labels[i].Item3, labels[i].Item4);
-
-                // Add the card to the flow layout panel
-                flowLayoutPanel1.Controls.Add(card);
+                ofd.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    picBoxUser.Image = new Bitmap(ofd.FileName);
+                }
             }
 
         }
-        private void OpenInformationForm()
+
+        private void ckbFemale_CheckedChanged(object sender, EventArgs e)
         {
-            // Open the Information form
-            Information informationForm = new Information();
-            informationForm.Show();
+            if (ckbFemale.Checked)
+            {
+                ckbMale.Checked = false;
+            }
+
         }
 
-
-
+        private void ckbMale_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbMale.Checked)
+            {
+                ckbFemale.Checked = false;
+            }
+        }
     }
 }

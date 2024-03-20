@@ -13,5 +13,8 @@
     <Compile Update="Login2.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="WorkerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
