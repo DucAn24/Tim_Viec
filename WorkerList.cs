@@ -37,7 +37,6 @@ namespace TimViec
 
         private void AddControlsToPanel(Image image, string label1Text, string label2Text, string label3Text, string label4Text)
         {
-
             //create and configure picture box
             PictureBox pictureBox = new PictureBox();
             pictureBox.Image = image;
@@ -104,7 +103,6 @@ namespace TimViec
             card.Controls.Add(btnViewProfile);
 
             flowLayoutPanel1.Controls.Add(card);
-
         }
 
 
@@ -129,7 +127,6 @@ namespace TimViec
             //loop all labels and images
             for (int i = 0; i < 6; i++)
             {
-
                 // Get image from ImageList by index
                 Image image = imageList1.Images[imageIndices[i]];
 

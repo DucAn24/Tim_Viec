@@ -4,20 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 
 namespace TimViec
 {
     public class DbConnection
     {
-        private string connectionString;
-        private SqlConnection connection;
+        SqlConnection connection = new SqlConnection(Properties.Settings.Default.connStr);
 
-        public DbConnection(string server, string database, string username, string password)
+        public SqlConnection GetSqlConnection() 
         {
-            // Create the connection string
-            connectionString = $"Server={server};Database={database};User Id={username};Password={password};";
-            connection = new SqlConnection(connectionString);
+            return connection;
         }
 
         public void Open()

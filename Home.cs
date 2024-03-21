@@ -39,8 +39,6 @@ namespace TimViec
             {
                 materialCard.Click += MaterialCard_Click;
             }
-
-
         }
 
         private void Home_Load(object sender, EventArgs e)
