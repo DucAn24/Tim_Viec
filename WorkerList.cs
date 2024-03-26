@@ -44,6 +44,7 @@ namespace TimViec
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Set this to Zoom
             pictureBox.Size = new Size(90,90); // Set this to desired size
             pictureBox.Location = new Point(20, 20);
+            pictureBox.Click += (sender, e) => OpenInformationForm();
 
 
             // Create and configure label 1
@@ -53,6 +54,7 @@ namespace TimViec
             label1.ForeColor = Color.Chocolate;
             label1.Font = new Font("Nirmala UI", 12, FontStyle.Bold);
             label1.Location = new Point(120, 20);
+            label1.Click += (sender, e) => OpenInformationForm();
 
 
             // Create and configure label 2
@@ -62,37 +64,40 @@ namespace TimViec
             label2.ForeColor = Color.LightGreen;
             label2.Font = new Font("Nirmala UI", 16, FontStyle.Bold);
             label2.Location = new Point(120, 50);
+            label2.Click += (sender, e) => OpenInformationForm();
 
             // Create and configure label 3
             Label label3 = new Label();
             label3.Text = label3Text;
-             
             label3.AutoSize = true;
             label3.Location = new Point(20, 120);
+            label3.Click += (sender, e) => OpenInformationForm();
 
             // Create and configure label 4
             Label label4 = new Label();
             label4.Text = label4Text;
             label4.AutoSize = false; // Set AutoSize to false
-            label4.Width = 1100; 
+            label4.Width = 1310; 
             label4.Height = 100;
             label4.Location = new Point(120, 100); // Set the location
             label4.TextAlign = ContentAlignment.TopLeft;
+            label4.Click += (sender, e) => OpenInformationForm();
 
             // Create a new panel
             MaterialCard card = new MaterialCard();
-            card.Width = 1250; // Set panel width as needed
+            card.Width = 1460; // Set panel width as needed
             card.Height = 250;
             card.BackColor = Color.White; // Set panel background color if needed
+            card.Click += (sender, e) => OpenInformationForm();
 
             MaterialButton btnHire = new MaterialButton();
             btnHire.Text = "Hire Talent";
             btnHire.Location = new Point(120, 200);
 
-            MaterialButton btnViewProfile = new MaterialButton();
-            btnViewProfile.Text = "View Profile"; 
-            btnViewProfile.Location = new Point(240, 200);
-            btnViewProfile.Click += (sender, e) => OpenInformationForm();
+            MaterialButton btnFavourite = new MaterialButton();
+            btnFavourite.Text = "Favourite";
+            btnFavourite.Location = new Point(240, 200);
+
 
             // add controls to the card
             card.Controls.Add(label1);
@@ -101,7 +106,8 @@ namespace TimViec
             card.Controls.Add(label4);
             card.Controls.Add(pictureBox);
             card.Controls.Add(btnHire);
-            card.Controls.Add(btnViewProfile);
+            card.Controls.Add(btnFavourite);
+
 
             flowLayoutPanel1.Controls.Add(card);
 

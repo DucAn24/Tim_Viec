@@ -1,6 +1,6 @@
 ﻿namespace TimViec
 {
-    partial class Home
+    partial class Worker
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Worker));
             materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             tabPage4 = new TabPage();
             materialCard19 = new MaterialSkin.Controls.MaterialCard();
@@ -42,10 +41,6 @@
             materialCard2 = new MaterialSkin.Controls.MaterialCard();
             materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             switchTheme = new MaterialSkin.Controls.MaterialSwitch();
-            materialCard1 = new MaterialSkin.Controls.MaterialCard();
-            label1 = new Label();
-            materialDivider11 = new MaterialSkin.Controls.MaterialDivider();
-            materialButton16 = new MaterialSkin.Controls.MaterialButton();
             tabPage1 = new TabPage();
             materialCard18 = new MaterialSkin.Controls.MaterialCard();
             pictureBox6 = new PictureBox();
@@ -98,7 +93,6 @@
             materialCard3 = new MaterialSkin.Controls.MaterialCard();
             materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
-            imageList1 = new ImageList(components);
             materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             label3 = new Label();
@@ -112,6 +106,7 @@
             materialDivider5 = new MaterialSkin.Controls.MaterialDivider();
             materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             materialCard5 = new MaterialSkin.Controls.MaterialCard();
+            materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
             btnImportImage = new MaterialSkin.Controls.MaterialButton();
             label31 = new Label();
             label30 = new Label();
@@ -137,14 +132,12 @@
             materialButton5 = new MaterialSkin.Controls.MaterialButton();
             materialDivider3 = new MaterialSkin.Controls.MaterialDivider();
             materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
-            imageList2 = new ImageList(components);
-            materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
+            tabPage5 = new TabPage();
             materialTabControl1.SuspendLayout();
             tabPage4.SuspendLayout();
             materialCard19.SuspendLayout();
             materialCard13.SuspendLayout();
             materialCard2.SuspendLayout();
-            materialCard1.SuspendLayout();
             tabPage1.SuspendLayout();
             materialCard18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
@@ -178,17 +171,17 @@
             materialTabControl1.Controls.Add(tabPage1);
             materialTabControl1.Controls.Add(tabPage2);
             materialTabControl1.Controls.Add(tabPage3);
+            materialTabControl1.Controls.Add(tabPage5);
             materialTabControl1.Depth = 0;
             materialTabControl1.Dock = DockStyle.Fill;
             materialTabControl1.Font = new Font("Nirmala UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            materialTabControl1.ImageList = imageList1;
             materialTabControl1.Location = new Point(3, 64);
             materialTabControl1.MouseState = MaterialSkin.MouseState.HOVER;
             materialTabControl1.Multiline = true;
             materialTabControl1.Name = "materialTabControl1";
             materialTabControl1.SelectedIndex = 0;
             materialTabControl1.Size = new Size(1594, 853);
-            materialTabControl1.TabIndex = 0;
+            materialTabControl1.TabIndex = 1;
             // 
             // tabPage4
             // 
@@ -196,13 +189,12 @@
             tabPage4.Controls.Add(materialCard19);
             tabPage4.Controls.Add(materialCard13);
             tabPage4.Controls.Add(materialCard2);
-            tabPage4.Controls.Add(materialCard1);
             tabPage4.Font = new Font("Nirmala UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tabPage4.ForeColor = SystemColors.ActiveCaption;
             tabPage4.ImageKey = "icons8-dashboards-32.png";
-            tabPage4.Location = new Point(4, 39);
+            tabPage4.Location = new Point(4, 32);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1586, 810);
+            tabPage4.Size = new Size(1586, 817);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Dashboards";
             // 
@@ -215,7 +207,7 @@
             materialCard19.Controls.Add(materialButton3);
             materialCard19.Depth = 0;
             materialCard19.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard19.Location = new Point(26, 424);
+            materialCard19.Location = new Point(45, 59);
             materialCard19.Margin = new Padding(14);
             materialCard19.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard19.Name = "materialCard19";
@@ -350,63 +342,6 @@
             switchTheme.TabIndex = 2;
             switchTheme.Text = "LIGHT   ";
             switchTheme.UseVisualStyleBackColor = false;
-            switchTheme.CheckedChanged += materialSwitch2_CheckedChanged;
-            // 
-            // materialCard1
-            // 
-            materialCard1.BackColor = Color.FromArgb(255, 255, 255);
-            materialCard1.Controls.Add(label1);
-            materialCard1.Controls.Add(materialDivider11);
-            materialCard1.Controls.Add(materialButton16);
-            materialCard1.Depth = 0;
-            materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(26, 30);
-            materialCard1.Margin = new Padding(14);
-            materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialCard1.Name = "materialCard1";
-            materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1133, 319);
-            materialCard1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.ForeColor = Color.LightSkyBlue;
-            label1.Location = new Point(17, 7);
-            label1.Name = "label1";
-            label1.Size = new Size(97, 41);
-            label1.TabIndex = 4;
-            label1.Text = "Hired";
-            // 
-            // materialDivider11
-            // 
-            materialDivider11.BackColor = Color.FromArgb(30, 0, 0, 0);
-            materialDivider11.Depth = 0;
-            materialDivider11.Location = new Point(0, 57);
-            materialDivider11.MouseState = MaterialSkin.MouseState.HOVER;
-            materialDivider11.Name = "materialDivider11";
-            materialDivider11.Size = new Size(1132, 10);
-            materialDivider11.TabIndex = 3;
-            materialDivider11.Text = "materialDivider11";
-            // 
-            // materialButton16
-            // 
-            materialButton16.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            materialButton16.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            materialButton16.Depth = 0;
-            materialButton16.HighEmphasis = true;
-            materialButton16.Icon = null;
-            materialButton16.Location = new Point(970, 12);
-            materialButton16.Margin = new Padding(4, 6, 4, 6);
-            materialButton16.MouseState = MaterialSkin.MouseState.HOVER;
-            materialButton16.Name = "materialButton16";
-            materialButton16.NoAccentTextColor = Color.Empty;
-            materialButton16.Size = new Size(136, 36);
-            materialButton16.TabIndex = 1;
-            materialButton16.Text = "delete worker";
-            materialButton16.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            materialButton16.UseAccentColor = false;
-            materialButton16.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
@@ -423,10 +358,10 @@
             tabPage1.Controls.Add(label8);
             tabPage1.Controls.Add(label7);
             tabPage1.ImageKey = "search.png";
-            tabPage1.Location = new Point(4, 39);
+            tabPage1.Location = new Point(4, 32);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1586, 810);
+            tabPage1.Size = new Size(1586, 817);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Find Work";
             // 
@@ -723,7 +658,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Nirmala UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.ForeColor = SystemColors.ActiveCaptionText;
-            label9.Location = new Point(23, 84);
+            label9.Location = new Point(26, 87);
             label9.Name = "label9";
             label9.Size = new Size(216, 31);
             label9.TabIndex = 2;
@@ -734,7 +669,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Nirmala UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.LightGreen;
-            label8.Location = new Point(234, 84);
+            label8.Location = new Point(237, 87);
             label8.Name = "label8";
             label8.Size = new Size(143, 31);
             label8.TabIndex = 1;
@@ -745,7 +680,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Nirmala UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = SystemColors.ActiveCaptionText;
-            label7.Location = new Point(3, 3);
+            label7.Location = new Point(6, 6);
             label7.Name = "label7";
             label7.Size = new Size(770, 81);
             label7.TabIndex = 0;
@@ -773,10 +708,10 @@
             tabPage2.Controls.Add(label2);
             tabPage2.ForeColor = SystemColors.GradientActiveCaption;
             tabPage2.ImageKey = "project.png";
-            tabPage2.Location = new Point(4, 39);
+            tabPage2.Location = new Point(4, 32);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1586, 810);
+            tabPage2.Size = new Size(1586, 817);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Post Job";
             // 
@@ -809,7 +744,7 @@
             label23.AutoSize = true;
             label23.Font = new Font("Nirmala UI Semilight", 10.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label23.ForeColor = SystemColors.ActiveCaptionText;
-            label23.Location = new Point(364, 529);
+            label23.Location = new Point(367, 532);
             label23.Name = "label23";
             label23.Size = new Size(394, 23);
             label23.TabIndex = 30;
@@ -820,7 +755,7 @@
             label22.AutoSize = true;
             label22.Font = new Font("Nirmala UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label22.ForeColor = SystemColors.ActiveCaptionText;
-            label22.Location = new Point(101, 517);
+            label22.Location = new Point(104, 520);
             label22.Name = "label22";
             label22.Size = new Size(240, 38);
             label22.TabIndex = 29;
@@ -831,7 +766,7 @@
             label21.AutoSize = true;
             label21.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label21.ForeColor = Color.LightGreen;
-            label21.Location = new Point(100, 460);
+            label21.Location = new Point(103, 463);
             label21.Name = "label21";
             label21.Size = new Size(377, 54);
             label21.TabIndex = 28;
@@ -842,7 +777,7 @@
             label20.AutoSize = true;
             label20.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label20.ForeColor = Color.LightGreen;
-            label20.Location = new Point(100, 232);
+            label20.Location = new Point(103, 235);
             label20.Name = "label20";
             label20.Size = new Size(266, 54);
             label20.TabIndex = 27;
@@ -877,7 +812,7 @@
             label19.AutoSize = true;
             label19.Font = new Font("Nirmala UI Semilight", 10.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label19.ForeColor = SystemColors.ActiveCaptionText;
-            label19.Location = new Point(1014, 104);
+            label19.Location = new Point(1017, 107);
             label19.Name = "label19";
             label19.Size = new Size(452, 23);
             label19.TabIndex = 25;
@@ -888,7 +823,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Nirmala UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(845, 92);
+            label4.Location = new Point(848, 95);
             label4.Name = "label4";
             label4.Size = new Size(136, 38);
             label4.TabIndex = 24;
@@ -927,7 +862,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label18.ForeColor = Color.LightGreen;
-            label18.Location = new Point(100, 26);
+            label18.Location = new Point(103, 29);
             label18.Name = "label18";
             label18.Size = new Size(339, 54);
             label18.TabIndex = 22;
@@ -940,7 +875,7 @@
             materialButton15.Depth = 0;
             materialButton15.HighEmphasis = true;
             materialButton15.Icon = null;
-            materialButton15.Location = new Point(269, 754);
+            materialButton15.Location = new Point(272, 757);
             materialButton15.Margin = new Padding(4, 6, 4, 6);
             materialButton15.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton15.Name = "materialButton15";
@@ -959,7 +894,7 @@
             materialButton2.Depth = 0;
             materialButton2.HighEmphasis = true;
             materialButton2.Icon = null;
-            materialButton2.Location = new Point(354, 754);
+            materialButton2.Location = new Point(357, 757);
             materialButton2.Margin = new Padding(4, 6, 4, 6);
             materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton2.Name = "materialButton2";
@@ -978,7 +913,7 @@
             materialButton1.Depth = 0;
             materialButton1.HighEmphasis = true;
             materialButton1.Icon = null;
-            materialButton1.Location = new Point(117, 754);
+            materialButton1.Location = new Point(120, 757);
             materialButton1.Margin = new Padding(4, 6, 4, 6);
             materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton1.Name = "materialButton1";
@@ -1137,7 +1072,6 @@
             materialRadioButton2.AutoSize = true;
             materialRadioButton2.Depth = 0;
             materialRadioButton2.ImageKey = "icons8-hour-24.png";
-            materialRadioButton2.ImageList = imageList1;
             materialRadioButton2.Location = new Point(209, 57);
             materialRadioButton2.Margin = new Padding(0);
             materialRadioButton2.MouseLocation = new Point(-1, -1);
@@ -1149,27 +1083,12 @@
             materialRadioButton2.TabStop = true;
             materialRadioButton2.Text = "Pay fixed price";
             materialRadioButton2.UseVisualStyleBackColor = true;
-            materialRadioButton2.CheckedChanged += materialRadioButton2_CheckedChanged;
-            // 
-            // imageList1
-            // 
-            imageList1.ColorDepth = ColorDepth.Depth32Bit;
-            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
-            imageList1.TransparentColor = Color.Transparent;
-            imageList1.Images.SetKeyName(0, "magnifying-glass.png");
-            imageList1.Images.SetKeyName(1, "profile.png");
-            imageList1.Images.SetKeyName(2, "project.png");
-            imageList1.Images.SetKeyName(3, "search.png");
-            imageList1.Images.SetKeyName(4, "icons8-dashboards-32.png");
-            imageList1.Images.SetKeyName(5, "icons8-hour-24.png");
-            imageList1.Images.SetKeyName(6, "icons8-search-64.png");
             // 
             // materialRadioButton1
             // 
             materialRadioButton1.AutoSize = true;
             materialRadioButton1.Depth = 0;
             materialRadioButton1.ImageKey = "icons8-hour-24.png";
-            materialRadioButton1.ImageList = imageList1;
             materialRadioButton1.Location = new Point(35, 57);
             materialRadioButton1.Margin = new Padding(0);
             materialRadioButton1.MouseLocation = new Point(-1, -1);
@@ -1181,7 +1100,6 @@
             materialRadioButton1.TabStop = true;
             materialRadioButton1.Text = "Pay by the hour";
             materialRadioButton1.UseVisualStyleBackColor = true;
-            materialRadioButton1.CheckedChanged += materialRadioButton1_CheckedChanged;
             // 
             // materialLabel1
             // 
@@ -1201,7 +1119,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Nirmala UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.ActiveCaptionText;
-            label3.Location = new Point(100, 92);
+            label3.Location = new Point(103, 95);
             label3.Name = "label3";
             label3.Size = new Size(75, 38);
             label3.TabIndex = 2;
@@ -1212,7 +1130,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Nirmala UI Semilight", 10.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(181, 104);
+            label2.Location = new Point(184, 107);
             label2.Name = "label2";
             label2.Size = new Size(454, 23);
             label2.TabIndex = 1;
@@ -1226,9 +1144,9 @@
             tabPage3.Controls.Add(materialCard5);
             tabPage3.Controls.Add(materialCard7);
             tabPage3.ImageKey = "profile.png";
-            tabPage3.Location = new Point(4, 39);
+            tabPage3.Location = new Point(4, 32);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1586, 810);
+            tabPage3.Size = new Size(1586, 817);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Profile";
             // 
@@ -1379,6 +1297,17 @@
             materialCard5.Size = new Size(760, 670);
             materialCard5.TabIndex = 0;
             // 
+            // materialDivider2
+            // 
+            materialDivider2.BackColor = Color.FromArgb(30, 0, 0, 0);
+            materialDivider2.Depth = 0;
+            materialDivider2.Location = new Point(0, 260);
+            materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
+            materialDivider2.Name = "materialDivider2";
+            materialDivider2.Size = new Size(758, 10);
+            materialDivider2.TabIndex = 21;
+            materialDivider2.Text = "materialDivider2";
+            // 
             // btnImportImage
             // 
             btnImportImage.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -1397,7 +1326,6 @@
             btnImportImage.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnImportImage.UseAccentColor = false;
             btnImportImage.UseVisualStyleBackColor = true;
-            btnImportImage.Click += btnImportImage_Click;
             // 
             // label31
             // 
@@ -1648,7 +1576,6 @@
             ckbFemale.TabIndex = 3;
             ckbFemale.Text = "Female";
             ckbFemale.UseVisualStyleBackColor = true;
-            ckbFemale.CheckedChanged += ckbFemale_CheckedChanged;
             // 
             // ckbMale
             // 
@@ -1665,7 +1592,6 @@
             ckbMale.TabIndex = 2;
             ckbMale.Text = "Male";
             ckbMale.UseVisualStyleBackColor = true;
-            ckbMale.CheckedChanged += ckbMale_CheckedChanged;
             // 
             // materialTextBox21
             // 
@@ -1808,42 +1734,27 @@
             materialLabel6.TabIndex = 0;
             materialLabel6.Text = "Certifications";
             // 
-            // imageList2
+            // tabPage5
             // 
-            imageList2.ColorDepth = ColorDepth.Depth32Bit;
-            imageList2.ImageStream = (ImageListStreamer)resources.GetObject("imageList2.ImageStream");
-            imageList2.TransparentColor = Color.Transparent;
-            imageList2.Images.SetKeyName(0, "68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f6867514f413661494a7255656b413d3d2d3830343936383231362e31356436633638646239313762626564383835323437373439303.jpg");
-            imageList2.Images.SetKeyName(1, "desktop-wallpaper-pfp-aesthetic-profile-for-instagram-instagram-profile-thumbnail.jpg");
-            imageList2.Images.SetKeyName(2, "326285595c45f11ba854.jpg");
+            tabPage5.Location = new Point(4, 32);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Size = new Size(1586, 817);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Appointment";
+            tabPage5.UseVisualStyleBackColor = true;
             // 
-            // materialDivider2
-            // 
-            materialDivider2.BackColor = Color.FromArgb(30, 0, 0, 0);
-            materialDivider2.Depth = 0;
-            materialDivider2.Location = new Point(0, 260);
-            materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
-            materialDivider2.Name = "materialDivider2";
-            materialDivider2.Size = new Size(758, 10);
-            materialDivider2.TabIndex = 21;
-            materialDivider2.Text = "materialDivider2";
-            // 
-            // Home
+            // Worker
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
             ClientSize = new Size(1600, 920);
             Controls.Add(materialTabControl1);
-            DrawerBackgroundWithAccent = true;
             DrawerShowIconsWhenHidden = true;
             DrawerTabControl = materialTabControl1;
-            DrawerUseColors = true;
-            ForeColor = SystemColors.ActiveCaption;
-            Name = "Home";
+            Name = "Worker";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Home";
-            Load += Home_Load;
+            Text = "Worker";
+            Load += Worker_Load;
             materialTabControl1.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
             materialCard19.ResumeLayout(false);
@@ -1852,8 +1763,6 @@
             materialCard13.PerformLayout();
             materialCard2.ResumeLayout(false);
             materialCard2.PerformLayout();
-            materialCard1.ResumeLayout(false);
-            materialCard1.PerformLayout();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             materialCard18.ResumeLayout(false);
@@ -1901,113 +1810,108 @@
         #endregion
 
         private MaterialSkin.Controls.MaterialTabControl materialTabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
-        private ImageList imageList1;
-        private TabPage tabPage3;
-        private MaterialSkin.Controls.MaterialCard materialCard1;
-        private MaterialSkin.Controls.MaterialSwitch switchTheme;
-        private MaterialSkin.Controls.MaterialCard materialCard2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private Label label3;
-        private Label label2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private MaterialSkin.Controls.MaterialCard materialCard3;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
-        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
-        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
-        private MaterialSkin.Controls.MaterialCard materialCard4;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
-        private MaterialSkin.Controls.MaterialTextBox materialTextBox2;
-        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
-        private MaterialSkin.Controls.MaterialCard materialCard9;
-        private MaterialSkin.Controls.MaterialCard materialCard7;
-        private MaterialSkin.Controls.MaterialCard materialCard5;
-        private MaterialSkin.Controls.MaterialCheckbox ckbFemale;
-        private MaterialSkin.Controls.MaterialCheckbox ckbMale;
-        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
-        private PictureBox picBoxUser;
-        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox23;
-        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox22;
-        private MaterialSkin.Controls.MaterialDivider materialDivider3;
-        private MaterialSkin.Controls.MaterialLabel materialLabel6;
-        private MaterialSkin.Controls.MaterialDivider materialDivider5;
-        private MaterialSkin.Controls.MaterialLabel materialLabel8;
-        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox24;
-        private MaterialSkin.Controls.MaterialDivider materialDivider1;
-        private MaterialSkin.Controls.MaterialButton materialButton5;
-        private MaterialSkin.Controls.MaterialButton materialButton6;
-        private MaterialSkin.Controls.MaterialButton materialButton8;
-        private MaterialSkin.Controls.MaterialButton materialButton2;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
-        private MaterialSkin.Controls.MaterialButton materialButton11;
-        private MaterialSkin.Controls.MaterialButton materialButton10;
-        private MaterialSkin.Controls.MaterialButton materialButton13;
-        private MaterialSkin.Controls.MaterialMultiLineTextBox2 materialMultiLineTextBox27;
-        private MaterialSkin.Controls.MaterialMultiLineTextBox2 materialMultiLineTextBox25;
-        private MaterialSkin.Controls.MaterialDivider materialDivider9;
-        private MaterialSkin.Controls.MaterialTextBox materialTextBox3;
-        private MaterialSkin.Controls.MaterialCard materialCard13;
-        private MaterialSkin.Controls.MaterialButton materialButton16;
-        private MaterialSkin.Controls.MaterialButton materialButton15;
-        private MaterialSkin.Controls.MaterialButton materialButton17;
-        private MaterialSkin.Controls.MaterialDivider materialDivider11;
-        private MaterialSkin.Controls.MaterialLabel materialLabel16;
         public TabPage tabPage4;
         private MaterialSkin.Controls.MaterialCard materialCard19;
-        private MaterialSkin.Controls.MaterialDivider materialDivider16;
-        private MaterialSkin.Controls.MaterialButton materialButton3;
-        private Label label1;
         private Label label5;
-        private ImageList imageList2;
-        private Label label7;
+        private MaterialSkin.Controls.MaterialDivider materialDivider16;
+        private MaterialSkin.Controls.MaterialButton materialButton17;
+        private MaterialSkin.Controls.MaterialButton materialButton3;
+        private MaterialSkin.Controls.MaterialCard materialCard13;
+        private MaterialSkin.Controls.MaterialLabel materialLabel16;
+        private MaterialSkin.Controls.MaterialCard materialCard2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialSwitch switchTheme;
+        private TabPage tabPage1;
         private MaterialSkin.Controls.MaterialCard materialCard18;
+        private PictureBox pictureBox6;
+        private Label label14;
         private MaterialSkin.Controls.MaterialCard materialCard17;
+        private PictureBox pictureBox7;
+        private Label label15;
         private MaterialSkin.Controls.MaterialCard materialCard16;
+        private PictureBox pictureBox8;
+        private Label label16;
         private MaterialSkin.Controls.MaterialCard materialCard15;
+        private PictureBox pictureBox9;
+        private Label label17;
         private MaterialSkin.Controls.MaterialCard materialCard12;
+        private PictureBox pictureBox4;
+        private Label label12;
+        public MaterialSkin.Controls.MaterialCard materialCard14;
+        private PictureBox pictureBox3;
+        private Label label11;
         private MaterialSkin.Controls.MaterialCard materialCard10;
+        private PictureBox pictureBox5;
+        private Label label13;
+        public MaterialSkin.Controls.MaterialCard materialCard6;
+        private PictureBox pictureBox2;
+        private Label label10;
         private Label label9;
         private Label label8;
-        private Label label14;
-        private Label label15;
-        private Label label16;
-        private Label label17;
-        private Label label12;
-        private Label label11;
-        private Label label13;
-        private Label label10;
-        public MaterialSkin.Controls.MaterialCard materialCard14;
-        public MaterialSkin.Controls.MaterialCard materialCard6;
-        private PictureBox pictureBox6;
-        private PictureBox pictureBox7;
-        private PictureBox pictureBox8;
-        private PictureBox pictureBox9;
-        private PictureBox pictureBox4;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox5;
-        private PictureBox pictureBox2;
-        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox25;
-        private Label label18;
-        private MaterialSkin.Controls.MaterialComboBox materialComboBox2;
-        private Label label19;
-        private Label label4;
+        private Label label7;
+        private TabPage tabPage2;
+        private MaterialSkin.Controls.MaterialMultiLineTextBox2 materialMultiLineTextBox21;
         private Label label23;
         private Label label22;
         private Label label21;
         private Label label20;
-        private MaterialSkin.Controls.MaterialMultiLineTextBox2 materialMultiLineTextBox21;
+        private MaterialSkin.Controls.MaterialComboBox materialComboBox2;
+        private Label label19;
+        private Label label4;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox25;
+        private Label label18;
+        private MaterialSkin.Controls.MaterialButton materialButton15;
+        private MaterialSkin.Controls.MaterialButton materialButton2;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialCard materialCard4;
+        private MaterialSkin.Controls.MaterialDivider materialDivider9;
+        private MaterialSkin.Controls.MaterialTextBox materialTextBox3;
+        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialTextBox materialTextBox2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialCard materialCard3;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private Label label3;
+        private Label label2;
+        private TabPage tabPage3;
         private Label label24;
-        private Label label25;
-        private DateTimePicker dateTimePicker1;
-        private Label label26;
+        private MaterialSkin.Controls.MaterialCard materialCard9;
+        private MaterialSkin.Controls.MaterialMultiLineTextBox2 materialMultiLineTextBox27;
+        private MaterialSkin.Controls.MaterialButton materialButton11;
+        private MaterialSkin.Controls.MaterialButton materialButton6;
+        private MaterialSkin.Controls.MaterialDivider materialDivider5;
+        private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private MaterialSkin.Controls.MaterialCard materialCard5;
+        private MaterialSkin.Controls.MaterialDivider materialDivider2;
+        private MaterialSkin.Controls.MaterialButton btnImportImage;
+        private Label label31;
+        private Label label30;
         private Label label29;
         private MaterialSkin.Controls.MaterialTextBox2 materialTextBox26;
         private Label label28;
         private Label label27;
-        private Label label31;
-        private Label label30;
-        private MaterialSkin.Controls.MaterialButton btnImportImage;
-        private MaterialSkin.Controls.MaterialDivider materialDivider2;
+        private Label label26;
+        private Label label25;
+        private DateTimePicker dateTimePicker1;
+        private MaterialSkin.Controls.MaterialButton materialButton13;
+        private MaterialSkin.Controls.MaterialButton materialButton8;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox24;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox23;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox22;
+        private MaterialSkin.Controls.MaterialCheckbox ckbFemale;
+        private MaterialSkin.Controls.MaterialCheckbox ckbMale;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
+        private PictureBox picBoxUser;
+        private MaterialSkin.Controls.MaterialCard materialCard7;
+        private MaterialSkin.Controls.MaterialMultiLineTextBox2 materialMultiLineTextBox25;
+        private MaterialSkin.Controls.MaterialButton materialButton10;
+        private MaterialSkin.Controls.MaterialButton materialButton5;
+        private MaterialSkin.Controls.MaterialDivider materialDivider3;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
+        private TabPage tabPage5;
     }
 }

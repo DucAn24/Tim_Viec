@@ -15,11 +15,11 @@ using Font = System.Drawing.Font;
 
 namespace TimViec
 {
-    public partial class Home : MaterialForm
+    public partial class User : MaterialForm
     {
 
         MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
-        public Home()
+        public User()
         {
             InitializeComponent();
             materialSkinManager.EnforceBackcolorOnAllComponents = false;

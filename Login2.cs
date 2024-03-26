@@ -25,7 +25,7 @@ namespace TimViec
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            new Home().Show();
+            new User().Show();
             this.Close();
         }
     }

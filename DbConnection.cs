@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Data;
 using Microsoft.Data.SqlClient;
 
@@ -13,10 +14,10 @@ namespace TimViec
         private string connectionString;
         private SqlConnection connection;
 
-        public DbConnection(string server, string database, string username, string password)
+        public DbConnection()
         {
-            // Create the connection string
-            connectionString = $"Server={server};Database={database};User Id={username};Password={password};";
+            // Assign the connection string directly
+            connectionString = @"Data Source=DucAn\SQLEXPRESS;Initial Catalog=TimViec;Integrated Security=True;Trust Server Certificate=True";
             connection = new SqlConnection(connectionString);
         }
 
@@ -64,5 +65,33 @@ namespace TimViec
             }
             return dataTable;
         }
+
+        public int ExecuteNonQuery(string query)
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                try
+                {
+                    connection.Open();
+                    int result = command.ExecuteNonQuery();
+                    connection.Close();
+
+                    // Display a success message box
+                    MessageBox.Show("Command executed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    // Display an error message box
+                    MessageBox.Show($"Error executing command: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return -1;
+                }
+            }
+        }
+
+
+
+
     }
 }

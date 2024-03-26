@@ -53,13 +53,14 @@
             imageList1.Images.SetKeyName(6, "images.png");
             imageList1.Images.SetKeyName(7, "icons8-writing-96.png");
             imageList1.Images.SetKeyName(8, "people.png");
+            imageList1.Images.SetKeyName(9, "icons8-save-48.png");
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 163);
             label7.ForeColor = SystemColors.ActiveCaptionText;
-            label7.Location = new Point(1061, 172);
+            label7.Location = new Point(1037, 152);
             label7.Name = "label7";
             label7.Size = new Size(86, 31);
             label7.TabIndex = 16;
@@ -72,7 +73,7 @@
             materialButton14.Depth = 0;
             materialButton14.HighEmphasis = true;
             materialButton14.Icon = (Image)resources.GetObject("materialButton14.Icon");
-            materialButton14.Location = new Point(722, 166);
+            materialButton14.Location = new Point(594, 145);
             materialButton14.Margin = new Padding(4, 6, 4, 6);
             materialButton14.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton14.Name = "materialButton14";
@@ -99,7 +100,7 @@
             materialComboBox2.IntegralHeight = false;
             materialComboBox2.ItemHeight = 43;
             materialComboBox2.Items.AddRange(new object[] { "Latest", "Oldest", "Lowest Price", "Highest Price" });
-            materialComboBox2.Location = new Point(1188, 154);
+            materialComboBox2.Location = new Point(1145, 134);
             materialComboBox2.MaxDropDownItems = 4;
             materialComboBox2.MouseState = MaterialSkin.MouseState.OUT;
             materialComboBox2.Name = "materialComboBox2";
@@ -117,7 +118,7 @@
             materialTextBox25.HideSelection = true;
             materialTextBox25.Hint = "Search for project";
             materialTextBox25.LeadingIcon = null;
-            materialTextBox25.Location = new Point(129, 154);
+            materialTextBox25.Location = new Point(31, 134);
             materialTextBox25.MaxLength = 32767;
             materialTextBox25.MouseState = MaterialSkin.MouseState.OUT;
             materialTextBox25.Name = "materialTextBox25";
@@ -139,9 +140,9 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Location = new Point(129, 239);
+            flowLayoutPanel1.Location = new Point(31, 212);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1304, 694);
+            flowLayoutPanel1.Size = new Size(1521, 721);
             flowLayoutPanel1.TabIndex = 17;
             // 
             // label18
@@ -149,7 +150,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label18.ForeColor = Color.LightGreen;
-            label18.Location = new Point(129, 74);
+            label18.Location = new Point(31, 77);
             label18.Name = "label18";
             label18.Size = new Size(229, 54);
             label18.TabIndex = 23;
