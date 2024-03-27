@@ -12,12 +12,13 @@ using System.Windows.Forms;
 
 namespace TimViec
 {
-    public partial class UCHome : MaterialForm
+    public partial class Appointment : MaterialForm
     {
         MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
-        public UCHome()
+        public Appointment()
         {
             InitializeComponent();
+
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
 
             materialSkinManager.AddFormToManage(this);
@@ -27,10 +28,9 @@ namespace TimViec
                                                                 Primary.LightGreen500,
                                                                 Accent.LightGreen200,
                                                                 TextShade.WHITE);
-
         }
 
-        private void UCHome_Load(object sender, EventArgs e)
+        private void Appointment_Load(object sender, EventArgs e)
         {
 
         }

@@ -31,12 +31,11 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorkerList));
             imageList1 = new ImageList(components);
-            label7 = new Label();
             materialButton14 = new MaterialSkin.Controls.MaterialButton();
-            materialComboBox2 = new MaterialSkin.Controls.MaterialComboBox();
             materialTextBox25 = new MaterialSkin.Controls.MaterialTextBox2();
             flowLayoutPanel1 = new FlowLayoutPanel();
             label18 = new Label();
+            materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
             SuspendLayout();
             // 
             // imageList1
@@ -55,17 +54,6 @@
             imageList1.Images.SetKeyName(8, "people.png");
             imageList1.Images.SetKeyName(9, "icons8-save-48.png");
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 163);
-            label7.ForeColor = SystemColors.ActiveCaptionText;
-            label7.Location = new Point(1037, 152);
-            label7.Name = "label7";
-            label7.Size = new Size(86, 31);
-            label7.TabIndex = 16;
-            label7.Text = "Sort by";
-            // 
             // materialButton14
             // 
             materialButton14.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -73,7 +61,7 @@
             materialButton14.Depth = 0;
             materialButton14.HighEmphasis = true;
             materialButton14.Icon = (Image)resources.GetObject("materialButton14.Icon");
-            materialButton14.Location = new Point(594, 145);
+            materialButton14.Location = new Point(961, 158);
             materialButton14.Margin = new Padding(4, 6, 4, 6);
             materialButton14.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton14.Name = "materialButton14";
@@ -85,29 +73,6 @@
             materialButton14.UseAccentColor = false;
             materialButton14.UseVisualStyleBackColor = true;
             // 
-            // materialComboBox2
-            // 
-            materialComboBox2.AutoResize = false;
-            materialComboBox2.BackColor = Color.FromArgb(255, 255, 255);
-            materialComboBox2.Depth = 0;
-            materialComboBox2.DrawMode = DrawMode.OwnerDrawVariable;
-            materialComboBox2.DropDownHeight = 174;
-            materialComboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-            materialComboBox2.DropDownWidth = 121;
-            materialComboBox2.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            materialComboBox2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialComboBox2.FormattingEnabled = true;
-            materialComboBox2.IntegralHeight = false;
-            materialComboBox2.ItemHeight = 43;
-            materialComboBox2.Items.AddRange(new object[] { "Latest", "Oldest", "Lowest Price", "Highest Price" });
-            materialComboBox2.Location = new Point(1145, 134);
-            materialComboBox2.MaxDropDownItems = 4;
-            materialComboBox2.MouseState = MaterialSkin.MouseState.OUT;
-            materialComboBox2.Name = "materialComboBox2";
-            materialComboBox2.Size = new Size(151, 49);
-            materialComboBox2.StartIndex = 0;
-            materialComboBox2.TabIndex = 14;
-            // 
             // materialTextBox25
             // 
             materialTextBox25.AnimateReadOnly = false;
@@ -118,7 +83,7 @@
             materialTextBox25.HideSelection = true;
             materialTextBox25.Hint = "Search for project";
             materialTextBox25.LeadingIcon = null;
-            materialTextBox25.Location = new Point(31, 134);
+            materialTextBox25.Location = new Point(58, 146);
             materialTextBox25.MaxLength = 32767;
             materialTextBox25.MouseState = MaterialSkin.MouseState.OUT;
             materialTextBox25.Name = "materialTextBox25";
@@ -130,7 +95,7 @@
             materialTextBox25.SelectionLength = 0;
             materialTextBox25.SelectionStart = 0;
             materialTextBox25.ShortcutsEnabled = true;
-            materialTextBox25.Size = new Size(542, 48);
+            materialTextBox25.Size = new Size(520, 48);
             materialTextBox25.TabIndex = 13;
             materialTextBox25.TabStop = false;
             materialTextBox25.TextAlign = HorizontalAlignment.Left;
@@ -150,22 +115,50 @@
             label18.AutoSize = true;
             label18.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label18.ForeColor = Color.LightGreen;
-            label18.Location = new Point(31, 77);
+            label18.Location = new Point(58, 75);
             label18.Name = "label18";
             label18.Size = new Size(229, 54);
             label18.TabIndex = 23;
             label18.Text = "Find Talent";
+            // 
+            // materialTextBox21
+            // 
+            materialTextBox21.AnimateReadOnly = false;
+            materialTextBox21.BackgroundImageLayout = ImageLayout.None;
+            materialTextBox21.CharacterCasing = CharacterCasing.Normal;
+            materialTextBox21.Depth = 0;
+            materialTextBox21.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialTextBox21.HideSelection = true;
+            materialTextBox21.Hint = "Budget";
+            materialTextBox21.LeadingIcon = null;
+            materialTextBox21.Location = new Point(638, 146);
+            materialTextBox21.MaxLength = 32767;
+            materialTextBox21.MouseState = MaterialSkin.MouseState.OUT;
+            materialTextBox21.Name = "materialTextBox21";
+            materialTextBox21.PasswordChar = '\0';
+            materialTextBox21.PrefixSuffixText = null;
+            materialTextBox21.ReadOnly = false;
+            materialTextBox21.RightToLeft = RightToLeft.No;
+            materialTextBox21.SelectedText = "";
+            materialTextBox21.SelectionLength = 0;
+            materialTextBox21.SelectionStart = 0;
+            materialTextBox21.ShortcutsEnabled = true;
+            materialTextBox21.Size = new Size(241, 48);
+            materialTextBox21.TabIndex = 24;
+            materialTextBox21.TabStop = false;
+            materialTextBox21.TextAlign = HorizontalAlignment.Left;
+            materialTextBox21.TrailingIcon = null;
+            materialTextBox21.UseSystemPasswordChar = false;
             // 
             // WorkerList
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1600, 950);
+            Controls.Add(materialTextBox21);
             Controls.Add(label18);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(label7);
             Controls.Add(materialButton14);
-            Controls.Add(materialComboBox2);
             Controls.Add(materialTextBox25);
             Name = "WorkerList";
             StartPosition = FormStartPosition.CenterScreen;
@@ -178,11 +171,10 @@
         #endregion
 
         private ImageList imageList1;
-        private Label label7;
         private MaterialSkin.Controls.MaterialButton materialButton14;
-        private MaterialSkin.Controls.MaterialComboBox materialComboBox2;
         private MaterialSkin.Controls.MaterialTextBox2 materialTextBox25;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label label18;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
     }
 }

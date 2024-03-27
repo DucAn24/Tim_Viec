@@ -1,9 +1,11 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,10 +17,13 @@ namespace TimViec
     public partial class WorkerList : MaterialForm
     {
         MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
-        public WorkerList()
+
+        private DbConnection dbConnection;
+        public WorkerList(/* string category */)
         {
             InitializeComponent();
-     
+            dbConnection = new DbConnection();
+
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
 
             materialSkinManager.AddFormToManage(this);
@@ -28,7 +33,10 @@ namespace TimViec
                                                                 Primary.LightGreen500,
                                                                 Accent.LightGreen200,
                                                                 TextShade.WHITE);
+
+            //LoadDataAndAddPanels(string category);
         }
+
 
         private void WorkerList_Load(object sender, EventArgs e)
         {
@@ -95,8 +103,13 @@ namespace TimViec
             btnHire.Location = new Point(120, 200);
 
             MaterialButton btnFavourite = new MaterialButton();
-            btnFavourite.Text = "Favourite";
-            btnFavourite.Location = new Point(240, 200);
+            btnFavourite.Text = "Add To Favourite";
+            btnFavourite.Location = new Point(450, 200);
+
+            MaterialButton btnAppointment = new MaterialButton();
+            btnAppointment.Text = "Make An Appointment";
+            btnAppointment.Location = new Point(240, 200);
+            btnAppointment.Click += (sender, e) => OpenAppointmentForm();
 
 
             // add controls to the card
@@ -107,6 +120,7 @@ namespace TimViec
             card.Controls.Add(pictureBox);
             card.Controls.Add(btnHire);
             card.Controls.Add(btnFavourite);
+            card.Controls.Add(btnAppointment);
 
 
             flowLayoutPanel1.Controls.Add(card);
@@ -146,12 +160,38 @@ namespace TimViec
             }
         }
 
+/*        private void LoadDataAndAddPanels(string category)
+        {
+            string query = "SELECT * FROM YourTableName WHERE Category = @Category";
+            DataTable dataTable = dbConnection.ExecuteQuery(query);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                // Process the data from the row
+                var image = Image.FromFile(row["ImagePath"].ToString()); // Replace "ImagePath" with the actual column name for the image path
+                var label1Text = row["Label1"].ToString(); // Replace "Label1" with the actual column name for the label1 text
+                var label2Text = row["Label2"].ToString(); // Replace "Label2" with the actual column name for the label2 text
+                var label3Text = row["Label3"].ToString(); // Replace "Label3" with the actual column name for the label3 text
+                var label4Text = row["Label4"].ToString(); // Replace "Label4" with the actual column name for the label4 text
+
+                var card = AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text);
+                flowLayoutPanel1.Controls.Add(card);
+            }
+        }*/
+
 
         private void OpenInformationForm()
         {
             // Open the Information form
             Information informationForm = new Information();
             informationForm.Show();
+        }
+
+        private void OpenAppointmentForm()
+        {
+            // Open the Appointment form
+            Appointment appointmentForm = new Appointment();
+            appointmentForm.Show();
         }
     }
 }

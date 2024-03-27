@@ -12,7 +12,7 @@ namespace TimViec
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new Login());
-            Application.Run(new WorkerList());
+            Application.Run(new User());
         }
     }
 }

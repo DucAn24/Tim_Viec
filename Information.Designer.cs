@@ -254,9 +254,9 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Location = new Point(17, 284);
+            flowLayoutPanel1.Location = new Point(17, 271);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1513, 427);
+            flowLayoutPanel1.Size = new Size(1513, 440);
             flowLayoutPanel1.TabIndex = 24;
             // 
             // imageList1
@@ -302,7 +302,7 @@
             materialMultiLineTextBox21.SelectionLength = 0;
             materialMultiLineTextBox21.SelectionStart = 0;
             materialMultiLineTextBox21.ShortcutsEnabled = true;
-            materialMultiLineTextBox21.Size = new Size(831, 115);
+            materialMultiLineTextBox21.Size = new Size(841, 141);
             materialMultiLineTextBox21.TabIndex = 26;
             materialMultiLineTextBox21.TabStop = false;
             materialMultiLineTextBox21.TextAlign = HorizontalAlignment.Left;
@@ -355,12 +355,12 @@
             materialCard1.Controls.Add(materialButton2);
             materialCard1.Depth = 0;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(17, 745);
+            materialCard1.Location = new Point(17, 728);
             materialCard1.Margin = new Padding(14);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
             materialCard1.Padding = new Padding(14);
-            materialCard1.Size = new Size(1021, 149);
+            materialCard1.Size = new Size(1031, 175);
             materialCard1.TabIndex = 29;
             // 
             // materialCard2
@@ -454,11 +454,11 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Font = new Font("Nirmala UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.LightGreen;
-            label8.Location = new Point(621, 227);
+            label8.Location = new Point(639, 227);
             label8.Name = "label8";
-            label8.Size = new Size(253, 54);
+            label8.Size = new Size(189, 41);
             label8.TabIndex = 31;
             label8.Text = "User Review";
             // 
