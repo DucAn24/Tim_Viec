@@ -35,7 +35,7 @@ namespace TimViec
 
             if (reader.Read() == true)
             {
-                new Home().Show();
+                new FUser().Show();
                 this.Hide();
             }
             else

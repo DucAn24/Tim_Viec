@@ -15,11 +15,13 @@ using Font = System.Drawing.Font;
 
 namespace TimViec
 {
-    public partial class Home : MaterialForm
+    public partial class FUser : MaterialForm
     {
-
         MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
-        public Home()
+        UserDAO userDAO = new UserDAO();
+        ProjectsDAO projectsDAO = new ProjectsDAO();
+
+        public FUser()
         {
             InitializeComponent();
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
@@ -39,11 +41,6 @@ namespace TimViec
             {
                 materialCard.Click += MaterialCard_Click;
             }
-        }
-
-        private void Home_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void materialSwitch2_CheckedChanged(object sender, EventArgs e)
@@ -117,7 +114,6 @@ namespace TimViec
             {
                 ckbMale.Checked = false;
             }
-
         }
 
         private void ckbMale_CheckedChanged(object sender, EventArgs e)
@@ -126,6 +122,19 @@ namespace TimViec
             {
                 ckbFemale.Checked = false;
             }
+        }
+
+
+        private void btnAddInformation_Click(object sender, EventArgs e)
+        {
+            User user = new User(txtFirstName.Text, txtLastName.Text, txtEmail.Text, dTPDateOfBirth.Value, picBoxUser.Image.ToString(), txtPhone.Text, txtAddress.Text, txtAddress.Text);
+            userDAO.AddInformation(user);
+        }
+
+        private void btnAddProject_Click(object sender, EventArgs e)
+        {
+            Projects projects = new Projects(txtFirstName.Text, txtLastName.Text, txtEmail.Text, dTPDateOfBirth.Value, picBoxUser.Image.ToString(), txtPhone.Text, txtAddress.Text, txtAddress.Text, txtTitle.Text, txtDescription.Text, txtMinBudget.Text, txtMaxBudget.Text, comboBoxCategory.Text);
+            projectsDAO.AddProjects(projects);
         }
     }
 }

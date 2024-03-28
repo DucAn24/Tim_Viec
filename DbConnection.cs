@@ -17,34 +17,6 @@ namespace TimViec
             return connection;
         }
 
-        public void Open()
-        {
-            try
-            {
-                // Open the connection
-                connection.Open();
-                Console.WriteLine("Connection opened successfully.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error opening connection: {ex.Message}");
-            }
-        }
-
-        public void Close()
-        {
-            try
-            {
-                // Close the connection
-                connection.Close();
-                Console.WriteLine("Connection closed successfully.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error closing connection: {ex.Message}");
-            }
-        }
-
         public DataTable ExecuteQuery(string query)
         {
             DataTable dataTable = new DataTable();
@@ -60,6 +32,27 @@ namespace TimViec
                 Console.WriteLine($"Error executing query: {ex.Message}");
             }
             return dataTable;
+        }
+
+        public void Execute(string strSql)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand(strSql, connection);
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Succes");
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Failed" + exc);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }

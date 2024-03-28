@@ -24,7 +24,6 @@ E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.sourcelink.json
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Information.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.WorkerList.resources
 C:\Users\hp\LapTrinhWin\Project\Tim_Viec\obj\Debug\net8.0-windows\TimViec.csproj.AssemblyReference.cache
-C:\Users\hp\LapTrinhWin\Project\Tim_Viec\obj\Debug\net8.0-windows\TimViec.Home.resources
 C:\Users\hp\LapTrinhWin\Project\Tim_Viec\obj\Debug\net8.0-windows\TimViec.Information.resources
 C:\Users\hp\LapTrinhWin\Project\Tim_Viec\obj\Debug\net8.0-windows\TimViec.Login.resources
 C:\Users\hp\LapTrinhWin\Project\Tim_Viec\obj\Debug\net8.0-windows\TimViec.Properties.Resources.resources
@@ -55,3 +54,4 @@ C:\Users\hp\LapTrinhWin\Project\Tim_Viec\obj\Debug\net8.0-windows\TimViec.genrun
 C:\Users\hp\LapTrinhWin\Project\Tim_Viec\obj\Debug\net8.0-windows\ref\TimViec.dll
 C:\Users\hp\LapTrinhWin\Project\Tim_Viec\obj\Debug\net8.0-windows\TimViec.Register.resources
 C:\Users\hp\LapTrinhWin\Project\Tim_Viec\bin\Debug\net8.0-windows\TimViec.dll.config
+C:\Users\hp\LapTrinhWin\Project\Tim_Viec\obj\Debug\net8.0-windows\TimViec.FUser.resources
