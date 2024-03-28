@@ -35,6 +35,18 @@ namespace TimViec
                                                                 TextShade.WHITE);
 
             //LoadDataAndAddPanels(string category);
+
+/*            materialButton14.Click += (sender, e) =>
+            {
+                // Get the job title and salary from the text boxes
+                string jobTitle = string.IsNullOrEmpty(materialTextBox25.Text) ? null : materialTextBox25.Text;
+                decimal? salary = string.IsNullOrEmpty(materialTextBox21.Text) ? (decimal?)null : decimal.Parse(materialTextBox21.Text);
+
+                // Search for workers
+                SearchWorkers(jobTitle, salary);
+            };*/
+
+
         }
 
 
@@ -160,27 +172,84 @@ namespace TimViec
             }
         }
 
-/*        private void LoadDataAndAddPanels(string category)
-        {
-            string query = "SELECT * FROM YourTableName WHERE Category = @Category";
-            DataTable dataTable = dbConnection.ExecuteQuery(query);
+        /*        private void LoadDataAndAddPanels(string category)
+                {
+                    string query = "SELECT * FROM YourTableName WHERE Category = @Category";
+                    DataTable dataTable = dbConnection.ExecuteQuery(query);
 
-            foreach (DataRow row in dataTable.Rows)
-            {
-                // Process the data from the row
-                var image = Image.FromFile(row["ImagePath"].ToString()); // Replace "ImagePath" with the actual column name for the image path
-                var label1Text = row["Label1"].ToString(); // Replace "Label1" with the actual column name for the label1 text
-                var label2Text = row["Label2"].ToString(); // Replace "Label2" with the actual column name for the label2 text
-                var label3Text = row["Label3"].ToString(); // Replace "Label3" with the actual column name for the label3 text
-                var label4Text = row["Label4"].ToString(); // Replace "Label4" with the actual column name for the label4 text
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        // Process the data from the row
+                        var image = Image.FromFile(row["ImagePath"].ToString()); // Replace "ImagePath" with the actual column name for the image path
+                        var label1Text = row["Label1"].ToString(); // Replace "Label1" with the actual column name for the label1 text
+                        var label2Text = row["Label2"].ToString(); // Replace "Label2" with the actual column name for the label2 text
+                        var label3Text = row["Label3"].ToString(); // Replace "Label3" with the actual column name for the label3 text
+                        var label4Text = row["Label4"].ToString(); // Replace "Label4" with the actual column name for the label4 text
 
-                var card = AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text);
-                flowLayoutPanel1.Controls.Add(card);
-            }
-        }*/
+                        var card = AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text);
+                        flowLayoutPanel1.Controls.Add(card);
+                    }
+                }*/
+
+        /*        public void SearchWorkers(string jobTitle, decimal? salary)
+                {
+                    // Clear the existing panels
+                    flowLayoutPanel1.Controls.Clear();
+
+                    // Start building the query
+                    string query = "SELECT * FROM Workers WHERE ";
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = dbConnection;
+
+                    // Add conditions to the query based on the provided parameters
+                    if (!string.IsNullOrEmpty(jobTitle))
+                    {
+                        query += "JobTitle LIKE @JobTitle ";
+                        command.Parameters.AddWithValue("@JobTitle", "%" + jobTitle + "%");
+                    }
+                    if (salary.HasValue)
+                    {
+                        // Add an AND if there are multiple conditions
+                        if (command.Parameters.Count > 0)
+                        {
+                            query += "AND ";
+                        }
+                        query += "Salary >= @Salary ";
+                        command.Parameters.AddWithValue("@Salary", salary.Value);
+                    }
+
+                    // Set the command text
+                    command.CommandText = query;
+
+                    // Execute the query and get the results
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    // Loop through the results
+                    while (reader.Read())
+                    {
+                        // Get the data from the row
+                        var image = Image.FromFile(reader["ImagePath"].ToString());
+                        var label1Text = reader["Label1"].ToString();
+                        var label2Text = reader["Label2"].ToString();
+                        var label3Text = reader["Label3"].ToString();
+                        var label4Text = reader["Label4"].ToString();
+
+                        // Add a panel with the data
+                        AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text);
+                    }
+
+                    // Close the reader and the connection
+                    reader.Close();
+                    dbConnection.Close();
 
 
-        private void OpenInformationForm()
+                }*/
+
+
+
+
+
+    private void OpenInformationForm()
         {
             // Open the Information form
             Information informationForm = new Information();
