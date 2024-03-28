@@ -3,31 +3,27 @@
   "WorkspaceRootPath": "E:\\winForm\\TimViec\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|e:\\winform\\timviec\\workerlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:workerlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|e:\\winform\\timviec\\workerlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\workerlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:workerlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|e:\\winform\\timviec\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|e:\\winform\\timviec\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|e:\\winform\\timviec\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -42,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,20 +50,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DbConnection.cs",
-              "DocumentMoniker": "E:\\winForm\\TimViec\\DbConnection.cs",
-              "RelativeDocumentMoniker": "DbConnection.cs",
-              "ToolTip": "E:\\winForm\\TimViec\\DbConnection.cs",
-              "RelativeToolTip": "DbConnection.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T08:09:02.926Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "WorkerList.cs",
               "DocumentMoniker": "E:\\winForm\\TimViec\\WorkerList.cs",
               "RelativeDocumentMoniker": "WorkerList.cs",
@@ -80,19 +63,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "WorkerList.cs [Design]",
               "DocumentMoniker": "E:\\winForm\\TimViec\\WorkerList.cs",
               "RelativeDocumentMoniker": "WorkerList.cs",
               "ToolTip": "E:\\winForm\\TimViec\\WorkerList.cs [Design]",
               "RelativeToolTip": "WorkerList.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T07:47:41.773Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-03-27T07:47:41.773Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\winForm\\TimViec\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -100,12 +82,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-27T06:32:26.671Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-27T06:32:26.671Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "User.cs [Design]",
               "DocumentMoniker": "E:\\winForm\\TimViec\\User.cs",
               "RelativeDocumentMoniker": "User.cs",
@@ -117,7 +98,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\winForm\\TimViec\\User.cs",
               "RelativeDocumentMoniker": "User.cs",
@@ -130,19 +111,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Worker.cs [Design]",
               "DocumentMoniker": "E:\\winForm\\TimViec\\Worker.cs",
               "RelativeDocumentMoniker": "Worker.cs",
               "ToolTip": "E:\\winForm\\TimViec\\Worker.cs [Design]",
               "RelativeToolTip": "Worker.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-22T03:54:02.764Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-03-22T03:54:02.764Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "Worker.cs",
               "DocumentMoniker": "E:\\winForm\\TimViec\\Worker.cs",
               "RelativeDocumentMoniker": "Worker.cs",
@@ -150,8 +130,7 @@
               "RelativeToolTip": "Worker.cs",
               "ViewState": "AQIAAF8AAAAAAAAAAADwvzUAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-22T03:18:53.705Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-22T03:18:53.705Z"
             }
           ]
         }
