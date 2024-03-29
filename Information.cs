@@ -111,8 +111,6 @@ namespace TimViec
 
                 // Add controls to the panel with corresponding information
                 AddControlsToPanel(image, labels[i].Item1, labels[i].Item4);
-
-
             }
         }
     }

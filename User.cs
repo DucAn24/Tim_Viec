@@ -20,10 +20,9 @@ namespace TimViec
 {
     public partial class User : MaterialForm
     {
-
         MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
-        ClientInforDAO clientDAO = new ClientInforDAO();
-        JobDAO jobDAO = new JobDAO();
+        ClientDAO clientDAO = new ClientDAO();
+        JobInformationDAO jobDAO = new JobInformationDAO();
 
         public User()
         {
@@ -59,6 +58,7 @@ namespace TimViec
         {
             AddPanelToFlowLayoutHired(flowLayoutPanel1);
             AddPanelToFlowLayoutWait(flowLayoutPanel3);
+
         }
 
         private void materialSwitch2_CheckedChanged(object sender, EventArgs e)
@@ -77,29 +77,30 @@ namespace TimViec
 
         private void materialRadioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (materialRadioButton1.Checked)
+            if (btnPayHour.Checked)
             {
-                materialLabel4.Text = "per hour ";
+                lbPayType.Text = "per hour ";
             }
         }
 
         private void materialRadioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (materialRadioButton2.Checked)
+            if (btnPayPrice.Checked)
             {
-                materialLabel4.Text = "per project";
+                lbPayType.Text = "per project";
             }
         }
 
         private Dictionary<string, string> pictureToCategoryMap = new Dictionary<string, string>
         {
-            { "pictureBox2", "AI Services" },
-            { "pictureBox3", "Design - Creative" },
-            { "pictureBox4", "Sales -Marketing" },
-            { "pictureBox5", "Writing - Traslation" },
-            { "pictureBox6", "Admin - Custome Support" },
-            { "pictureBox7", "Finance - Accounting" },
-            { "pictureBox8", "Engineering - Architecture" },
+            { "pictureBox2", "Devlopment-IT" },
+            { "pictureBox3", "AI-Services" },
+            { "pictureBox4", "Design-Creative" },
+            { "pictureBox5", "Sales-Marketing" },
+            { "pictureBox6", "Engineering-Architecture" },
+            { "pictureBox7", "Finance-Accounting" },
+            { "pictureBox8", "Admin-Custome-Support" },
+            { "pictureBox9", "Writing-Traslation" },
             // Add more if needed
         };
 
@@ -111,19 +112,20 @@ namespace TimViec
             // Create and show the appropriate form based on the clicked PictureBox
             if (clickedPictureBox != null && pictureToCategoryMap.TryGetValue(clickedPictureBox.Name, out string category))
             {
-                OpenWokerListForm(/*category*/);
+                OpenWokerListForm(category);
             }
         }
 
         private Dictionary<string, string> cardToCategoryMap = new Dictionary<string, string>
         {
-            { "materialCard6", "AI Services" },
-            { "materialCard14", "Design - Creative" },
-            { "materialCard12", "Sales -Marketing" },
-            { "materialCard10", "Writing - Traslation" },
-            { "materialCard15", "Admin - Custome Support" },
-            { "materialCard16", "Finance - Accounting" },
-            { "materialCard17", "Engineering - Architecture" },
+            { "materialCard6", "Devlopment-IT" },
+            { "materialCard14", "AI-Services" },
+            { "materialCard12", "Design-Creative" },
+            { "materialCard10", "Sales-Marketing" },
+            { "materialCard15", "Writing-Traslation" },
+            { "materialCard16", "Admin-Custome Support" },
+            { "materialCard17", "Finance-Accounting" },
+            { "materialCard18", "Engineering-Architecture" },
             // Add more if needed
         };
 
@@ -135,16 +137,15 @@ namespace TimViec
             // Fetch the data for the category of the clicked card
             if (clickedCard != null && cardToCategoryMap.TryGetValue(clickedCard.Name, out string category))
             {
-                OpenWokerListForm(/*category*/);
+                OpenWokerListForm(category);
             }
         }
 
-        private void OpenWokerListForm(/*string category*/)
+        private void OpenWokerListForm(string category)
         {
-            WorkerList workerList = new WorkerList(/*category*/);
+            WorkerList workerList = new WorkerList(category);
             workerList.Show();
         }
-
 
         private void btnImportImage_Click(object sender, EventArgs e)
         {
@@ -156,16 +157,17 @@ namespace TimViec
                     picBoxUser.Image = new Bitmap(ofd.FileName);
                 }
             }
-
         }
+
+        private string gender = "";
 
         private void ckbFemale_CheckedChanged(object sender, EventArgs e)
         {
             if (ckbFemale.Checked)
             {
                 ckbMale.Checked = false;
+                gender = ckbMale.Text;
             }
-
         }
 
         private void ckbMale_CheckedChanged(object sender, EventArgs e)
@@ -173,6 +175,7 @@ namespace TimViec
             if (ckbMale.Checked)
             {
                 ckbFemale.Checked = false;
+                gender = ckbMale.Text;
             }
         }
 
@@ -310,8 +313,6 @@ namespace TimViec
             AddPanelToFlowLayout(flowLayoutPanel, AddControlsToPanelWait);
         }
 
-
-
         /*        private void AddPanelToFlowLayout(FlowLayoutPanel flowLayoutPanel, Func<Image, string, string, MaterialCard> addControlsToPanel, string query)
                 {
                     string connectionString = "Data Source=(local);Initial Catalog=YourDatabaseName;Integrated Security=True";
@@ -352,9 +353,6 @@ namespace TimViec
                 }
         */
 
-
-
-
         private void OpenAppointmentForm()
         {
             // Open the Appointment form
@@ -364,13 +362,13 @@ namespace TimViec
 
         private void btnSaveInformation_Click(object sender, EventArgs e)
         {
-            ClientInfor client = new ClientInfor(txtFirstName.Text, txtLastName.Text, txtEmail.Text, dTPDateOfBirth.Value, picBoxUser.Image.ToString(), txtPhone.Text, txtAddress.Text, txtAddress.Text);
+            Client client = new Client(txtFirstName.Text, txtLastName.Text, txtEmail.Text, dTPDateOfBirth.Value, picBoxUser.Image.ToString(), txtPhone.Text, txtAddress.Text, gender);
             clientDAO.AddInformation(client);
         }
 
         private void btnSubmitProject_Click(object sender, EventArgs e)
         {
-            Job job = new Job(txtTitle.Text, txtDescription.Text, txtMinBudget.Text, txtMaxBudget.Text, cbBoxCategory.Text);
+            JobInformation job = new JobInformation(txtTitle.Text, txtDescription.Text, cbBoxCategory.Text, txtMinPrice.Text, txtMaxPrice.Text, lbPayType.Text);
             jobDAO.AddJob(job); 
         }
     }

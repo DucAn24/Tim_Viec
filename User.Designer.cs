@@ -76,15 +76,15 @@
             btnSubmitProject = new MaterialSkin.Controls.MaterialButton();
             materialCard4 = new MaterialSkin.Controls.MaterialCard();
             materialDivider9 = new MaterialSkin.Controls.MaterialDivider();
-            txtMaxBudget = new MaterialSkin.Controls.MaterialTextBox();
+            txtMaxPrice = new MaterialSkin.Controls.MaterialTextBox();
             materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
-            materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            txtMinBudget = new MaterialSkin.Controls.MaterialTextBox();
+            lbPayType = new MaterialSkin.Controls.MaterialLabel();
+            txtMinPrice = new MaterialSkin.Controls.MaterialTextBox();
             materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             materialCard3 = new MaterialSkin.Controls.MaterialCard();
             materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
-            materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
-            materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
+            btnPayPrice = new MaterialSkin.Controls.MaterialRadioButton();
+            btnPayHour = new MaterialSkin.Controls.MaterialRadioButton();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             label3 = new Label();
             label2 = new Label();
@@ -901,10 +901,10 @@
             // 
             materialCard4.BackColor = Color.FromArgb(255, 255, 255);
             materialCard4.Controls.Add(materialDivider9);
-            materialCard4.Controls.Add(txtMaxBudget);
+            materialCard4.Controls.Add(txtMaxPrice);
             materialCard4.Controls.Add(materialComboBox1);
-            materialCard4.Controls.Add(materialLabel4);
-            materialCard4.Controls.Add(txtMinBudget);
+            materialCard4.Controls.Add(lbPayType);
+            materialCard4.Controls.Add(txtMinPrice);
             materialCard4.Controls.Add(materialLabel3);
             materialCard4.Depth = 0;
             materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
@@ -927,23 +927,23 @@
             materialDivider9.TabIndex = 20;
             materialDivider9.Text = "materialDivider9";
             // 
-            // txtMaxBudget
+            // txtMaxPrice
             // 
-            txtMaxBudget.AnimateReadOnly = false;
-            txtMaxBudget.BorderStyle = BorderStyle.None;
-            txtMaxBudget.Depth = 0;
-            txtMaxBudget.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtMaxBudget.Hint = "Up to";
-            txtMaxBudget.LeadingIcon = null;
-            txtMaxBudget.Location = new Point(199, 57);
-            txtMaxBudget.MaxLength = 50;
-            txtMaxBudget.MouseState = MaterialSkin.MouseState.OUT;
-            txtMaxBudget.Multiline = false;
-            txtMaxBudget.Name = "txtMaxBudget";
-            txtMaxBudget.Size = new Size(139, 50);
-            txtMaxBudget.TabIndex = 19;
-            txtMaxBudget.Text = "";
-            txtMaxBudget.TrailingIcon = null;
+            txtMaxPrice.AnimateReadOnly = false;
+            txtMaxPrice.BorderStyle = BorderStyle.None;
+            txtMaxPrice.Depth = 0;
+            txtMaxPrice.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtMaxPrice.Hint = "Up to";
+            txtMaxPrice.LeadingIcon = null;
+            txtMaxPrice.Location = new Point(199, 57);
+            txtMaxPrice.MaxLength = 50;
+            txtMaxPrice.MouseState = MaterialSkin.MouseState.OUT;
+            txtMaxPrice.Multiline = false;
+            txtMaxPrice.Name = "txtMaxPrice";
+            txtMaxPrice.Size = new Size(139, 50);
+            txtMaxPrice.TabIndex = 19;
+            txtMaxPrice.Text = "";
+            txtMaxPrice.TrailingIcon = null;
             // 
             // materialComboBox1
             // 
@@ -968,36 +968,36 @@
             materialComboBox1.StartIndex = 0;
             materialComboBox1.TabIndex = 18;
             // 
-            // materialLabel4
+            // lbPayType
             // 
-            materialLabel4.AutoSize = true;
-            materialLabel4.Depth = 0;
-            materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel4.Location = new Point(507, 69);
-            materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel4.Name = "materialLabel4";
-            materialLabel4.Size = new Size(75, 19);
-            materialLabel4.TabIndex = 16;
-            materialLabel4.Text = "per project";
+            lbPayType.AutoSize = true;
+            lbPayType.Depth = 0;
+            lbPayType.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            lbPayType.Location = new Point(507, 69);
+            lbPayType.MouseState = MaterialSkin.MouseState.HOVER;
+            lbPayType.Name = "lbPayType";
+            lbPayType.Size = new Size(75, 19);
+            lbPayType.TabIndex = 16;
+            lbPayType.Text = "per project";
             // 
-            // txtMinBudget
+            // txtMinPrice
             // 
-            txtMinBudget.AnimateReadOnly = false;
-            txtMinBudget.BorderStyle = BorderStyle.None;
-            txtMinBudget.Depth = 0;
-            txtMinBudget.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtMinBudget.Hint = "From";
-            txtMinBudget.LeadingIcon = null;
-            txtMinBudget.Location = new Point(26, 57);
-            txtMinBudget.Margin = new Padding(7, 3, 3, 3);
-            txtMinBudget.MaxLength = 50;
-            txtMinBudget.MouseState = MaterialSkin.MouseState.OUT;
-            txtMinBudget.Multiline = false;
-            txtMinBudget.Name = "txtMinBudget";
-            txtMinBudget.Size = new Size(153, 50);
-            txtMinBudget.TabIndex = 15;
-            txtMinBudget.Text = "";
-            txtMinBudget.TrailingIcon = null;
+            txtMinPrice.AnimateReadOnly = false;
+            txtMinPrice.BorderStyle = BorderStyle.None;
+            txtMinPrice.Depth = 0;
+            txtMinPrice.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtMinPrice.Hint = "From";
+            txtMinPrice.LeadingIcon = null;
+            txtMinPrice.Location = new Point(26, 57);
+            txtMinPrice.Margin = new Padding(7, 3, 3, 3);
+            txtMinPrice.MaxLength = 50;
+            txtMinPrice.MouseState = MaterialSkin.MouseState.OUT;
+            txtMinPrice.Multiline = false;
+            txtMinPrice.Name = "txtMinPrice";
+            txtMinPrice.Size = new Size(153, 50);
+            txtMinPrice.TabIndex = 15;
+            txtMinPrice.Text = "";
+            txtMinPrice.TrailingIcon = null;
             // 
             // materialLabel3
             // 
@@ -1015,8 +1015,8 @@
             // 
             materialCard3.BackColor = Color.FromArgb(255, 255, 255);
             materialCard3.Controls.Add(materialDivider1);
-            materialCard3.Controls.Add(materialRadioButton2);
-            materialCard3.Controls.Add(materialRadioButton1);
+            materialCard3.Controls.Add(btnPayPrice);
+            materialCard3.Controls.Add(btnPayHour);
             materialCard3.Controls.Add(materialLabel1);
             materialCard3.Depth = 0;
             materialCard3.ForeColor = Color.FromArgb(222, 0, 0, 0);
@@ -1039,43 +1039,43 @@
             materialDivider1.TabIndex = 14;
             materialDivider1.Text = "materialDivider1";
             // 
-            // materialRadioButton2
+            // btnPayPrice
             // 
-            materialRadioButton2.AutoSize = true;
-            materialRadioButton2.Depth = 0;
-            materialRadioButton2.ImageKey = "icons8-hour-24.png";
-            materialRadioButton2.ImageList = imageList1;
-            materialRadioButton2.Location = new Point(209, 57);
-            materialRadioButton2.Margin = new Padding(0);
-            materialRadioButton2.MouseLocation = new Point(-1, -1);
-            materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            materialRadioButton2.Name = "materialRadioButton2";
-            materialRadioButton2.Ripple = true;
-            materialRadioButton2.Size = new Size(139, 37);
-            materialRadioButton2.TabIndex = 13;
-            materialRadioButton2.TabStop = true;
-            materialRadioButton2.Text = "Pay fixed price";
-            materialRadioButton2.UseVisualStyleBackColor = true;
-            materialRadioButton2.CheckedChanged += materialRadioButton2_CheckedChanged;
+            btnPayPrice.AutoSize = true;
+            btnPayPrice.Depth = 0;
+            btnPayPrice.ImageKey = "icons8-hour-24.png";
+            btnPayPrice.ImageList = imageList1;
+            btnPayPrice.Location = new Point(209, 57);
+            btnPayPrice.Margin = new Padding(0);
+            btnPayPrice.MouseLocation = new Point(-1, -1);
+            btnPayPrice.MouseState = MaterialSkin.MouseState.HOVER;
+            btnPayPrice.Name = "btnPayPrice";
+            btnPayPrice.Ripple = true;
+            btnPayPrice.Size = new Size(139, 37);
+            btnPayPrice.TabIndex = 13;
+            btnPayPrice.TabStop = true;
+            btnPayPrice.Text = "Pay fixed price";
+            btnPayPrice.UseVisualStyleBackColor = true;
+            btnPayPrice.CheckedChanged += materialRadioButton2_CheckedChanged;
             // 
-            // materialRadioButton1
+            // btnPayHour
             // 
-            materialRadioButton1.AutoSize = true;
-            materialRadioButton1.Depth = 0;
-            materialRadioButton1.ImageKey = "icons8-hour-24.png";
-            materialRadioButton1.ImageList = imageList1;
-            materialRadioButton1.Location = new Point(35, 57);
-            materialRadioButton1.Margin = new Padding(0);
-            materialRadioButton1.MouseLocation = new Point(-1, -1);
-            materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialRadioButton1.Name = "materialRadioButton1";
-            materialRadioButton1.Ripple = true;
-            materialRadioButton1.Size = new Size(145, 37);
-            materialRadioButton1.TabIndex = 12;
-            materialRadioButton1.TabStop = true;
-            materialRadioButton1.Text = "Pay by the hour";
-            materialRadioButton1.UseVisualStyleBackColor = true;
-            materialRadioButton1.CheckedChanged += materialRadioButton1_CheckedChanged;
+            btnPayHour.AutoSize = true;
+            btnPayHour.Depth = 0;
+            btnPayHour.ImageKey = "icons8-hour-24.png";
+            btnPayHour.ImageList = imageList1;
+            btnPayHour.Location = new Point(35, 57);
+            btnPayHour.Margin = new Padding(0);
+            btnPayHour.MouseLocation = new Point(-1, -1);
+            btnPayHour.MouseState = MaterialSkin.MouseState.HOVER;
+            btnPayHour.Name = "btnPayHour";
+            btnPayHour.Ripple = true;
+            btnPayHour.Size = new Size(145, 37);
+            btnPayHour.TabIndex = 12;
+            btnPayHour.TabStop = true;
+            btnPayHour.Text = "Pay by the hour";
+            btnPayHour.UseVisualStyleBackColor = true;
+            btnPayHour.CheckedChanged += materialRadioButton1_CheckedChanged;
             // 
             // materialLabel1
             // 
@@ -1797,15 +1797,15 @@
         private MaterialSkin.Controls.MaterialButton btnSubmitProject;
         private MaterialSkin.Controls.MaterialCard materialCard4;
         private MaterialSkin.Controls.MaterialDivider materialDivider9;
-        private MaterialSkin.Controls.MaterialTextBox txtMaxBudget;
+        private MaterialSkin.Controls.MaterialTextBox txtMaxPrice;
         private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
-        private MaterialSkin.Controls.MaterialTextBox txtMinBudget;
+        private MaterialSkin.Controls.MaterialLabel lbPayType;
+        private MaterialSkin.Controls.MaterialTextBox txtMinPrice;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialCard materialCard3;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
-        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
-        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
+        private MaterialSkin.Controls.MaterialRadioButton btnPayPrice;
+        private MaterialSkin.Controls.MaterialRadioButton btnPayHour;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Label label3;
         private Label label2;
