@@ -53,7 +53,7 @@ namespace TimViec
                     this.Close();
                 }
         */
-        private int GetRoleFromDatabase(string username, string password)
+/*        private int GetRoleFromDatabase(string username, string password)
         {
             // Create an instance of DbConnection
             DbConnection dbConnection = new DbConnection();
@@ -81,7 +81,7 @@ namespace TimViec
                 return -1;
             }
         }
-
+*/
 
 
     }

@@ -49,13 +49,15 @@ namespace TimViec
             }
         }
 
-        public DataTable ExecuteQuery(string query)
+        public DataTable ExecuteQuery(SqlCommand command)
         {
             DataTable dataTable = new DataTable();
             try
             {
-                // Create a SqlCommand object and execute the query
-                SqlCommand command = new SqlCommand(query, connection);
+                // Assign the connection to the command
+                command.Connection = this.Connection;
+
+                // Create a SqlDataAdapter and fill the DataTable
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 adapter.Fill(dataTable);
             }
@@ -88,6 +90,12 @@ namespace TimViec
                     return -1;
                 }
             }
+        }
+
+
+        public SqlConnection Connection
+        {
+            get { return connection; }
         }
 
 

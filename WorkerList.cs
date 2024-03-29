@@ -19,10 +19,15 @@ namespace TimViec
         MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
 
         private DbConnection dbConnection;
-        public WorkerList(/* string category */)
+        private string category;
+
+        public WorkerList(string category)
         {
             InitializeComponent();
             dbConnection = new DbConnection();
+            this.category = category;
+
+
 
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
 
@@ -34,9 +39,9 @@ namespace TimViec
                                                                 Accent.LightGreen200,
                                                                 TextShade.WHITE);
 
-            //LoadDataAndAddPanels(string category);
 
-/*            materialButton14.Click += (sender, e) =>
+
+            materialButton14.Click += (sender, e) =>
             {
                 // Get the job title and salary from the text boxes
                 string jobTitle = string.IsNullOrEmpty(materialTextBox25.Text) ? null : materialTextBox25.Text;
@@ -44,7 +49,7 @@ namespace TimViec
 
                 // Search for workers
                 SearchWorkers(jobTitle, salary);
-            };*/
+            };
 
 
         }
@@ -52,17 +57,18 @@ namespace TimViec
 
         private void WorkerList_Load(object sender, EventArgs e)
         {
-            AddPanelToFlowLayout();
+            LoadDataAndAddPanels(category);
         }
 
         private void AddControlsToPanel(Image image, string label1Text, string label2Text, string label3Text, string label4Text)
         {
 
+
             //create and configure picture box
             PictureBox pictureBox = new PictureBox();
             pictureBox.Image = image;
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Set this to Zoom
-            pictureBox.Size = new Size(90,90); // Set this to desired size
+            pictureBox.Size = new Size(90, 90); // Set this to desired size
             pictureBox.Location = new Point(20, 20);
             pictureBox.Click += (sender, e) => OpenInformationForm();
 
@@ -140,116 +146,94 @@ namespace TimViec
         }
 
 
-        private void AddPanelToFlowLayout()
+        private void LoadDataAndAddPanels(string category)
         {
-            // Example data for panels
-            List<(string, string, string, string)> labels = new List<(string, string, string, string)>
+            dbConnection.Open();
+
+
+            string query = "SELECT * FROM JobInformation WHERE Category = @Category";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@Category", category);
+            DataTable dataTable = dbConnection.ExecuteQuery(command);
+
+            foreach (DataRow row in dataTable.Rows)
             {
-                ("Duc AN Nbguyen ", "Python Developer : Django - Flask - RESTful APIs - Automation Scripts", "$10.00/hr", "Are you looking for a versatile Python Developer to help you with your Project? I'm a Python developer driven by a profound passion for technology. Offering a diverse range of services, I specialize in web scraping, data mining, data wrangling, data analysis, automation, and cloud services."),
-                ("Tijani-Ahmed O. t", "Python Programmer", "$5.00/hr", "I am a junior Python developer. I'm good at using Python to solve your use cases, be it web development, API development, machine learning, data analysis, scripting, web automation, etc.I am good at building backend applications and RESTful APIs using the Django Framework. I can. also build full-stack web applications.Apart from this, I'm also an automation expert in python. I can scrape, automate processes, manipulate different files, classify and predict data using ML, speed up applications with asynchronous programming etc."),
-                ("Akshay V.", "Python Machine Learning Developer | Expert in Flask & Django", "Label 3-3", "👋 Hey there! I'm akshay vayak, a seasoned Python and Machine Learning enthusiast with a passion for turning data into actionable insights. I'm here to supercharge your projects with cutting-edge technology and data-driven solutions.\r\n\r\nKey Skills:\r\n\r\n🐍 Python Expertise: I'm fluent in Python, leveraging its versatility to build robust applications, web scrapers, and automate tasks.\r\n🤖 Machine Learning Wizardry: I specialize in creating predictive models, natural language processing, computer vision, and recommendation systems.\r\n📊 Data Analysis & Visualization: I'll transform your data into meaningful insights using pandas, Matplotlib, and Seaborn.\r\n\U0001f9e0 Deep Learning: I have experience with TensorFlow and PyTorch for developing neural networks.\r\n💻 Full-Stack Familiarity: I can seamlessly integrate ML models into web apps, giving your users intelligent experiences.\r\n🌐 API Integration: I'll connect your applications with external APIs to fetch or deliver data.\r\n📈 Optimization: I optimize code and models for speed, scalability, and cost-effectiveness."),
-                ("Ismail P. ", "Mobile App Developer / Python Developer", "Label 3-3", "Label 3-4"),
-                ("code web", "Label 3-2", "Label 3-3", "Label 3-4"),
-                ("code web", "Label 3-2", "Label 3-3", "Label 3-4")
-            };
+                // Process the data from the row
 
+                var imagePath = row["ImagePath"] as string;
+                var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
 
-
-            // Example data for image indices in the ImageList
-            List<int> imageIndices = new List<int> { 0, 1, 2, 3, 4, 5 };
-
-            //loop all labels and images
-            for (int i = 0; i < 6; i++)
-            {
-
-                // Get image from ImageList by index
-                Image image = imageList1.Images[imageIndices[i]];
-
-                // Add controls to the panel with corresponding information
-                AddControlsToPanel(image, labels[i].Item1, labels[i].Item2, labels[i].Item3, labels[i].Item4);
-
+                string label1Text = row["CraftsmanID"].ToString();
+                string label2Text = row["JobTitle"].ToString();
+                string label3Text = row["MaxPrice"].ToString();
+                string label4Text = row["JobDescription"].ToString();
                 
+                AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text);
             }
         }
 
-        /*        private void LoadDataAndAddPanels(string category)
+
+        public void SearchWorkers(string jobTitle, decimal? salary)
+        {
+            // Clear the existing panels
+            flowLayoutPanel1.Controls.Clear();
+
+            // Start building the query
+            string query = "SELECT * FROM JobInformation WHERE ";
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbConnection.Connection;
+
+            // Add conditions to the query based on the provided parameters
+            if (!string.IsNullOrEmpty(jobTitle))
+            {
+                query += "JobTitle LIKE @JobTitle ";
+                command.Parameters.AddWithValue("@JobTitle", "%" + jobTitle + "%");
+            }
+            if (salary.HasValue)
+            {
+                // Add an AND if there are multiple conditions
+                if (command.Parameters.Count > 0)
                 {
-                    string query = "SELECT * FROM YourTableName WHERE Category = @Category";
-                    DataTable dataTable = dbConnection.ExecuteQuery(query);
+                    query += "AND ";
+                }
+                query += "MinPrice >= @salary ";
+                command.Parameters.AddWithValue("@Salary", salary.Value);
+            }
 
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        // Process the data from the row
-                        var image = Image.FromFile(row["ImagePath"].ToString()); // Replace "ImagePath" with the actual column name for the image path
-                        var label1Text = row["Label1"].ToString(); // Replace "Label1" with the actual column name for the label1 text
-                        var label2Text = row["Label2"].ToString(); // Replace "Label2" with the actual column name for the label2 text
-                        var label3Text = row["Label3"].ToString(); // Replace "Label3" with the actual column name for the label3 text
-                        var label4Text = row["Label4"].ToString(); // Replace "Label4" with the actual column name for the label4 text
+            // Set the command text
+            command.CommandText = query;
 
-                        var card = AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text);
-                        flowLayoutPanel1.Controls.Add(card);
-                    }
-                }*/
+            // Ensure the connection is open before executing the reader
+            if (command.Connection.State != ConnectionState.Open)
+            {
+                command.Connection.Open();
+            }
 
-        /*        public void SearchWorkers(string jobTitle, decimal? salary)
-                {
-                    // Clear the existing panels
-                    flowLayoutPanel1.Controls.Clear();
+            // Execute the query and get the results
+            SqlDataReader reader = command.ExecuteReader();
 
-                    // Start building the query
-                    string query = "SELECT * FROM Workers WHERE ";
-                    SqlCommand command = new SqlCommand();
-                    command.Connection = dbConnection;
+            // Loop through the results
+            while (reader.Read())
+            {
+                // Get the data from the row
+                var image = Image.FromFile(reader["ImagePath"].ToString());
+                var label1Text = reader["CraftsmanID"].ToString();
+                var label2Text = reader["JobTitle"].ToString();
+                var label3Text = reader["MinPrice"].ToString();
+                var label4Text = reader["JobDescription"].ToString();
 
-                    // Add conditions to the query based on the provided parameters
-                    if (!string.IsNullOrEmpty(jobTitle))
-                    {
-                        query += "JobTitle LIKE @JobTitle ";
-                        command.Parameters.AddWithValue("@JobTitle", "%" + jobTitle + "%");
-                    }
-                    if (salary.HasValue)
-                    {
-                        // Add an AND if there are multiple conditions
-                        if (command.Parameters.Count > 0)
-                        {
-                            query += "AND ";
-                        }
-                        query += "Salary >= @Salary ";
-                        command.Parameters.AddWithValue("@Salary", salary.Value);
-                    }
+                // Add a panel with the data
+                AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text);
+            }
 
-                    // Set the command text
-                    command.CommandText = query;
-
-                    // Execute the query and get the results
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    // Loop through the results
-                    while (reader.Read())
-                    {
-                        // Get the data from the row
-                        var image = Image.FromFile(reader["ImagePath"].ToString());
-                        var label1Text = reader["Label1"].ToString();
-                        var label2Text = reader["Label2"].ToString();
-                        var label3Text = reader["Label3"].ToString();
-                        var label4Text = reader["Label4"].ToString();
-
-                        // Add a panel with the data
-                        AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text);
-                    }
-
-                    // Close the reader and the connection
-                    reader.Close();
-                    dbConnection.Close();
-
-
-                }*/
+            // Close the reader and the connection
+            reader.Close();
+            dbConnection.Close();
+        }
 
 
 
-
-
-    private void OpenInformationForm()
+        private void OpenInformationForm()
         {
             // Open the Information form
             Information informationForm = new Information();
@@ -262,5 +246,8 @@ namespace TimViec
             Appointment appointmentForm = new Appointment();
             appointmentForm.Show();
         }
+
+
+
     }
 }
