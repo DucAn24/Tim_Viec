@@ -17,7 +17,7 @@ namespace TimViec
         public DbConnection()
         {
             // Assign the connection string directly
-            connectionString = @"Data Source=DucAn\SQLEXPRESS;Initial Catalog=TimViec;Integrated Security=True;Trust Server Certificate=True";
+            connectionString = @"Data Source=DESKTOP-M545OQ4;Initial Catalog=Project_Winform;Integrated Security=True;Encrypt=False";
             connection = new SqlConnection(connectionString);
         }
 
@@ -90,8 +90,25 @@ namespace TimViec
             }
         }
 
-
-
-
+        public void Execute(string sqlStr)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand(sqlStr, connection);
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Succes", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Failed" + exc);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

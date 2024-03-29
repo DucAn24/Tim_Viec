@@ -22,6 +22,9 @@ namespace TimViec
     {
 
         MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
+        ClientInforDAO clientDAO = new ClientInforDAO();
+        JobDAO jobDAO = new JobDAO();
+
         public User()
         {
             InitializeComponent();
@@ -56,7 +59,6 @@ namespace TimViec
         {
             AddPanelToFlowLayoutHired(flowLayoutPanel1);
             AddPanelToFlowLayoutWait(flowLayoutPanel3);
-
         }
 
         private void materialSwitch2_CheckedChanged(object sender, EventArgs e)
@@ -310,45 +312,45 @@ namespace TimViec
 
 
 
-/*        private void AddPanelToFlowLayout(FlowLayoutPanel flowLayoutPanel, Func<Image, string, string, MaterialCard> addControlsToPanel, string query)
-        {
-            string connectionString = "Data Source=(local);Initial Catalog=YourDatabaseName;Integrated Security=True";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+        /*        private void AddPanelToFlowLayout(FlowLayoutPanel flowLayoutPanel, Func<Image, string, string, MaterialCard> addControlsToPanel, string query)
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int imageIndex = reader.GetInt32(0); // Assuming the first column is the image index
-                            string label1 = reader.GetString(1); // Assuming the second column is the first label
-                            string label2 = reader.GetString(2); // Assuming the third column is the second label
+                    string connectionString = "Data Source=(local);Initial Catalog=YourDatabaseName;Integrated Security=True";
 
-                            var image = imageList1.Images[imageIndex];
-                            var card = addControlsToPanel(image, label1, label2);
-                            flowLayoutPanel.Controls.Add(card);
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    int imageIndex = reader.GetInt32(0); // Assuming the first column is the image index
+                                    string label1 = reader.GetString(1); // Assuming the second column is the first label
+                                    string label2 = reader.GetString(2); // Assuming the third column is the second label
+
+                                    var image = imageList1.Images[imageIndex];
+                                    var card = addControlsToPanel(image, label1, label2);
+                                    flowLayoutPanel.Controls.Add(card);
+                                }
+                            }
                         }
                     }
                 }
-            }
-        }
 
-        private void AddPanelToFlowLayoutHired(FlowLayoutPanel flowLayoutPanel)
-        {
-            string query = "SELECT ImageIndex, Label1, Label2 FROM YourHiredTableName";
-            AddPanelToFlowLayout(flowLayoutPanel, AddControlsToPanelDashBoard, query);
-        }
+                private void AddPanelToFlowLayoutHired(FlowLayoutPanel flowLayoutPanel)
+                {
+                    string query = "SELECT ImageIndex, Label1, Label2 FROM YourHiredTableName";
+                    AddPanelToFlowLayout(flowLayoutPanel, AddControlsToPanelDashBoard, query);
+                }
 
-        private void AddPanelToFlowLayoutWait(FlowLayoutPanel flowLayoutPanel)
-        {
-            string query = "SELECT ImageIndex, Label1, Label2 FROM YourWaitTableName";
-            AddPanelToFlowLayout(flowLayoutPanel, AddControlsToPanelWait, query);
-        }
-*/
+                private void AddPanelToFlowLayoutWait(FlowLayoutPanel flowLayoutPanel)
+                {
+                    string query = "SELECT ImageIndex, Label1, Label2 FROM YourWaitTableName";
+                    AddPanelToFlowLayout(flowLayoutPanel, AddControlsToPanelWait, query);
+                }
+        */
 
 
 
@@ -360,5 +362,16 @@ namespace TimViec
             appointmentForm.Show();
         }
 
+        private void btnSaveInformation_Click(object sender, EventArgs e)
+        {
+            ClientInfor client = new ClientInfor(txtFirstName.Text, txtLastName.Text, txtEmail.Text, dTPDateOfBirth.Value, picBoxUser.Image.ToString(), txtPhone.Text, txtAddress.Text, txtAddress.Text);
+            clientDAO.AddInformation(client);
+        }
+
+        private void btnSubmitProject_Click(object sender, EventArgs e)
+        {
+            Job job = new Job(txtTitle.Text, txtDescription.Text, txtMinBudget.Text, txtMaxBudget.Text, cbBoxCategory.Text);
+            jobDAO.AddJob(job); 
+        }
     }
 }

@@ -1,36 +1,33 @@
-USE TimViec
+USE Project_Winform
+GO
 
-CREATE TABLE Account (
-    ID INT IDENTITY(1,1) PRIMARY KEY,
-    Role INT, -- 0 Client, 1 Craftsman
-    Username NVARCHAR(100),
-    Password NVARCHAR(255)
+CREATE TABLE Account(
+	Username varchar(100),
+	Password varchar(100)
 );
 
-CREATE TABLE Craftsman (
-    ID INT PRIMARY KEY,
-    FirstName NVARCHAR(255),
-    LastName NVARCHAR(255),
-    Address NVARCHAR(255),
-    PhoneNumber NVARCHAR(20),
-    Gender NVARCHAR(10),
-    Email NVARCHAR(255),
-    DateOfBirth DATETIME,
-    ImagePath NVARCHAR(MAX),
-    FOREIGN KEY (ID) REFERENCES Account(ID)
+INSERT INTO Account VALUES('abc','123');
+
+CREATE TABLE Person (
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+	LastName VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    DateOfBirth DATE, -- Date of birth of the user
+    PicturePath VARCHAR(100), 
+    Phone VARCHAR(20), -- Phone number of the user
+	Address VARCHAR(250),
+    Gender CHAR(1) -- Gender of the user (M for Male, F for Female, O for Other, etc.)
 );
 
-CREATE TABLE Client (
-    ID INT PRIMARY KEY,
-    FirstName NVARCHAR(255),
-    LastName NVARCHAR(255),
-    Address NVARCHAR(255),
-    PhoneNumber NVARCHAR(20),
-    Gender NVARCHAR(10),
-    Email NVARCHAR(255),
-    DateOfBirth DATETIME,
-    ImagePath NVARCHAR(MAX), 
-    FOREIGN KEY (ID) REFERENCES Account(ID)
+CREATE TABLE Job (
+    ProjectID INT IDENTITY(1,1) PRIMARY KEY,
+    Title VARCHAR(100) NOT NULL,
+    Description TEXT NOT NULL,
+    MinBudget DECIMAL(10, 2),
+    MaxBudget DECIMAL(10, 2),
+	Category VARCHAR(50),
+    --FOREIGN KEY (ClientID) REFERENCES Person(UserID)
 );
 
 
