@@ -68,27 +68,22 @@ namespace TimViec
             return dataTable;
         }
 
-        public int ExecuteNonQuery(string query)
+        public int ExecuteNonQuery(SqlCommand command)
         {
-            using (SqlCommand command = new SqlCommand(query, connection))
+            try
             {
-                try
-                {
-                    connection.Open();
-                    int result = command.ExecuteNonQuery();
-                    connection.Close();
+                int result = command.ExecuteNonQuery();
 
-                    // Display a success message box
-                    MessageBox.Show("Command executed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Display a success message box
+                MessageBox.Show("Command executed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    // Display an error message box
-                    MessageBox.Show($"Error executing command: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return -1;
-                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Display an error message box
+                MessageBox.Show($"Error executing command: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
             }
         }
 

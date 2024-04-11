@@ -4,22 +4,28 @@
     <Compile Update="Appointment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Information.cs">
+    <Compile Update="FInformation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="User.cs">
+    <Compile Update="FListJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Review.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Resgister.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Login2.cs">
+    <Compile Update="FWorker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Worker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="WorkerList.cs">
+    <Compile Update="FListWorker.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
