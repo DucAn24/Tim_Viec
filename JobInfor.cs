@@ -12,19 +12,22 @@ namespace TimViec
         private String jobDescription;
         private String category;
         private String price;
-        public JobInfor(string jobTitle, string jobDescription, string category, string price)
+        private String imageJob;
+        public JobInfor(string jobTitle, string jobDescription, string category, string price, string imageJob)
         {
             this.jobTitle = jobTitle;
             this.jobDescription = jobDescription;
             this.category = category;
             this.price = price;
-
+            this.imageJob = imageJob;
         }
 
         public string JobTitle { get => jobTitle; set => jobTitle = value; }
         public string JobDescription { get => jobDescription; set => jobDescription = value; }
         public string Category { get => category; set => category = value; }
         public string Price { get => price; set => price = value; }
+
+        public string ImageJob { get => imageJob; set => imageJob = value; }
 
     }
 

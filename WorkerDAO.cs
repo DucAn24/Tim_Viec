@@ -15,7 +15,7 @@ namespace TimViec
             try
             {
                 string sqlStrUsers = "UPDATE Users SET Name = @Name, Email = @Email, DateOfBirth = @DateOfBirth, ImagePath = @ImagePath, PhoneNumber = @Phone, Address = @Address, Gender = @Gender WHERE user_id = @UserId";
-                string sqlStrWorker = "UPDATE Worker SET Bio = @Bio, Skills = @Skills, Category = @Category WHERE user_id = @UserId";
+                string sqlStrWorker = "UPDATE Worker SET Bio = @Bio, Skills = @Skills, Category = @Category, Salary = @Salary WHERE user_id = @UserId";
 
                 using (SqlCommand command = new SqlCommand(sqlStrUsers, connection.Connection))
                 {
@@ -39,6 +39,7 @@ namespace TimViec
                             commandWorker.Parameters.AddWithValue("@Bio", worker.Bio);
                             commandWorker.Parameters.AddWithValue("@Skills", worker.Skills);
                             commandWorker.Parameters.AddWithValue("@Category", worker.Category);
+                            commandWorker.Parameters.AddWithValue("@Salary", worker.Salary);
                             commandWorker.Parameters.AddWithValue("@UserId", userId);
 
                             connection.Open();

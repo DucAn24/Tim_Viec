@@ -1,5 +1,6 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,11 +21,13 @@ namespace TimViec
         JobDAO jobDAO = new JobDAO();
         WorkerDAO workerDAO = new WorkerDAO();
         private int userId;
-        
+        private int worker_id;
+
         public FWorker(int userId)
         {
             this.userId = userId;
             dbConnection = new DbConnection();
+            this.worker_id = GetWorkerIdFromUserId(userId);
 
             InitializeComponent();
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
@@ -35,6 +38,19 @@ namespace TimViec
                                                                 Primary.LightGreen500,
                                                                 Accent.LightGreen200,
                                                                 TextShade.WHITE);
+
+            List<MaterialCard> materialCards = new List<MaterialCard> { materialCard6, materialCard14, materialCard12, materialCard10, materialCard15, materialCard16, materialCard17, materialCard18 };
+            List<PictureBox> pictureBoxes = new List<PictureBox> { pictureBox2, pictureBox3, pictureBox4, pictureBox5, pictureBox6, pictureBox7, pictureBox8, pictureBox9 };
+            // Attach a click event handler to each MaterialCard
+            foreach (var materialCard in materialCards)
+            {
+                materialCard.Click += MaterialCard_Click;
+            }
+            foreach (var pictureBox in pictureBoxes)
+            {
+                pictureBox.Click += PictureBox_Click;
+            }
+
         }
 
         private void Worker_Load(object sender, EventArgs e)
@@ -42,12 +58,106 @@ namespace TimViec
             AddPanelToFlowLayoutAppointment(flowLayoutPanel2);
         }
 
+        public int GetWorkerIdFromUserId(int userId)
+        {
+            int workerId = -1; // Initialize to -1 to represent not found
+
+            // Open the database connection
+            dbConnection.Open();
+
+            // Create the SQL command to get the worker_id
+            string query = @"
+                        SELECT W.Worker_id
+                        FROM Users U
+                        JOIN Worker W
+                        ON U.user_id = W.user_id
+                        WHERE U.user_id = @UserId
+                    ";
+
+            SqlCommand command = new SqlCommand(query, dbConnection.Connection);
+
+            // Add the user_id parameter to the command
+            command.Parameters.AddWithValue("@UserId", userId);
+
+            // Execute the command and get the result
+            object result = command.ExecuteScalar();
+
+            // If a result was returned, set the workerId
+            if (result != null)
+            {
+                workerId = (int)result;
+            }
+
+            // Close the database connection
+            dbConnection.Close();
+
+            return workerId;
+        }
+
+        private Dictionary<string, string> pictureToCategoryMap = new Dictionary<string, string>
+        {
+            { "pictureBox2", "Devlopment-IT" },
+            { "pictureBox3", "AI-Services" },
+            { "pictureBox4", "Design-Creative" },
+            { "pictureBox5", "Sales-Marketing" },
+            { "pictureBox6", "Engineering-Architecture" },
+            { "pictureBox7", "Finance-Accounting" },
+            { "pictureBox8", "Admin-Custome-Support" },
+            { "pictureBox9", "Writing-Traslation" },
+            // Add more if needed
+        };
+
+
+        private Dictionary<string, string> cardToCategoryMap = new Dictionary<string, string>
+        {
+            { "materialCard6", "Devlopment-IT" },
+            { "materialCard14", "AI-Services" },
+            { "materialCard12", "Design-Creative" },
+            { "materialCard10", "Sales-Marketing" },
+            { "materialCard15", "Writing-Traslation" },
+            { "materialCard16", "Admin-Custome Support" },
+            { "materialCard17", "Finance-Accounting" },
+            { "materialCard18", "Engineering-Architecture" },
+            // Add more if needed
+        };
+
+        private void PictureBox_Click(object sender, EventArgs e)
+        {
+            // Determine which PictureBox was clicked
+            PictureBox clickedPictureBox = sender as PictureBox;
+
+            // Create and show the appropriate form based on the clicked PictureBox
+            if (clickedPictureBox != null && pictureToCategoryMap.TryGetValue(clickedPictureBox.Name, out string category))
+            {
+                OpenFListJob(category, userId);
+            }
+        }
+
+        private void MaterialCard_Click(object sender, EventArgs e)
+        {
+            // Determine which MaterialCard was clicked
+            MaterialCard clickedCard = sender as MaterialCard;
+
+            // Fetch the data for the category of the clicked card
+            if (clickedCard != null && cardToCategoryMap.TryGetValue(clickedCard.Name, out string category))
+            {
+                OpenFListJob(category, userId);
+            }
+        }
+
+
+        private void OpenFListJob(string category, int userID)
+        {
+            FListJob jobList = new FListJob(category, userID);
+            jobList.Show();
+        }
+
         private void materialTabControl1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (this.materialTabControl1.SelectedIndex == 5) // Assuming the "Log out" tab is at index 5
             {
                 this.Hide(); // Hide the current form
-                new Login().Show(); // Show the Login form
+                new FLogin().Show(); // Show the Login form
             }
         }
 
@@ -81,8 +191,6 @@ namespace TimViec
             label2.Font = new Font("Nirmala UI", 10, FontStyle.Bold);
             label2.Location = new Point(10, 120);
 
-
-
             // Create a new panel
             MaterialCard card = new MaterialCard();
             card.Width = 310; // Set panel width as needed
@@ -110,53 +218,8 @@ namespace TimViec
 
         private void AddPanelToFlowLayoutAppointment(FlowLayoutPanel flowLayoutPanel)
         {
-            // Example data for panels
-            List<(string, string, string, string)> labels = new List<(string, string, string, string)>
-            {
-                ("Duc AN Nbguyen ", "Python Developer : Django - Flask - RESTful APIs - Automation Scripts", "$10.00/hr", "Are you looking for a versatile Python Developer to help you with your Project? I'm a Python developer driven by a profound passion for technology. Offering a diverse range of services, I specialize in web scraping, data mining, data wrangling, data analysis, automation, and cloud services."),
-                ("Tijani-Ahmed O. t", "Python Programmer", "$5.00/hr", "I am a junior Python developer. I'm good at using Python to solve your use cases, be it web development, API development, machine learning, data analysis, scripting, web automation, etc.I am good at building backend applications and RESTful APIs using the Django Framework. I can. also build full-stack web applications.Apart from this, I'm also an automation expert in python. I can scrape, automate processes, manipulate different files, classify and predict data using ML, speed up applications with asynchronous programming etc."),
-                ("Akshay V.", "c", "Label 3-3", "👋 Hey there! I'm akshay vayak, a seasoned Python and Machine Learning enthusiast with a passion for turning data into actionable insights. I'm here to supercharge your projects with cutting-edge technology and data-driven solutions.\r\n\r\nKey Skills:\r\n\r\n🐍 Python Expertise: I'm fluent in Python, leveraging its versatility to build robust applications, web scrapers, and automate tasks.\r\n🤖 Machine Learning Wizardry: I specialize in creating predictive models, natural language processing, computer vision, and recommendation systems.\r\n📊 Data Analysis & Visualization: I'll transform your data into meaningful insights using pandas, Matplotlib, and Seaborn.\r\n\U0001f9e0 Deep Learning: I have experience with TensorFlow and PyTorch for developing neural networks.\r\n💻 Full-Stack Familiarity: I can seamlessly integrate ML models into web apps, giving your users intelligent experiences.\r\n🌐 API Integration: I'll connect your applications with external APIs to fetch or deliver data.\r\n📈 Optimization: I optimize code and models for speed, scalability, and cost-effectiveness."),
-                ("Ismail P. ", "Mobile App Developer / Python Developer", "Label 3-3", "Label 3-4"),
-                ("code web", "Label 3-2", "Label 3-3", "Label 3-4"),
-                ("code web", "Label 3-2", "Label 3-3", "Label 3-4")
-            };
 
 
-
-            // Example data for image indices in the ImageList
-            List<int> imageIndices = new List<int> { 0, 1, 2, 3, 4, 5 };
-
-            //loop all labels and images
-            for (int i = 0; i < 6; i++)
-            {
-
-                // Get image from ImageList by index
-                Image image = imageList1.Images[imageIndices[i]];
-
-
-                // Get the card from the AddControlsToPanel method
-
-                MaterialCard cardAppointment = AddControlsToPanelAppointment(image, labels[i].Item1, labels[i].Item2, labels[i].Item3, labels[i].Item4);
-
-                // Add the card to the flowLayoutPanel
-                flowLayoutPanel.Controls.Add(cardAppointment);
-
-            }
-
-        }
-
-        private string imagePath;
-        private void btnImportImage_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    imagePath = ofd.FileName;
-                    picBoxUser.Image = new Bitmap(imagePath);
-                }
-            }
         }
 
         private string gender;
@@ -178,9 +241,36 @@ namespace TimViec
             }
         }
 
+        private string imagePath;
+        private string imageJob;
+
+        private string SelectImageFile(PictureBox pictureBox)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox.Image = new Bitmap(ofd.FileName);
+                    return ofd.FileName;
+                }
+            }
+            return null;
+        }
+
+        private void btnImportImage_Click(object sender, EventArgs e)
+        {
+            imagePath = SelectImageFile(picBoxUser);
+        }
+        private void btnImportJob_Click_1(object sender, EventArgs e)
+        {
+            imageJob = SelectImageFile(pictureBoxJob);
+        }
+
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Worker worker = new Worker(txtName.Text, txtEmail.Text, dtpBirth.Value, imagePath, txtPhone.Text, txtAddress.Text, gender, txtBio.Text, txtSkill.Text,cbxCategory2.Text);
+            Worker worker = new Worker(txtName.Text, txtEmail.Text, dtpBirth.Value, imagePath, txtPhone.Text, txtAddress.Text, gender, txtBio.Text, txtSkill.Text, cbxCategory2.Text, txtSalary.Text);
             bool isUpdated = workerDAO.UpdateWorkerInformation(worker, this.userId);
             if (isUpdated)
             {
@@ -191,5 +281,20 @@ namespace TimViec
                 MessageBox.Show("Failed to update Worker information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnSubmitJob_Click(object sender, EventArgs e)
+        {
+            JobInfor jobInfor = new JobInfor(txtTitle.Text, txtDescription.Text, cbxCategory.Text, txtPrice.Text, imageJob);
+            bool isUpdated = jobDAO.AddJobHistory(jobInfor, this.worker_id);
+            if (isUpdated)
+            {
+                MessageBox.Show("Job history information updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Failed to update job history information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

@@ -57,8 +57,8 @@
             txtName = new MaterialSkin.Controls.MaterialTextBox2();
             picBoxUser = new PictureBox();
             tabPage2 = new TabPage();
-            materialButton3 = new MaterialSkin.Controls.MaterialButton();
-            pictureBox1 = new PictureBox();
+            btnImportJob = new MaterialSkin.Controls.MaterialButton();
+            pictureBoxJob = new PictureBox();
             label8 = new Label();
             txtDescription = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             label23 = new Label();
@@ -130,7 +130,7 @@
             materialCard5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxUser).BeginInit();
             tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxJob).BeginInit();
             materialCard4.SuspendLayout();
             tabPage1.SuspendLayout();
             materialCard18.SuspendLayout();
@@ -581,8 +581,8 @@
             // tabPage2
             // 
             tabPage2.BackColor = Color.White;
-            tabPage2.Controls.Add(materialButton3);
-            tabPage2.Controls.Add(pictureBox1);
+            tabPage2.Controls.Add(btnImportJob);
+            tabPage2.Controls.Add(pictureBoxJob);
             tabPage2.Controls.Add(label8);
             tabPage2.Controls.Add(txtDescription);
             tabPage2.Controls.Add(label23);
@@ -608,41 +608,42 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Post Job";
             // 
-            // materialButton3
+            // btnImportJob
             // 
-            materialButton3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            materialButton3.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            materialButton3.Depth = 0;
-            materialButton3.HighEmphasis = true;
-            materialButton3.Icon = null;
-            materialButton3.Location = new Point(852, 642);
-            materialButton3.Margin = new Padding(4, 6, 4, 6);
-            materialButton3.MouseState = MaterialSkin.MouseState.HOVER;
-            materialButton3.Name = "materialButton3";
-            materialButton3.NoAccentTextColor = Color.Empty;
-            materialButton3.Size = new Size(125, 36);
-            materialButton3.TabIndex = 37;
-            materialButton3.Text = "import image";
-            materialButton3.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            materialButton3.UseAccentColor = false;
-            materialButton3.UseVisualStyleBackColor = true;
+            btnImportJob.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnImportJob.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnImportJob.Depth = 0;
+            btnImportJob.HighEmphasis = true;
+            btnImportJob.Icon = null;
+            btnImportJob.Location = new Point(957, 668);
+            btnImportJob.Margin = new Padding(4, 6, 4, 6);
+            btnImportJob.MouseState = MaterialSkin.MouseState.HOVER;
+            btnImportJob.Name = "btnImportJob";
+            btnImportJob.NoAccentTextColor = Color.Empty;
+            btnImportJob.Size = new Size(125, 36);
+            btnImportJob.TabIndex = 37;
+            btnImportJob.Text = "import image";
+            btnImportJob.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnImportJob.UseAccentColor = false;
+            btnImportJob.UseVisualStyleBackColor = true;
+            btnImportJob.Click += btnImportJob_Click;
             // 
-            // pictureBox1
+            // pictureBoxJob
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(852, 376);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(386, 257);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 36;
-            pictureBox1.TabStop = false;
+            pictureBoxJob.Image = (Image)resources.GetObject("pictureBoxJob.Image");
+            pictureBoxJob.Location = new Point(957, 402);
+            pictureBoxJob.Name = "pictureBoxJob";
+            pictureBoxJob.Size = new Size(386, 257);
+            pictureBoxJob.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxJob.TabIndex = 36;
+            pictureBoxJob.TabStop = false;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.LightGreen;
-            label8.Location = new Point(852, 307);
+            label8.Location = new Point(957, 333);
             label8.Name = "label8";
             label8.Size = new Size(276, 54);
             label8.TabIndex = 35;
@@ -655,7 +656,7 @@
             txtDescription.CharacterCasing = CharacterCasing.Normal;
             txtDescription.Depth = 0;
             txtDescription.HideSelection = true;
-            txtDescription.Location = new Point(101, 464);
+            txtDescription.Location = new Point(121, 490);
             txtDescription.MaxLength = 32767;
             txtDescription.MouseState = MaterialSkin.MouseState.OUT;
             txtDescription.Name = "txtDescription";
@@ -677,7 +678,7 @@
             label23.AutoSize = true;
             label23.Font = new Font("Nirmala UI Semilight", 10.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label23.ForeColor = SystemColors.ActiveCaptionText;
-            label23.Location = new Point(363, 417);
+            label23.Location = new Point(383, 443);
             label23.Name = "label23";
             label23.Size = new Size(394, 23);
             label23.TabIndex = 30;
@@ -688,7 +689,7 @@
             label22.AutoSize = true;
             label22.Font = new Font("Nirmala UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label22.ForeColor = SystemColors.ActiveCaptionText;
-            label22.Location = new Point(101, 405);
+            label22.Location = new Point(121, 431);
             label22.Name = "label22";
             label22.Size = new Size(240, 38);
             label22.TabIndex = 29;
@@ -699,7 +700,7 @@
             label21.AutoSize = true;
             label21.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label21.ForeColor = Color.LightGreen;
-            label21.Location = new Point(101, 348);
+            label21.Location = new Point(121, 374);
             label21.Name = "label21";
             label21.Size = new Size(377, 54);
             label21.TabIndex = 28;
@@ -710,7 +711,7 @@
             label20.AutoSize = true;
             label20.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label20.ForeColor = Color.LightGreen;
-            label20.Location = new Point(852, 73);
+            label20.Location = new Point(957, 99);
             label20.Name = "label20";
             label20.Size = new Size(266, 54);
             label20.TabIndex = 27;
@@ -732,7 +733,7 @@
             cbxCategory.IntegralHeight = false;
             cbxCategory.ItemHeight = 43;
             cbxCategory.Items.AddRange(new object[] { "Devlopment-IT", "AI-Services", "Design-Creative", "Sales-Marketing", "Writing-Traslation", "Admin-Custome Support", "Finance-Accounting", "Engineering-Architecture" });
-            cbxCategory.Location = new Point(101, 266);
+            cbxCategory.Location = new Point(121, 292);
             cbxCategory.MaxDropDownItems = 4;
             cbxCategory.MouseState = MaterialSkin.MouseState.OUT;
             cbxCategory.Name = "cbxCategory";
@@ -745,7 +746,7 @@
             label19.AutoSize = true;
             label19.Font = new Font("Nirmala UI Semilight", 10.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label19.ForeColor = SystemColors.ActiveCaptionText;
-            label19.Location = new Point(270, 237);
+            label19.Location = new Point(290, 263);
             label19.Name = "label19";
             label19.Size = new Size(452, 23);
             label19.TabIndex = 25;
@@ -756,7 +757,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Nirmala UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(101, 225);
+            label4.Location = new Point(121, 251);
             label4.Name = "label4";
             label4.Size = new Size(136, 38);
             label4.TabIndex = 24;
@@ -771,7 +772,7 @@
             txtTitle.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtTitle.HideSelection = true;
             txtTitle.LeadingIcon = null;
-            txtTitle.Location = new Point(101, 143);
+            txtTitle.Location = new Point(121, 169);
             txtTitle.MaxLength = 32767;
             txtTitle.MouseState = MaterialSkin.MouseState.OUT;
             txtTitle.Name = "txtTitle";
@@ -795,7 +796,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label18.ForeColor = Color.LightGreen;
-            label18.Location = new Point(101, 27);
+            label18.Location = new Point(121, 53);
             label18.Name = "label18";
             label18.Size = new Size(339, 54);
             label18.TabIndex = 22;
@@ -808,7 +809,7 @@
             materialButton2.Depth = 0;
             materialButton2.HighEmphasis = true;
             materialButton2.Icon = null;
-            materialButton2.Location = new Point(275, 755);
+            materialButton2.Location = new Point(279, 750);
             materialButton2.Margin = new Padding(5);
             materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton2.Name = "materialButton2";
@@ -827,7 +828,7 @@
             btnSumitJob.Depth = 0;
             btnSumitJob.HighEmphasis = true;
             btnSumitJob.Icon = null;
-            btnSumitJob.Location = new Point(117, 755);
+            btnSumitJob.Location = new Point(121, 750);
             btnSumitJob.Margin = new Padding(5);
             btnSumitJob.MouseState = MaterialSkin.MouseState.HOVER;
             btnSumitJob.Name = "btnSumitJob";
@@ -849,7 +850,7 @@
             materialCard4.Controls.Add(materialLabel3);
             materialCard4.Depth = 0;
             materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard4.Location = new Point(852, 143);
+            materialCard4.Location = new Point(957, 169);
             materialCard4.Margin = new Padding(14, 13, 14, 13);
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
@@ -927,7 +928,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Nirmala UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.ActiveCaptionText;
-            label3.Location = new Point(101, 92);
+            label3.Location = new Point(121, 118);
             label3.Name = "label3";
             label3.Size = new Size(75, 38);
             label3.TabIndex = 2;
@@ -938,7 +939,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Nirmala UI Semilight", 10.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(181, 104);
+            label2.Location = new Point(201, 130);
             label2.Name = "label2";
             label2.Size = new Size(454, 23);
             label2.TabIndex = 1;
@@ -1415,7 +1416,7 @@
             materialCard8.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard8.Name = "materialCard8";
             materialCard8.Padding = new Padding(14, 13, 14, 13);
-            materialCard8.Size = new Size(1413, 348);
+            materialCard8.Size = new Size(1413, 387);
             materialCard8.TabIndex = 28;
             // 
             // flowLayoutPanel3
@@ -1423,7 +1424,7 @@
             flowLayoutPanel3.AutoScroll = true;
             flowLayoutPanel3.Location = new Point(17, 73);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(1381, 248);
+            flowLayoutPanel3.Size = new Size(1381, 298);
             flowLayoutPanel3.TabIndex = 26;
             // 
             // label1
@@ -1528,7 +1529,7 @@
             ((System.ComponentModel.ISupportInitialize)picBoxUser).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxJob).EndInit();
             materialCard4.ResumeLayout(false);
             materialCard4.PerformLayout();
             tabPage1.ResumeLayout(false);
@@ -1666,8 +1667,8 @@
         private Label label32;
         private MaterialSkin.Controls.MaterialDivider materialDivider5;
         private TabPage tabPage6;
-        private MaterialSkin.Controls.MaterialButton materialButton3;
-        private PictureBox pictureBox1;
+        private MaterialSkin.Controls.MaterialButton btnImportJob;
+        private PictureBox pictureBoxJob;
         private Label label8;
     }
 }

@@ -117,8 +117,8 @@ namespace TimViec
         }
 
         private void materialButton5_Click(object sender, EventArgs e)
-        {    
-             Review reviewForm = new Review();
+        {
+            FReview reviewForm = new FReview();
             reviewForm.Show();
         }
     }

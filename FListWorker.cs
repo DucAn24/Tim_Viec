@@ -45,18 +45,6 @@ namespace TimViec
                                                                 TextShade.WHITE);
 
 
-
-            materialButton14.Click += (sender, e) =>
-            {
-                // Get the job title and salary from the text boxes
-                string jobTitle = string.IsNullOrEmpty(materialTextBox25.Text) ? null : materialTextBox25.Text;
-                //decimal? salary = string.IsNullOrEmpty(materialTextBox21.Text) ? (decimal?)null : decimal.Parse(materialTextBox21.Text);
-
-                // Search for workers
-                //SearchWorkers(jobTitle, salary);
-            };
-
-
         }
 
 
@@ -65,7 +53,7 @@ namespace TimViec
             LoadDataAndAddPanels(category);
         }
 
-        private void AddControlsToPanel(Image image, string label1Text, string label2Text, string label3Text, string label4Text, object userId, object Worker_id)
+        private void AddControlsToPanel(Image image, string label1Text, string label2Text, string label3Text, string label4Text, string salary, object userId, object Worker_id)
         {
 
 
@@ -99,20 +87,25 @@ namespace TimViec
 
             // Create and configure label 3
             Label label3 = new Label();
-            label3.Text = label3Text;
+            label3.Text = "Age: " + label3Text;
             label3.AutoSize = true;
             label3.Location = new Point(20, 120);
             label3.Click += (sender, e) => OpenInformationForm();
 
             // Create and configure label 4
             Label label4 = new Label();
-            label4.Text = label4Text;
-            label4.AutoSize = false; // Set AutoSize to false
-            label4.Width = 550; 
-            label4.Height = 100;
+            label4.Text = "Bio: " + label4Text;
+            label4.AutoSize = true; // Set AutoSize to false
             label4.Location = new Point(120, 100); // Set the location
             label4.TextAlign = ContentAlignment.TopLeft;
             label4.Click += (sender, e) => OpenInformationForm();
+
+            Label salaryLable = new Label();
+            salaryLable.Text = "Salary: " + salary;
+            salaryLable.AutoSize = true; // Set AutoSize to false
+            salaryLable.Location = new Point(120, 120); // Set the location
+            salaryLable.TextAlign = ContentAlignment.TopLeft;
+            salaryLable.Click += (sender, e) => OpenInformationForm();
 
             // Create a new panel
             MaterialCard card = new MaterialCard();
@@ -121,7 +114,7 @@ namespace TimViec
             card.BackColor = Color.White; // Set panel background color if needed
             card.Click += (sender, e) => OpenInformationForm();
             card.BackColor = Color.White; // Set panel background color if needed
-            card.Tag = new {  UserId = this.userId, WorkerId = Worker_id };
+            card.Tag = new { UserId = this.userId, WorkerId = Worker_id };
 
 
             MaterialButton btnHire = new MaterialButton();
@@ -137,37 +130,54 @@ namespace TimViec
                 var userId = ((dynamic)card.Tag).UserId;
                 var workerId = ((dynamic)card.Tag).WorkerId;
 
-
                 // Open the database connection
                 dbConnection.Open();
 
-                // Create the SQL command to insert the data
-                string query = @"
-                                INSERT INTO HiredWorkers (user_id, Worker_id)
-                                VALUES (@UserId, @WorkerId)
-                            ";
+                // Check if the user has already hired the worker
+                string checkQuery = @"
+                        SELECT COUNT(*)
+                        FROM HiredWorkers
+                        WHERE user_id = @UserId AND Worker_id = @WorkerId
+                    ";
 
-                SqlCommand command = new SqlCommand(query, dbConnection.Connection);
+                SqlCommand checkCommand = new SqlCommand(checkQuery, dbConnection.Connection);
+                checkCommand.Parameters.AddWithValue("@UserId", userId);
+                checkCommand.Parameters.AddWithValue("@WorkerId", workerId);
 
-                // Add the parameters to the command
-                command.Parameters.AddWithValue("@UserId", userId);
-                command.Parameters.AddWithValue("@WorkerId", workerId);
+                int count = (int)checkCommand.ExecuteScalar();
 
-                // Execute the command
-                try
+                if (count > 0)
                 {
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Hire successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("You have already hired this worker.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show($"Error inserting data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // Create the SQL command to insert the data
+                    string insertQuery = @"
+                            INSERT INTO HiredWorkers (user_id, Worker_id)
+                            VALUES (@UserId, @WorkerId)
+                        ";
+
+                    SqlCommand insertCommand = new SqlCommand(insertQuery, dbConnection.Connection);
+
+                    // Add the parameters to the command
+                    insertCommand.Parameters.AddWithValue("@UserId", userId);
+                    insertCommand.Parameters.AddWithValue("@WorkerId", workerId);
+
+                    // Execute the command
+                    try
+                    {
+                        insertCommand.ExecuteNonQuery();
+                        MessageBox.Show("Hire successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error inserting data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
 
-                // Close the database connection
                 dbConnection.Close();
             };
-
 
 
             MaterialButton btnFavourite = new MaterialButton();
@@ -176,60 +186,52 @@ namespace TimViec
             btnFavourite.Tag = card; // Store the panel in the Favourite button's Tag property
             btnFavourite.Click += (sender, e) =>
             {
-                // Get the panel from the Favourite button's Tag property
+                // Get the panel from the Hire button's Tag property
                 MaterialCard card = (MaterialCard)((MaterialButton)sender).Tag;
 
-                // Get the employer ID and user ID from the panel's Tag property
-                var employerId = ((dynamic)card.Tag).EmployerId;
+                // Get the user ID and worker ID from the panel's Tag property
                 var userId = ((dynamic)card.Tag).UserId;
-
-                // Check if the user is trying to favorite themselves
-                if (this.userId == userId)
-                {
-                    MessageBox.Show("You cannot add yourself to favourites.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                var workerId = ((dynamic)card.Tag).WorkerId;
 
                 // Open the database connection
                 dbConnection.Open();
 
-                // Check if the user has already liked the job
+                // Check if the user has already like the worker
                 string checkQuery = @"
-                                    SELECT status 
-                                    FROM Favourite 
-                                    WHERE employer_id = @EmployerId AND user_id = @UserId
-                                ";
+                        SELECT COUNT(*)
+                        FROM Favourite
+                        WHERE user_id = @UserId AND Worker_id = @WorkerId
+                    ";
 
                 SqlCommand checkCommand = new SqlCommand(checkQuery, dbConnection.Connection);
-                checkCommand.Parameters.AddWithValue("@EmployerId", employerId);
                 checkCommand.Parameters.AddWithValue("@UserId", userId);
+                checkCommand.Parameters.AddWithValue("@WorkerId", workerId);
 
-                object liked = checkCommand.ExecuteScalar();
+                int count = (int)checkCommand.ExecuteScalar();
 
-                if (liked != null)
+                if (count > 0)
                 {
-                    MessageBox.Show("You have already liked this job.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("You have already like this worker.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     // Create the SQL command to insert the data
-                    string query = @"
-                                    INSERT INTO Favourite (employer_id, user_id,status)
-                                    VALUES (@EmployerId, @UserId,@Status)
-                                ";
+                    string insertQuery = @"
+                            INSERT INTO Favourite (user_id, Worker_id, isFavourite)
+                            VALUES (@UserId, @WorkerId, 'true')
+                        ";
 
-                    SqlCommand command = new SqlCommand(query, dbConnection.Connection);
+                    SqlCommand insertCommand = new SqlCommand(insertQuery, dbConnection.Connection);
 
                     // Add the parameters to the command
-                    command.Parameters.AddWithValue("@EmployerId", employerId);
-                    command.Parameters.AddWithValue("@UserId", userId);
-                    command.Parameters.AddWithValue("@status", "Liked");
+                    insertCommand.Parameters.AddWithValue("@UserId", userId);
+                    insertCommand.Parameters.AddWithValue("@WorkerId", workerId);
 
                     // Execute the command
                     try
                     {
-                        command.ExecuteNonQuery();
-                        MessageBox.Show("Added to favourites successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        insertCommand.ExecuteNonQuery();
+                        MessageBox.Show("Like successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
@@ -240,9 +242,6 @@ namespace TimViec
                 // Close the database connection
                 dbConnection.Close();
             };
-
-
-
 
 
             MaterialButton btnAppointment = new MaterialButton();
@@ -256,6 +255,7 @@ namespace TimViec
             card.Controls.Add(label2);
             card.Controls.Add(label3);
             card.Controls.Add(label4);
+            card.Controls.Add(salaryLable);
             card.Controls.Add(pictureBox);
             card.Controls.Add(btnHire);
             card.Controls.Add(btnFavourite);
@@ -275,7 +275,8 @@ namespace TimViec
 		                            U.ImagePath,
 		                            U.DateOfBirth,
 		                            W.Bio,
-		                            W.Skills
+		                            W.Skills,
+                                    W.Salary 
                             FROM Users U
                             JOIN Worker W
                             ON U.user_id = w.user_id
@@ -289,7 +290,7 @@ namespace TimViec
             foreach (DataRow row in dataTable.Rows)
             {
                 // Process the data from the row
-                var Worker_id = row["Worker_id"];  
+                var Worker_id = row["Worker_id"];
                 var imagePath = row["ImagePath"] as string;
                 var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
 
@@ -306,91 +307,76 @@ namespace TimViec
 
                 string label4Text = row["Bio"].ToString();
 
+                string salary = row["Salary"].ToString();
 
-                AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text, this.userId, Worker_id);
+
+                AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text, salary, this.userId, Worker_id);
             }
             dbConnection.Close();
         }
 
-
-
-        public void SearchWorkers(string jobTitle, decimal? salary)
+        public void SearchWorkers(string orderByPrice)
         {
+            dbConnection.Open();
+            string query = @"
+                            SELECT  W.Worker_id,
+                                    U.Name,
+		                            U.Email,
+		                            U.ImagePath,
+		                            U.DateOfBirth,
+		                            W.Bio,
+		                            W.Skills,
+                                    W.Salary
+                            FROM Users U
+                            JOIN Worker W
+                            ON U.user_id = w.user_id
+                            ";
+
+            if (!string.IsNullOrEmpty(orderByPrice))
+            {
+                query += $" ORDER BY W.Salary {orderByPrice}";
+            }
+
+
+            SqlCommand command = new SqlCommand(query, dbConnection.Connection);
+
+            // Execute the command and get the result
+            SqlDataReader reader = command.ExecuteReader();
+
             // Clear the existing panels
             flowLayoutPanel1.Controls.Clear();
 
-            // Start building the query
-            StringBuilder query = new StringBuilder(@"
-                                            SELECT 
-                                                J.employer_id,
-                                                U.user_id,
-                                                J.job_id,
-                                                U.ImagePath, 
-                                                U.FirstName + ' ' + U.LastName AS FullName, 
-                                                J.JobTitle, 
-                                                J.JobDescription, 
-                                                J.MaxPrice
-                                            FROM 
-                                                Users U
-                                            INNER JOIN 
-                                                JobList J ON U.user_id = J.employer_id
-                                            WHERE 
-                                                J.Category = @Category
-                                        ");
-
-            SqlCommand command = new SqlCommand();
-            command.Connection = dbConnection.Connection;
-            command.Parameters.AddWithValue("@Category", category);
-
-            // Add conditions to the query based on the provided parameters
-            if (!string.IsNullOrEmpty(jobTitle))
-            {
-                query.Append("AND J.JobTitle LIKE @JobTitle ");
-                command.Parameters.AddWithValue("@JobTitle", "%" + jobTitle + "%");
-            }
-            if (salary.HasValue)
-            {
-                query.Append("AND J.MaxPrice >= @Salary ");
-                command.Parameters.AddWithValue("@Salary", salary.Value);
-            }
-
-            // Set the command text
-            command.CommandText = query.ToString();
-
-            // Ensure the connection is open before executing the reader
-            if (command.Connection.State != ConnectionState.Open)
-            {
-                command.Connection.Open();
-            }
-
-            // Execute the query and get the results
-            SqlDataReader reader = command.ExecuteReader();
-
-            // Loop through the results
             while (reader.Read())
             {
-                // Get the data from the row
-                var image = Image.FromFile(reader["ImagePath"].ToString());
-                var label1Text = reader["FullName"].ToString();
-                var label2Text = reader["JobTitle"].ToString();
-                var label3Text = reader["MaxPrice"].ToString();
-                var label4Text = reader["JobDescription"].ToString();
-
-                var userId = reader["user_id"];
+                // Process the data from the row
                 var Worker_id = reader["Worker_id"];
+                var imagePath = reader["ImagePath"] as string;
+                var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
+
+                string label1Text = reader["Name"].ToString();
+                string label2Text = reader["Skills"].ToString();
+
+                // Calculate age from date of birth
+                DateTime dateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]);
+                int age = DateTime.Now.Year - dateOfBirth.Year;
+                if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+                    age = age - 1;
+
+                string label3Text = age.ToString();
+
+                string label4Text = reader["Bio"].ToString();
+
+                string salary = reader["Salary"].ToString();
 
 
-                // Add a panel with the data
-                AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text, userId, Worker_id);
+                AddControlsToPanel(image, label1Text, label2Text, label3Text, label4Text, salary, this.userId, Worker_id);
             }
-
-            // Close the reader and the connection
-            reader.Close();
             dbConnection.Close();
         }
-
-
-
+        private void cbxPrice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SearchWorkers(cbxPrice.SelectedItem.ToString());
+        }
 
 
         private void OpenInformationForm()
@@ -403,10 +389,9 @@ namespace TimViec
         private void OpenAppointmentForm()
         {
             // Open the Appointment form
-            Appointment appointmentForm = new Appointment();
+            FAppointment appointmentForm = new FAppointment();
             appointmentForm.Show();
         }
-
 
 
     }

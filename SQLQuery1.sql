@@ -19,23 +19,13 @@ CREATE TABLE Users  (
 );
 GO
 
-CREATE TRIGGER trg_AfterInsertUsers
-ON Users
-AFTER INSERT
-AS
-BEGIN
-    INSERT INTO Worker(user_id, Bio, Skills)
-    SELECT i.user_id, '', ''
-    FROM inserted i
-END
-GO
 
 CREATE TABLE Worker (
     Worker_id INT IDENTITY PRIMARY KEY,
     user_id INT,
     Bio NVARCHAR(MAX),
     Skills NVARCHAR(MAX),
-	Category NVARCHAR(80);
+	Category NVARCHAR(80),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 GO
@@ -49,6 +39,29 @@ CREATE TABLE HiredWorkers (
 );
 GO
 
+CREATE TABLE Favourite (
+    favourite_id INT IDENTITY PRIMARY KEY,
+    Worker_id INT,
+    user_id INT,
+	isFavourite VARCHAR(50),
+    FOREIGN KEY (Worker_id) REFERENCES Worker(Worker_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+GO
+
+CREATE TRIGGER trg_AfterInsertUsers
+ON Users
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO Worker(user_id, Bio, Skills)
+    SELECT i.user_id, '', ''
+    FROM inserted i
+	WHERE Role = 1
+END
+GO
+
+
 CREATE TABLE JobList (
     job_id INT IDENTITY PRIMARY KEY,
     PostedBy INT,
@@ -60,6 +73,7 @@ CREATE TABLE JobList (
     FOREIGN KEY (PostedBy) REFERENCES Users(user_id)
 );
 GO
+
 
 CREATE TABLE JobHistory (
     job_history_id INT IDENTITY PRIMARY KEY,
@@ -76,71 +90,52 @@ GO
 CREATE TABLE Applications (
     application_id INT IDENTITY PRIMARY KEY,
     job_id INT,
-    user_id INT,
-    hired_user_id INT,
-    job_history_id INT,
-    status VARCHAR(50),
+    Worker_id INT,
     FOREIGN KEY (job_id) REFERENCES JobList(job_id),
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (hired_user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (job_history_id) REFERENCES JobHistory(job_history_id)
+    FOREIGN KEY (Worker_id) REFERENCES Worker(Worker_id),
 );
 GO
 
-CREATE TRIGGER AddToJobHistory
+CREATE TRIGGER trg_AcceptedJob
 ON Applications
-AFTER UPDATE
+AFTER INSERT
 AS
 BEGIN
-    -- Kiểm tra xem trạng thái có phải là 'Accepted' không
-    IF EXISTS (SELECT 1 FROM inserted WHERE status = 'Accepted')
-    BEGIN
-        -- Lấy thông tin về công việc
-        DECLARE @Worker_id INT, @job_id INT, @JobTitle NVARCHAR(255), @JobDescription NVARCHAR(MAX), @Category NVARCHAR(80), @Price DECIMAL(18, 2), @ImagesJob NVARCHAR(MAX);
-        SELECT @Worker_id = hired_user_id, @job_id = job_id FROM inserted;
-        SELECT @JobTitle = JobTitle, @JobDescription = JobDescription, @Category = Category, @Price = Price, @ImagesJob = ImagesJob
-        FROM JobList
-        WHERE job_id = @job_id;
-
-        -- Thêm công việc vào lịch sử công việc
-        INSERT INTO JobHistory (Worker_id,  JobTitle, JobDescription, Category, Price, ImagesJob)
-        VALUES (@Worker_id,  @JobTitle, @JobDescription, @Category, @Price, @ImagesJob);
-    END
+    -- Inserting accepted job details into JobHistory table
+    INSERT INTO JobHistory (Worker_id, JobTitle, JobDescription, Category, Price, ImagesJob)
+    SELECT i.Worker_id, j.JobTitle, j.JobDescription, j.Category, j.Price, j.ImagesJob
+    FROM inserted i
+    INNER JOIN JobList j ON i.job_id = j.job_id
+    WHERE i.Worker_id IS NOT NULL; -- Ensuring that a worker has accepted the job
 END;
-GO
 
 
-CREATE TABLE Favourite (
-    favourite_id INT IDENTITY PRIMARY KEY,
-    Worker_id INT,
-    user_id INT,
-	isFavourite VARCHAR(50),
-    FOREIGN KEY (Worker_id) REFERENCES Users(user_id),
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
-);
-GO
+SELECT COUNT(*) AS TriggerCount
+FROM sys.triggers;
+
+
+
 
 CREATE TABLE Ratings (
     rating_id INT IDENTITY PRIMARY KEY,
-    job_id INT,
     Worker_id INT,
+    user_id INT,
     Stars INT,
     Comment NVARCHAR(MAX),
-    FOREIGN KEY (job_id) REFERENCES JobList(job_id),
-    FOREIGN KEY (Worker_id) REFERENCES Worker(Worker_id)
+    FOREIGN KEY (Worker_id) REFERENCES Worker(Worker_id),
+	FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 GO
 
-CREATE TABLE Appointments (
+CREATE TABLE Appointment (
     appointment_id INT IDENTITY PRIMARY KEY,
-    job_id INT,
     Worker_id INT,
-    employer_id INT,
+    user_id INT,
     Date DATETIME,
+	Content NVARCHAR(MAX),
     Status NVARCHAR(50),
-    FOREIGN KEY (job_id) REFERENCES JobList(job_id),
     FOREIGN KEY (Worker_id) REFERENCES Worker(Worker_id),
-    FOREIGN KEY (employer_id) REFERENCES Users(user_id)
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 GO
 
@@ -148,23 +143,45 @@ GO
 
 SELECT * FROM Users
 SELECT * FROM Worker
-
-SELECT W.worker_id,
-		U.Name,
-		U.Email,
-		U.ImagePath,
-		U.DateOfBirth,
-		W.Bio,
-		W.Skills
-FROM Users U
-JOIN Worker W
-ON U.user_id = w.user_id
-
+SELECT * FROM Favourite
 SELECT * FROM HiredWorkers
-SELECT * FROM Applications
+
+
+SELECT W.Category,
+		U.Name,
+		U.ImagePath
+FROM Worker W
+JOIN HiredWorkers H
+	ON W.Worker_id = H.Worker_id
+JOIN Users U
+	ON U.user_id = W.user_id
+WHERE H.user_id = 1
+
+SELECT W.Category,
+		U.Name,
+		U.ImagePath,
+		U.PhoneNumber,
+		U.Email,
+		U.DateOfBirth,
+		U.Address
+FROM Worker W
+JOIN Favourite F
+	ON W.Worker_id = F.Worker_id
+JOIN Users U
+	ON U.user_id = W.user_id
+WHERE F.user_id = 2
+
+INSERT INTO Applications (job_id,Worker_id)
+VALUES
+    (1, 3);
+
+
 
 SELECT * FROM JobList
+SELECT * FROM Applications
 SELECT * FROM JobHistory
+SELECT * FROM Ratings
+SELECT * FROM Appointment
 
 SELECT Worker_id, COUNT(*) as NumberOfJobs
 FROM JobHistory
@@ -172,7 +189,7 @@ GROUP BY Worker_id;
 
 
 
-SELECT * FROM Favourite
+
 
 
 

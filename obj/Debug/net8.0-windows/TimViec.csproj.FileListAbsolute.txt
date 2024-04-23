@@ -17,7 +17,6 @@ E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.pdb
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.genruntimeconfig.cache
 E:\winForm\TimViec\obj\Debug\net8.0-windows\ref\TimViec.dll
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Properties.Resources.resources
-E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Login.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.sourcelink.json
 E:\winForm\TimViec\bin\Debug\net8.0-windows\Azure.Core.dll
 E:\winForm\TimViec\bin\Debug\net8.0-windows\Azure.Identity.dll
@@ -62,11 +61,12 @@ E:\winForm\TimViec\bin\Debug\net8.0-windows\runtimes\win-arm64\native\WebView2Lo
 E:\winForm\TimViec\bin\Debug\net8.0-windows\runtimes\win-x64\native\WebView2Loader.dll
 E:\winForm\TimViec\bin\Debug\net8.0-windows\runtimes\win-x86\native\WebView2Loader.dll
 E:\winForm\TimViec\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Runtime.Caching.dll
-E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Appointment.resources
-E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Review.resources
-E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.Resgister.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.FClient.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.FInformation.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.FWorker.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.FListJob.resources
 E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.FListWorker.resources
+E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.FAppointment.resources
+E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.FLogin.resources
+E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.FResgister.resources
+E:\winForm\TimViec\obj\Debug\net8.0-windows\TimViec.FReview.resources

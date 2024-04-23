@@ -63,24 +63,24 @@
             materialDivider16 = new MaterialSkin.Controls.MaterialDivider();
             tabPage2 = new TabPage();
             cbxCategory = new MaterialSkin.Controls.MaterialComboBox();
-            materialButton3 = new MaterialSkin.Controls.MaterialButton();
-            pictureBox1 = new PictureBox();
+            btnImportJob = new MaterialSkin.Controls.MaterialButton();
+            pictureBoxJob = new PictureBox();
             label1 = new Label();
-            materialMultiLineTextBox21 = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
+            txtDescription = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             label23 = new Label();
             label22 = new Label();
             label21 = new Label();
             label20 = new Label();
             label19 = new Label();
             label4 = new Label();
-            materialTextBox25 = new MaterialSkin.Controls.MaterialTextBox2();
+            txtTitle = new MaterialSkin.Controls.MaterialTextBox2();
             label18 = new Label();
             materialButton2 = new MaterialSkin.Controls.MaterialButton();
-            materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            btnSubmitJob = new MaterialSkin.Controls.MaterialButton();
             materialCard4 = new MaterialSkin.Controls.MaterialCard();
             materialDivider9 = new MaterialSkin.Controls.MaterialDivider();
             materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
-            materialTextBox2 = new MaterialSkin.Controls.MaterialTextBox();
+            txtPrice = new MaterialSkin.Controls.MaterialTextBox();
             materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             label3 = new Label();
             label2 = new Label();
@@ -100,6 +100,8 @@
             switchTheme = new MaterialSkin.Controls.MaterialSwitch();
             label24 = new Label();
             materialCard5 = new MaterialSkin.Controls.MaterialCard();
+            txtSalary = new MaterialSkin.Controls.MaterialTextBox2();
+            label33 = new Label();
             label27 = new Label();
             txtName = new MaterialSkin.Controls.MaterialTextBox2();
             btnImportImage = new MaterialSkin.Controls.MaterialButton();
@@ -148,7 +150,7 @@
             tabPage4.SuspendLayout();
             materialCard19.SuspendLayout();
             tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxJob).BeginInit();
             materialCard4.SuspendLayout();
             tabPage3.SuspendLayout();
             materialCard3.SuspendLayout();
@@ -554,20 +556,20 @@
             // 
             tabPage2.BackColor = Color.White;
             tabPage2.Controls.Add(cbxCategory);
-            tabPage2.Controls.Add(materialButton3);
-            tabPage2.Controls.Add(pictureBox1);
+            tabPage2.Controls.Add(btnImportJob);
+            tabPage2.Controls.Add(pictureBoxJob);
             tabPage2.Controls.Add(label1);
-            tabPage2.Controls.Add(materialMultiLineTextBox21);
+            tabPage2.Controls.Add(txtDescription);
             tabPage2.Controls.Add(label23);
             tabPage2.Controls.Add(label22);
             tabPage2.Controls.Add(label21);
             tabPage2.Controls.Add(label20);
             tabPage2.Controls.Add(label19);
             tabPage2.Controls.Add(label4);
-            tabPage2.Controls.Add(materialTextBox25);
+            tabPage2.Controls.Add(txtTitle);
             tabPage2.Controls.Add(label18);
             tabPage2.Controls.Add(materialButton2);
-            tabPage2.Controls.Add(materialButton1);
+            tabPage2.Controls.Add(btnSubmitJob);
             tabPage2.Controls.Add(materialCard4);
             tabPage2.Controls.Add(label3);
             tabPage2.Controls.Add(label2);
@@ -604,34 +606,35 @@
             cbxCategory.StartIndex = 0;
             cbxCategory.TabIndex = 35;
             // 
-            // materialButton3
+            // btnImportJob
             // 
-            materialButton3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            materialButton3.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            materialButton3.Depth = 0;
-            materialButton3.HighEmphasis = true;
-            materialButton3.Icon = null;
-            materialButton3.Location = new Point(886, 603);
-            materialButton3.Margin = new Padding(4, 6, 4, 6);
-            materialButton3.MouseState = MaterialSkin.MouseState.HOVER;
-            materialButton3.Name = "materialButton3";
-            materialButton3.NoAccentTextColor = Color.Empty;
-            materialButton3.Size = new Size(125, 36);
-            materialButton3.TabIndex = 34;
-            materialButton3.Text = "import image";
-            materialButton3.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            materialButton3.UseAccentColor = false;
-            materialButton3.UseVisualStyleBackColor = true;
+            btnImportJob.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnImportJob.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnImportJob.Depth = 0;
+            btnImportJob.HighEmphasis = true;
+            btnImportJob.Icon = null;
+            btnImportJob.Location = new Point(886, 603);
+            btnImportJob.Margin = new Padding(4, 6, 4, 6);
+            btnImportJob.MouseState = MaterialSkin.MouseState.HOVER;
+            btnImportJob.Name = "btnImportJob";
+            btnImportJob.NoAccentTextColor = Color.Empty;
+            btnImportJob.Size = new Size(125, 36);
+            btnImportJob.TabIndex = 34;
+            btnImportJob.Text = "import image";
+            btnImportJob.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnImportJob.UseAccentColor = false;
+            btnImportJob.UseVisualStyleBackColor = true;
+            btnImportJob.Click += btnImportJob_Click_1;
             // 
-            // pictureBox1
+            // pictureBoxJob
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(886, 337);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(386, 257);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 33;
-            pictureBox1.TabStop = false;
+            pictureBoxJob.Image = (Image)resources.GetObject("pictureBoxJob.Image");
+            pictureBoxJob.Location = new Point(886, 337);
+            pictureBoxJob.Name = "pictureBoxJob";
+            pictureBoxJob.Size = new Size(386, 257);
+            pictureBoxJob.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxJob.TabIndex = 33;
+            pictureBoxJob.TabStop = false;
             // 
             // label1
             // 
@@ -644,29 +647,29 @@
             label1.TabIndex = 32;
             label1.Text = "Image Of Job";
             // 
-            // materialMultiLineTextBox21
+            // txtDescription
             // 
-            materialMultiLineTextBox21.AnimateReadOnly = false;
-            materialMultiLineTextBox21.BackgroundImageLayout = ImageLayout.None;
-            materialMultiLineTextBox21.CharacterCasing = CharacterCasing.Normal;
-            materialMultiLineTextBox21.Depth = 0;
-            materialMultiLineTextBox21.HideSelection = true;
-            materialMultiLineTextBox21.Location = new Point(101, 495);
-            materialMultiLineTextBox21.MaxLength = 32767;
-            materialMultiLineTextBox21.MouseState = MaterialSkin.MouseState.OUT;
-            materialMultiLineTextBox21.Name = "materialMultiLineTextBox21";
-            materialMultiLineTextBox21.PasswordChar = '\0';
-            materialMultiLineTextBox21.ReadOnly = false;
-            materialMultiLineTextBox21.ScrollBars = ScrollBars.None;
-            materialMultiLineTextBox21.SelectedText = "";
-            materialMultiLineTextBox21.SelectionLength = 0;
-            materialMultiLineTextBox21.SelectionStart = 0;
-            materialMultiLineTextBox21.ShortcutsEnabled = true;
-            materialMultiLineTextBox21.Size = new Size(657, 211);
-            materialMultiLineTextBox21.TabIndex = 31;
-            materialMultiLineTextBox21.TabStop = false;
-            materialMultiLineTextBox21.TextAlign = HorizontalAlignment.Left;
-            materialMultiLineTextBox21.UseSystemPasswordChar = false;
+            txtDescription.AnimateReadOnly = false;
+            txtDescription.BackgroundImageLayout = ImageLayout.None;
+            txtDescription.CharacterCasing = CharacterCasing.Normal;
+            txtDescription.Depth = 0;
+            txtDescription.HideSelection = true;
+            txtDescription.Location = new Point(101, 495);
+            txtDescription.MaxLength = 32767;
+            txtDescription.MouseState = MaterialSkin.MouseState.OUT;
+            txtDescription.Name = "txtDescription";
+            txtDescription.PasswordChar = '\0';
+            txtDescription.ReadOnly = false;
+            txtDescription.ScrollBars = ScrollBars.None;
+            txtDescription.SelectedText = "";
+            txtDescription.SelectionLength = 0;
+            txtDescription.SelectionStart = 0;
+            txtDescription.ShortcutsEnabled = true;
+            txtDescription.Size = new Size(657, 211);
+            txtDescription.TabIndex = 31;
+            txtDescription.TabStop = false;
+            txtDescription.TextAlign = HorizontalAlignment.Left;
+            txtDescription.UseSystemPasswordChar = false;
             // 
             // label23
             // 
@@ -734,33 +737,33 @@
             label4.TabIndex = 24;
             label4.Text = "Category";
             // 
-            // materialTextBox25
+            // txtTitle
             // 
-            materialTextBox25.AnimateReadOnly = false;
-            materialTextBox25.BackgroundImageLayout = ImageLayout.None;
-            materialTextBox25.CharacterCasing = CharacterCasing.Normal;
-            materialTextBox25.Depth = 0;
-            materialTextBox25.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialTextBox25.HideSelection = true;
-            materialTextBox25.LeadingIcon = null;
-            materialTextBox25.Location = new Point(101, 143);
-            materialTextBox25.MaxLength = 32767;
-            materialTextBox25.MouseState = MaterialSkin.MouseState.OUT;
-            materialTextBox25.Name = "materialTextBox25";
-            materialTextBox25.PasswordChar = '\0';
-            materialTextBox25.PrefixSuffixText = null;
-            materialTextBox25.ReadOnly = false;
-            materialTextBox25.RightToLeft = RightToLeft.No;
-            materialTextBox25.SelectedText = "";
-            materialTextBox25.SelectionLength = 0;
-            materialTextBox25.SelectionStart = 0;
-            materialTextBox25.ShortcutsEnabled = true;
-            materialTextBox25.Size = new Size(618, 48);
-            materialTextBox25.TabIndex = 23;
-            materialTextBox25.TabStop = false;
-            materialTextBox25.TextAlign = HorizontalAlignment.Left;
-            materialTextBox25.TrailingIcon = null;
-            materialTextBox25.UseSystemPasswordChar = false;
+            txtTitle.AnimateReadOnly = false;
+            txtTitle.BackgroundImageLayout = ImageLayout.None;
+            txtTitle.CharacterCasing = CharacterCasing.Normal;
+            txtTitle.Depth = 0;
+            txtTitle.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtTitle.HideSelection = true;
+            txtTitle.LeadingIcon = null;
+            txtTitle.Location = new Point(101, 143);
+            txtTitle.MaxLength = 32767;
+            txtTitle.MouseState = MaterialSkin.MouseState.OUT;
+            txtTitle.Name = "txtTitle";
+            txtTitle.PasswordChar = '\0';
+            txtTitle.PrefixSuffixText = null;
+            txtTitle.ReadOnly = false;
+            txtTitle.RightToLeft = RightToLeft.No;
+            txtTitle.SelectedText = "";
+            txtTitle.SelectionLength = 0;
+            txtTitle.SelectionStart = 0;
+            txtTitle.ShortcutsEnabled = true;
+            txtTitle.Size = new Size(618, 48);
+            txtTitle.TabIndex = 23;
+            txtTitle.TabStop = false;
+            txtTitle.TextAlign = HorizontalAlignment.Left;
+            txtTitle.TrailingIcon = null;
+            txtTitle.UseSystemPasswordChar = false;
             // 
             // label18
             // 
@@ -792,31 +795,32 @@
             materialButton2.UseAccentColor = true;
             materialButton2.UseVisualStyleBackColor = true;
             // 
-            // materialButton1
+            // btnSubmitJob
             // 
-            materialButton1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            materialButton1.Depth = 0;
-            materialButton1.HighEmphasis = true;
-            materialButton1.Icon = null;
-            materialButton1.Location = new Point(103, 744);
-            materialButton1.Margin = new Padding(4, 6, 4, 6);
-            materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialButton1.Name = "materialButton1";
-            materialButton1.NoAccentTextColor = Color.Empty;
-            materialButton1.Size = new Size(143, 36);
-            materialButton1.TabIndex = 16;
-            materialButton1.Text = "submit project";
-            materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            materialButton1.UseAccentColor = true;
-            materialButton1.UseVisualStyleBackColor = true;
+            btnSubmitJob.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnSubmitJob.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnSubmitJob.Depth = 0;
+            btnSubmitJob.HighEmphasis = true;
+            btnSubmitJob.Icon = null;
+            btnSubmitJob.Location = new Point(103, 744);
+            btnSubmitJob.Margin = new Padding(4, 6, 4, 6);
+            btnSubmitJob.MouseState = MaterialSkin.MouseState.HOVER;
+            btnSubmitJob.Name = "btnSubmitJob";
+            btnSubmitJob.NoAccentTextColor = Color.Empty;
+            btnSubmitJob.Size = new Size(143, 36);
+            btnSubmitJob.TabIndex = 16;
+            btnSubmitJob.Text = "submit project";
+            btnSubmitJob.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnSubmitJob.UseAccentColor = true;
+            btnSubmitJob.UseVisualStyleBackColor = true;
+            btnSubmitJob.Click += btnSubmitJob_Click;
             // 
             // materialCard4
             // 
             materialCard4.BackColor = Color.FromArgb(255, 255, 255);
             materialCard4.Controls.Add(materialDivider9);
             materialCard4.Controls.Add(materialComboBox1);
-            materialCard4.Controls.Add(materialTextBox2);
+            materialCard4.Controls.Add(txtPrice);
             materialCard4.Controls.Add(materialLabel3);
             materialCard4.Depth = 0;
             materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
@@ -862,24 +866,24 @@
             materialComboBox1.StartIndex = 0;
             materialComboBox1.TabIndex = 18;
             // 
-            // materialTextBox2
+            // txtPrice
             // 
-            materialTextBox2.AnimateReadOnly = false;
-            materialTextBox2.BorderStyle = BorderStyle.None;
-            materialTextBox2.Depth = 0;
-            materialTextBox2.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialTextBox2.Hint = "From";
-            materialTextBox2.LeadingIcon = null;
-            materialTextBox2.Location = new Point(26, 57);
-            materialTextBox2.Margin = new Padding(7, 3, 3, 3);
-            materialTextBox2.MaxLength = 50;
-            materialTextBox2.MouseState = MaterialSkin.MouseState.OUT;
-            materialTextBox2.Multiline = false;
-            materialTextBox2.Name = "materialTextBox2";
-            materialTextBox2.Size = new Size(153, 50);
-            materialTextBox2.TabIndex = 15;
-            materialTextBox2.Text = "";
-            materialTextBox2.TrailingIcon = null;
+            txtPrice.AnimateReadOnly = false;
+            txtPrice.BorderStyle = BorderStyle.None;
+            txtPrice.Depth = 0;
+            txtPrice.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtPrice.Hint = "From";
+            txtPrice.LeadingIcon = null;
+            txtPrice.Location = new Point(26, 57);
+            txtPrice.Margin = new Padding(7, 3, 3, 3);
+            txtPrice.MaxLength = 50;
+            txtPrice.MouseState = MaterialSkin.MouseState.OUT;
+            txtPrice.Multiline = false;
+            txtPrice.Name = "txtPrice";
+            txtPrice.Size = new Size(153, 50);
+            txtPrice.TabIndex = 15;
+            txtPrice.Text = "";
+            txtPrice.TrailingIcon = null;
             // 
             // materialLabel3
             // 
@@ -950,7 +954,7 @@
             materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard3.Name = "materialCard3";
             materialCard3.Padding = new Padding(14);
-            materialCard3.Size = new Size(434, 574);
+            materialCard3.Size = new Size(434, 622);
             materialCard3.TabIndex = 25;
             // 
             // cbxCategory2
@@ -1148,6 +1152,8 @@
             // materialCard5
             // 
             materialCard5.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard5.Controls.Add(txtSalary);
+            materialCard5.Controls.Add(label33);
             materialCard5.Controls.Add(label27);
             materialCard5.Controls.Add(txtName);
             materialCard5.Controls.Add(btnImportImage);
@@ -1170,8 +1176,47 @@
             materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard5.Name = "materialCard5";
             materialCard5.Padding = new Padding(14);
-            materialCard5.Size = new Size(760, 574);
+            materialCard5.Size = new Size(760, 622);
             materialCard5.TabIndex = 0;
+            // 
+            // txtSalary
+            // 
+            txtSalary.AnimateReadOnly = false;
+            txtSalary.BackgroundImageLayout = ImageLayout.None;
+            txtSalary.CharacterCasing = CharacterCasing.Normal;
+            txtSalary.Depth = 0;
+            txtSalary.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtSalary.HideSelection = true;
+            txtSalary.LeadingIcon = null;
+            txtSalary.Location = new Point(376, 221);
+            txtSalary.MaxLength = 32767;
+            txtSalary.MouseState = MaterialSkin.MouseState.OUT;
+            txtSalary.Name = "txtSalary";
+            txtSalary.PasswordChar = '\0';
+            txtSalary.PrefixSuffixText = null;
+            txtSalary.ReadOnly = false;
+            txtSalary.RightToLeft = RightToLeft.No;
+            txtSalary.SelectedText = "";
+            txtSalary.SelectionLength = 0;
+            txtSalary.SelectionStart = 0;
+            txtSalary.ShortcutsEnabled = true;
+            txtSalary.Size = new Size(218, 48);
+            txtSalary.TabIndex = 25;
+            txtSalary.TabStop = false;
+            txtSalary.TextAlign = HorizontalAlignment.Left;
+            txtSalary.TrailingIcon = null;
+            txtSalary.UseSystemPasswordChar = false;
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Font = new Font("Nirmala UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label33.ForeColor = SystemColors.ActiveCaptionText;
+            label33.Location = new Point(212, 238);
+            label33.Name = "label33";
+            label33.Size = new Size(80, 31);
+            label33.TabIndex = 24;
+            label33.Text = "Salary";
             // 
             // label27
             // 
@@ -1237,7 +1282,7 @@
             label31.AutoSize = true;
             label31.Font = new Font("Nirmala UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label31.ForeColor = SystemColors.ActiveCaptionText;
-            label31.Location = new Point(30, 481);
+            label31.Location = new Point(20, 519);
             label31.Name = "label31";
             label31.Size = new Size(107, 31);
             label31.TabIndex = 19;
@@ -1248,7 +1293,7 @@
             label30.AutoSize = true;
             label30.Font = new Font("Nirmala UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label30.ForeColor = SystemColors.ActiveCaptionText;
-            label30.Location = new Point(30, 358);
+            label30.Location = new Point(20, 396);
             label30.Name = "label30";
             label30.Size = new Size(176, 31);
             label30.TabIndex = 18;
@@ -1259,7 +1304,7 @@
             label29.AutoSize = true;
             label29.Font = new Font("Nirmala UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label29.ForeColor = SystemColors.ActiveCaptionText;
-            label29.Location = new Point(27, 256);
+            label29.Location = new Point(17, 294);
             label29.Name = "label29";
             label29.Size = new Size(166, 31);
             label29.TabIndex = 17;
@@ -1281,7 +1326,7 @@
             label25.AutoSize = true;
             label25.Font = new Font("Nirmala UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label25.ForeColor = SystemColors.ActiveCaptionText;
-            label25.Location = new Point(201, 164);
+            label25.Location = new Point(201, 173);
             label25.Name = "label25";
             label25.Size = new Size(153, 31);
             label25.TabIndex = 12;
@@ -1289,7 +1334,7 @@
             // 
             // dtpBirth
             // 
-            dtpBirth.Location = new Point(405, 164);
+            dtpBirth.Location = new Point(376, 174);
             dtpBirth.Name = "dtpBirth";
             dtpBirth.Size = new Size(265, 30);
             dtpBirth.TabIndex = 11;
@@ -1303,7 +1348,7 @@
             txtAddress.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtAddress.HideSelection = true;
             txtAddress.LeadingIcon = null;
-            txtAddress.Location = new Point(30, 515);
+            txtAddress.Location = new Point(20, 553);
             txtAddress.MaxLength = 32767;
             txtAddress.MouseState = MaterialSkin.MouseState.OUT;
             txtAddress.Name = "txtAddress";
@@ -1331,7 +1376,7 @@
             txtPhone.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtPhone.HideSelection = true;
             txtPhone.LeadingIcon = null;
-            txtPhone.Location = new Point(30, 403);
+            txtPhone.Location = new Point(20, 441);
             txtPhone.MaxLength = 32767;
             txtPhone.MouseState = MaterialSkin.MouseState.OUT;
             txtPhone.Name = "txtPhone";
@@ -1359,7 +1404,7 @@
             txtEmail.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtEmail.HideSelection = true;
             txtEmail.LeadingIcon = null;
-            txtEmail.Location = new Point(30, 290);
+            txtEmail.Location = new Point(20, 328);
             txtEmail.MaxLength = 32767;
             txtEmail.MouseState = MaterialSkin.MouseState.OUT;
             txtEmail.Name = "txtEmail";
@@ -1429,7 +1474,7 @@
             btnSave.Depth = 0;
             btnSave.HighEmphasis = true;
             btnSave.Icon = null;
-            btnSave.Location = new Point(132, 698);
+            btnSave.Location = new Point(121, 734);
             btnSave.Margin = new Padding(4, 6, 4, 6);
             btnSave.MouseState = MaterialSkin.MouseState.HOVER;
             btnSave.Name = "btnSave";
@@ -1449,7 +1494,7 @@
             materialButton13.Depth = 0;
             materialButton13.HighEmphasis = true;
             materialButton13.Icon = null;
-            materialButton13.Location = new Point(274, 698);
+            materialButton13.Location = new Point(263, 734);
             materialButton13.Margin = new Padding(4, 6, 4, 6);
             materialButton13.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton13.Name = "materialButton13";
@@ -1636,7 +1681,7 @@
             materialCard19.PerformLayout();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxJob).EndInit();
             materialCard4.ResumeLayout(false);
             materialCard4.PerformLayout();
             tabPage3.ResumeLayout(false);
@@ -1689,21 +1734,21 @@
         private Label label10;
         private Label label7;
         private TabPage tabPage2;
-        private MaterialSkin.Controls.MaterialMultiLineTextBox2 materialMultiLineTextBox21;
+        private MaterialSkin.Controls.MaterialMultiLineTextBox2 txtDescription;
         private Label label23;
         private Label label22;
         private Label label21;
         private Label label20;
         private Label label19;
         private Label label4;
-        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox25;
+        private MaterialSkin.Controls.MaterialTextBox2 txtTitle;
         private Label label18;
         private MaterialSkin.Controls.MaterialButton materialButton2;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialButton btnSubmitJob;
         private MaterialSkin.Controls.MaterialCard materialCard4;
         private MaterialSkin.Controls.MaterialDivider materialDivider9;
         private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
-        private MaterialSkin.Controls.MaterialTextBox materialTextBox2;
+        private MaterialSkin.Controls.MaterialTextBox txtPrice;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private Label label3;
         private Label label2;
@@ -1740,9 +1785,9 @@
         private MaterialSkin.Controls.MaterialDivider materialDivider3;
         private Label label27;
         private MaterialSkin.Controls.MaterialTextBox2 txtName;
-        private PictureBox pictureBox1;
+        private PictureBox pictureBoxJob;
         private Label label1;
-        private MaterialSkin.Controls.MaterialButton materialButton3;
+        private MaterialSkin.Controls.MaterialButton btnImportJob;
         private MaterialSkin.Controls.MaterialCard materialCard3;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialMultiLineTextBox2 txtBio;
@@ -1755,5 +1800,7 @@
         private Label label28;
         private MaterialSkin.Controls.MaterialComboBox cbxCategory;
         private MaterialSkin.Controls.MaterialComboBox cbxCategory2;
+        private MaterialSkin.Controls.MaterialTextBox2 txtSalary;
+        private Label label33;
     }
 }

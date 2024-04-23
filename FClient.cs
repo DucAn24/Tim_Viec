@@ -79,7 +79,7 @@ namespace TimViec
             if (this.materialTabControl1.SelectedIndex == 5) // Assuming the "Log out" tab is at index 5
             {
                 this.Hide(); // Hide the current form
-                new Login().Show(); // Show the Login form
+                new FLogin().Show(); // Show the Login form
             }
         }
 
@@ -147,31 +147,43 @@ namespace TimViec
             // Fetch the data for the category of the clicked card
             if (clickedCard != null && cardToCategoryMap.TryGetValue(clickedCard.Name, out string category))
             {
-                OpenWokerListForm(category,userId);
+                OpenWokerListForm(category, userId);
             }
         }
 
-        private void OpenWokerListForm(string category, int userID )
+        private void OpenWokerListForm(string category, int userID)
         {
-            FListWorker workerList = new FListWorker(category,userID);
+            FListWorker workerList = new FListWorker(category, userID);
             workerList.Show();
         }
 
-
         private string imagePath;
+        private string imageJob;
 
-        private void btnImportImage_Click(object sender, EventArgs e)
+        private string SelectImageFile(PictureBox pictureBox)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    imagePath = ofd.FileName;
-                    picBoxUser.Image = new Bitmap(imagePath);
+                    pictureBox.Image = new Bitmap(ofd.FileName);
+                    return ofd.FileName;
                 }
             }
+            return null;
         }
+
+        private void btnImportImage_Click(object sender, EventArgs e)
+        {
+            imagePath = SelectImageFile(picBoxUser);
+        }
+
+        private void btnImportJob_Click(object sender, EventArgs e)
+        {
+            imageJob = SelectImageFile(pictureBoxJob);
+        }
+
 
 
         private string gender;
@@ -194,13 +206,13 @@ namespace TimViec
             }
         }
 
-        private void AddControlsToPanelHIred(Image image, string label1Text, string label2Text)
+        private void AddControlsToPanelHIred(Image image, string label1Text, string label2Text, string email, string phone)
         {
             var pictureBox = new PictureBox
             {
                 Image = image,
                 SizeMode = PictureBoxSizeMode.StretchImage,
-                Size = new Size(60, 60),
+                Size = new Size(80, 80),
                 Location = new Point(10, 10)
             };
 
@@ -209,37 +221,57 @@ namespace TimViec
                 Text = label1Text,
                 AutoSize = true,
                 ForeColor = Color.Chocolate,
-                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
-                Location = new Point(20, 70)
+                Font = new Font("Nirmala UI", 16, FontStyle.Bold),
+                Location = new Point(20, 90)
             };
 
             var label2 = new Label
             {
                 Text = label2Text,
-                AutoSize = false,
+                AutoSize = true,
                 ForeColor = Color.LightGreen,
-                Font = new Font("Nirmala UI", 10, FontStyle.Bold),
-                Width = 300,
-                Height = 70,
-                Location = new Point(20, 120),
+                Font = new Font("Nirmala UI", 14, FontStyle.Bold),
+                Location = new Point(20, 150),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var emailLabel = new Label
+            {
+                Text = "Email: " + email,
+                AutoSize = true,
+                ForeColor = Color.DarkGray,
+                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Location = new Point(20, 200),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var phoneLabel = new Label
+            {
+                Text = "Phone: " + phone,
+                AutoSize = true,
+                ForeColor = Color.DarkGray,
+                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Location = new Point(20, 220),
                 TextAlign = ContentAlignment.TopLeft
             };
 
             var card = new MaterialCard
             {
-                Width = 320,
-                Height = 210,
+                Width = 300,
+                Height = 290,
                 BackColor = Color.White
             };
 
             card.Controls.Add(label1);
             card.Controls.Add(label2);
             card.Controls.Add(pictureBox);
+            card.Controls.Add(emailLabel);
+            card.Controls.Add(phoneLabel);
 
             flowLayoutPanel1.Controls.Add(card);
         }
 
-        private void AddControlsToPanelFavourite(Image image, string FullName, string PhoneNumber, string Address , string Email, string age)
+        private void AddControlsToPanelFavourite(Image image, string FullName, string PhoneNumber, string Address, string Email, string age)
         {
             var pictureBox = new PictureBox
             {
@@ -260,7 +292,17 @@ namespace TimViec
 
             var label2 = new Label
             {
-                Text ="phone: " + PhoneNumber,
+                Text = "phone: " + PhoneNumber,
+                AutoSize = true,
+                ForeColor = Color.LightGreen,
+                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Location = new Point(20, 90),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var label3 = new Label
+            {
+                Text = "Address: " + Address,
                 AutoSize = true,
                 ForeColor = Color.LightGreen,
                 Font = new Font("Nirmala UI", 12, FontStyle.Bold),
@@ -268,23 +310,13 @@ namespace TimViec
                 TextAlign = ContentAlignment.TopLeft
             };
 
-            var label3 = new Label
-            {
-                Text = "Address: " +Address,
-                AutoSize = true,
-                ForeColor = Color.LightGreen,
-                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
-                Location = new Point(20, 140),
-                TextAlign = ContentAlignment.TopLeft
-            };
-
             var label4 = new Label
             {
-                Text = "email: "+Email,
+                Text = "email: " + Email,
                 AutoSize = true,
                 ForeColor = Color.LightGreen,
                 Font = new Font("Nirmala UI", 12, FontStyle.Bold),
-                Location = new Point(20, 160),
+                Location = new Point(20, 150),
                 TextAlign = ContentAlignment.TopLeft
             };
 
@@ -298,11 +330,15 @@ namespace TimViec
                 TextAlign = ContentAlignment.TopLeft
             };
 
+            MaterialButton btnUnLike = new MaterialButton();
+            btnUnLike.Text = "Unlike";
+            btnUnLike.Location = new Point(20, 220);
+
 
             var card = new MaterialCard
             {
-                Width = 320,
-                Height = 310,
+                Width = 300,
+                Height = 290,
                 BackColor = Color.White
             };
 
@@ -312,6 +348,7 @@ namespace TimViec
             card.Controls.Add(label4);
             card.Controls.Add(label5);
             card.Controls.Add(pictureBox);
+            card.Controls.Add(btnUnLike);
 
             flowLayoutPanel4.Controls.Add(card);
         }
@@ -320,13 +357,17 @@ namespace TimViec
         {
             dbConnection.Open();
             string query = @"
-                            SELECT u.ImagePath,
-		                           u.Name,
-		                           j.JobTitle
-                            FROM Users u
-                            INNER JOIN Applications a ON u.user_id = a.user_id
-                            INNER JOIN JobList j ON j.job_id = a.job_id
-                            WHERE u.user_id = @UserId
+                            SELECT W.Category,
+		                            U.Name,
+		                            U.ImagePath,
+                                    U.Email,
+                                    U.PhoneNumber
+                            FROM Worker W
+                            JOIN HiredWorkers H
+	                            ON W.Worker_id = H.Worker_id
+                            JOIN Users U
+	                            ON U.user_id = W.user_id
+                            WHERE H.user_id = @UserId
                         ";
 
             SqlCommand command = new SqlCommand(query);
@@ -341,12 +382,11 @@ namespace TimViec
                 var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
 
                 string label1Text = row["Name"].ToString();
-                string label2Text = row["JobTitle"].ToString();
+                string label2Text = row["Category"].ToString();
+                string email = row["Email"].ToString();
+                string phone = row["PhoneNumber"].ToString();
 
-
-
-
-                AddControlsToPanelHIred(image, label1Text, label2Text);
+                AddControlsToPanelHIred(image, label1Text, label2Text, email, phone);
             }
             dbConnection.Close();
 
@@ -356,18 +396,19 @@ namespace TimViec
         {
             dbConnection.Open();
             string query = @"
-                            SELECT
-                                u.ImagePath,
-                                u.Name,
-                                u.PhoneNumber,
-                                u.Address,
-                                u.Email,
-                                u.DateOfBirth
-                            FROM
-                                Favourite f
-                            JOIN
-                                Users u ON f.user_id = u.user_id
-                            WHERE u.user_id = @UserId
+                            SELECT W.Category,
+		                            U.Name,
+		                            U.ImagePath,
+		                            U.PhoneNumber,
+		                            U.Email,
+		                            U.DateOfBirth,
+		                            U.Address
+                            FROM Worker W
+                            JOIN Favourite F
+	                            ON W.Worker_id = F.Worker_id
+                            JOIN Users U
+	                            ON U.user_id = W.user_id                     
+                            WHERE F.user_id = @UserId
                         ";
 
             SqlCommand command = new SqlCommand(query);
@@ -383,7 +424,7 @@ namespace TimViec
 
                 string label1Text = row["Name"].ToString();
                 string label2Text = row["PhoneNumber"].ToString();
-                string label3Text = row["Address"].ToString();
+                string label3Text = row["Category"].ToString();
                 string label4Text = row["Email"].ToString();
 
                 // Calculate age from date of birth
@@ -404,7 +445,7 @@ namespace TimViec
         private void OpenAppointmentForm()
         {
             // Open the Appointment form
-            Appointment appointmentForm = new Appointment();
+            FAppointment appointmentForm = new FAppointment();
             appointmentForm.Show();
         }
 
@@ -424,8 +465,8 @@ namespace TimViec
 
         private void btnSumitJob_Click(object sender, EventArgs e)
         {
-            JobInfor jobInfor = new JobInfor(txtTitle.Text, txtDescription.Text, cbxCategory.Text, txtPrice.Text);
-            bool isUpdated = jobDAO.AddJob(jobInfor, this.userId);
+            JobInfor jobInfor = new JobInfor(txtTitle.Text, txtDescription.Text, cbxCategory.Text, txtPrice.Text, imageJob);
+            bool isUpdated = jobDAO.AddJobList(jobInfor, this.userId);
             if (isUpdated)
             {
                 MessageBox.Show("Client information updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -438,6 +479,7 @@ namespace TimViec
             }
 
         }
+
 
     }
 
