@@ -20,13 +20,16 @@ namespace TimViec
         private DbConnection dbConnection;
 
         private int workerId;
-        public FInformation(int workerId)
+        private int userId;
+        public FInformation(int userId, int workerId)
         {
             InitializeComponent();
             dbConnection = new DbConnection();
 
             this.workerId = workerId;
+            this.userId = userId;
             System.Diagnostics.Debug.WriteLine($"FInfor form: workerId = {this.workerId}");
+            System.Diagnostics.Debug.WriteLine($"FInfor form: userId = {this.userId}");
 
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
             materialSkinManager.AddFormToManage(this);
@@ -42,6 +45,7 @@ namespace TimViec
         {
             AddPanelToFlowLayout(workerId);
         }
+
 
 
         private Label CreateLabel(string text, Font font, Point location)

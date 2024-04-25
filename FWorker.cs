@@ -23,6 +23,10 @@ namespace TimViec
         private int userId;
         private int worker_id;
 
+        private Dictionary<MaterialCard, string> cardToCategoryMap;
+        private Dictionary<PictureBox, string> pictureToCategoryMap;
+
+
         public FWorker(int userId)
         {
             this.userId = userId;
@@ -39,16 +43,38 @@ namespace TimViec
                                                                 Accent.LightGreen200,
                                                                 TextShade.WHITE);
 
-            List<MaterialCard> materialCards = new List<MaterialCard> { materialCard6, materialCard14, materialCard12, materialCard10, materialCard15, materialCard16, materialCard17, materialCard18 };
-            List<PictureBox> pictureBoxes = new List<PictureBox> { pictureBox2, pictureBox3, pictureBox4, pictureBox5, pictureBox6, pictureBox7, pictureBox8, pictureBox9 };
-            // Attach a click event handler to each MaterialCard
-            foreach (var materialCard in materialCards)
+            cardToCategoryMap = new Dictionary<MaterialCard, string>
             {
-                materialCard.Click += MaterialCard_Click;
+                { materialCard6, "Devlopment-IT" },
+                { materialCard14, "AI-Services" },
+                { materialCard12, "Design-Creative" },
+                { materialCard10, "Sales-Marketing" },
+                { materialCard15, "Writing-Traslation" },
+                { materialCard16, "Admin-Custome Support" },
+                { materialCard17, "Finance-Accounting" },
+                { materialCard18, "Engineering-Architecture" },
+            };
+
+            pictureToCategoryMap = new Dictionary<PictureBox, string>
+            {
+                { pictureBox2, "Devlopment-IT" },
+                { pictureBox3, "AI-Services" },
+                { pictureBox4, "Design-Creative" },
+                { pictureBox5, "Sales-Marketing" },
+                { pictureBox6, "Engineering-Architecture" },
+                { pictureBox7, "Finance-Accounting" },
+                { pictureBox8, "Admin-Custome-Support" },
+                { pictureBox9, "Writing-Traslation" },
+            };
+
+            foreach (var pair in cardToCategoryMap)
+            {
+                pair.Key.Click += MaterialCard_Click;
             }
-            foreach (var pictureBox in pictureBoxes)
+
+            foreach (var pair in pictureToCategoryMap)
             {
-                pictureBox.Click += PictureBox_Click;
+                pair.Key.Click += PictureBox_Click;
             }
 
         }
@@ -94,40 +120,10 @@ namespace TimViec
             return workerId;
         }
 
-        private Dictionary<string, string> pictureToCategoryMap = new Dictionary<string, string>
-        {
-            { "pictureBox2", "Devlopment-IT" },
-            { "pictureBox3", "AI-Services" },
-            { "pictureBox4", "Design-Creative" },
-            { "pictureBox5", "Sales-Marketing" },
-            { "pictureBox6", "Engineering-Architecture" },
-            { "pictureBox7", "Finance-Accounting" },
-            { "pictureBox8", "Admin-Custome-Support" },
-            { "pictureBox9", "Writing-Traslation" },
-            // Add more if needed
-        };
-
-
-        private Dictionary<string, string> cardToCategoryMap = new Dictionary<string, string>
-        {
-            { "materialCard6", "Devlopment-IT" },
-            { "materialCard14", "AI-Services" },
-            { "materialCard12", "Design-Creative" },
-            { "materialCard10", "Sales-Marketing" },
-            { "materialCard15", "Writing-Traslation" },
-            { "materialCard16", "Admin-Custome Support" },
-            { "materialCard17", "Finance-Accounting" },
-            { "materialCard18", "Engineering-Architecture" },
-            // Add more if needed
-        };
 
         private void PictureBox_Click(object sender, EventArgs e)
         {
-            // Determine which PictureBox was clicked
-            PictureBox clickedPictureBox = sender as PictureBox;
-
-            // Create and show the appropriate form based on the clicked PictureBox
-            if (clickedPictureBox != null && pictureToCategoryMap.TryGetValue(clickedPictureBox.Name, out string category))
+            if (sender is PictureBox clickedPictureBox && pictureToCategoryMap.TryGetValue(clickedPictureBox, out string category))
             {
                 OpenFListJob(category, userId);
             }
@@ -135,11 +131,7 @@ namespace TimViec
 
         private void MaterialCard_Click(object sender, EventArgs e)
         {
-            // Determine which MaterialCard was clicked
-            MaterialCard clickedCard = sender as MaterialCard;
-
-            // Fetch the data for the category of the clicked card
-            if (clickedCard != null && cardToCategoryMap.TryGetValue(clickedCard.Name, out string category))
+            if (sender is MaterialCard clickedCard && cardToCategoryMap.TryGetValue(clickedCard, out string category))
             {
                 OpenFListJob(category, userId);
             }
@@ -154,10 +146,10 @@ namespace TimViec
 
         private void materialTabControl1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (this.materialTabControl1.SelectedIndex == 5) // Assuming the "Log out" tab is at index 5
+            if (this.materialTabControl1.SelectedIndex == 5) 
             {
-                this.Hide(); // Hide the current form
-                new FLogin().Show(); // Show the Login form
+                this.Hide(); 
+                new FLogin().Show(); 
             }
         }
 
@@ -288,11 +280,6 @@ namespace TimViec
             }
             dbConnection.Close();
         }
-
-
-
-
-
 
 
         private void btnSave_Click(object sender, EventArgs e)

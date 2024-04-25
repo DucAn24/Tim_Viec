@@ -67,7 +67,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label18.ForeColor = Color.LightGreen;
-            label18.Location = new Point(58, 75);
+            label18.Location = new Point(58, 74);
             label18.Name = "label18";
             label18.Size = new Size(229, 54);
             label18.TabIndex = 23;
@@ -89,14 +89,13 @@
             cbxPrice.IntegralHeight = false;
             cbxPrice.ItemHeight = 43;
             cbxPrice.Items.AddRange(new object[] { "ASC", "DESC" });
-            cbxPrice.Location = new Point(623, 149);
+            cbxPrice.Location = new Point(632, 152);
             cbxPrice.MaxDropDownItems = 4;
             cbxPrice.MouseState = MaterialSkin.MouseState.OUT;
             cbxPrice.Name = "cbxPrice";
             cbxPrice.Size = new Size(151, 49);
             cbxPrice.StartIndex = 0;
             cbxPrice.TabIndex = 24;
-            cbxPrice.SelectedIndexChanged += cbxPrice_SelectedIndexChanged;
             // 
             // txtSearch
             // 
@@ -108,7 +107,7 @@
             txtSearch.HideSelection = true;
             txtSearch.Hint = "Search for skill";
             txtSearch.LeadingIcon = null;
-            txtSearch.Location = new Point(24, 149);
+            txtSearch.Location = new Point(58, 152);
             txtSearch.MaxLength = 32767;
             txtSearch.MouseState = MaterialSkin.MouseState.OUT;
             txtSearch.Name = "txtSearch";
@@ -134,7 +133,7 @@
             btnSearch.Depth = 0;
             btnSearch.HighEmphasis = true;
             btnSearch.Icon = (Image)resources.GetObject("btnSearch.Icon");
-            btnSearch.Location = new Point(848, 161);
+            btnSearch.Location = new Point(829, 164);
             btnSearch.Margin = new Padding(4, 6, 4, 6);
             btnSearch.MouseState = MaterialSkin.MouseState.HOVER;
             btnSearch.Name = "btnSearch";
@@ -145,6 +144,7 @@
             btnSearch.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnSearch.UseAccentColor = false;
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // FListWorker
             // 

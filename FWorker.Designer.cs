@@ -1657,7 +1657,7 @@
             DrawerTabControl = materialTabControl1;
             Name = "FWorker";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Worker";
+            Text = "The Gioi Tho - Nguoi Tho";
             Load += Worker_Load;
             materialTabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);

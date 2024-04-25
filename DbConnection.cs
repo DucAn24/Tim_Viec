@@ -87,14 +87,10 @@ namespace TimViec
             }
         }
 
-
         public SqlConnection Connection
         {
             get { return connection; }
         }
-
-
-
 
     }
 }

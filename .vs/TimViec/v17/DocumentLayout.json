@@ -3,40 +3,28 @@
   "WorkspaceRootPath": "E:\\winForm\\TimViec\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\fclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:fclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\fworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:fworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\fclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:fclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\finformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:finformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|e:\\winform\\timviec\\clientdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:clientdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\fworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:fworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|e:\\winform\\timviec\\flistjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:flistjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\flistworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:flistworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\finformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:finformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|e:\\winform\\timviec\\fworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:fworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\flistjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:flistjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|e:\\winform\\timviec\\fclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:fclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|E:\\winForm\\TimViec\\fclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0163572F-8C83-475C-A0E5-BDC31B2852E7}|TimViec.csproj|solutionrelative:fclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,116 +46,79 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ClientDAO.cs",
-              "DocumentMoniker": "E:\\winForm\\TimViec\\ClientDAO.cs",
-              "RelativeDocumentMoniker": "ClientDAO.cs",
-              "ToolTip": "E:\\winForm\\TimViec\\ClientDAO.cs",
-              "RelativeToolTip": "ClientDAO.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAxwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T04:43:42.904Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "FWorker.cs [Design]",
-              "DocumentMoniker": "E:\\winForm\\TimViec\\FWorker.cs",
-              "RelativeDocumentMoniker": "FWorker.cs",
-              "ToolTip": "E:\\winForm\\TimViec\\FWorker.cs [Design]",
-              "RelativeToolTip": "FWorker.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T17:18:43.672Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FWorker.cs",
-              "DocumentMoniker": "E:\\winForm\\TimViec\\FWorker.cs",
-              "RelativeDocumentMoniker": "FWorker.cs",
-              "ToolTip": "E:\\winForm\\TimViec\\FWorker.cs",
-              "RelativeToolTip": "FWorker.cs",
-              "ViewState": "AQIAADkAAAAAAAAAAAAYwNcAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T14:46:03.592Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FListJob.cs",
-              "DocumentMoniker": "E:\\winForm\\TimViec\\FListJob.cs",
-              "RelativeDocumentMoniker": "FListJob.cs",
-              "ToolTip": "E:\\winForm\\TimViec\\FListJob.cs",
-              "RelativeToolTip": "FListJob.cs",
-              "ViewState": "AQIAAHcAAAAAAAAAAAArwBgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T17:05:21.038Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "FListWorker.cs",
-              "DocumentMoniker": "E:\\winForm\\TimViec\\FListWorker.cs",
-              "RelativeDocumentMoniker": "FListWorker.cs",
-              "ToolTip": "E:\\winForm\\TimViec\\FListWorker.cs",
-              "RelativeToolTip": "FListWorker.cs",
-              "ViewState": "AQIAAPsAAAAAAAAAAAAgwBwAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T16:43:19.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FInformation.cs",
-              "DocumentMoniker": "E:\\winForm\\TimViec\\FInformation.cs",
-              "RelativeDocumentMoniker": "FInformation.cs",
-              "ToolTip": "E:\\winForm\\TimViec\\FInformation.cs",
-              "RelativeToolTip": "FInformation.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAgwCoAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T02:48:45.343Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "FInformation.cs [Design]",
-              "DocumentMoniker": "E:\\winForm\\TimViec\\FInformation.cs",
-              "RelativeDocumentMoniker": "FInformation.cs",
-              "ToolTip": "E:\\winForm\\TimViec\\FInformation.cs [Design]",
-              "RelativeToolTip": "FInformation.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T02:22:24.064Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "FClient.cs [Design]",
               "DocumentMoniker": "E:\\winForm\\TimViec\\FClient.cs",
               "RelativeDocumentMoniker": "FClient.cs",
               "ToolTip": "E:\\winForm\\TimViec\\FClient.cs [Design]",
               "RelativeToolTip": "FClient.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T14:33:11.149Z",
+              "WhenOpened": "2024-04-25T14:24:16.119Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "FClient.cs",
               "DocumentMoniker": "E:\\winForm\\TimViec\\FClient.cs",
               "RelativeDocumentMoniker": "FClient.cs",
               "ToolTip": "E:\\winForm\\TimViec\\FClient.cs",
               "RelativeToolTip": "FClient.cs",
-              "ViewState": "AQIAAMoAAAAAAAAAAAAUwMoAAAAoAAAA",
+              "ViewState": "AQIAAM4AAAAAAAAAAAAUwN0AAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T08:21:21.985Z",
+              "WhenOpened": "2024-04-25T14:54:01.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FListJob.cs",
+              "DocumentMoniker": "E:\\winForm\\TimViec\\FListJob.cs",
+              "RelativeDocumentMoniker": "FListJob.cs",
+              "ToolTip": "E:\\winForm\\TimViec\\FListJob.cs",
+              "RelativeToolTip": "FListJob.cs",
+              "ViewState": "AQIAAFYAAAAAAAAAAAAgwEEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T17:05:21.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FWorker.cs",
+              "DocumentMoniker": "E:\\winForm\\TimViec\\FWorker.cs",
+              "RelativeDocumentMoniker": "FWorker.cs",
+              "ToolTip": "E:\\winForm\\TimViec\\FWorker.cs",
+              "RelativeToolTip": "FWorker.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAAQwIIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T14:46:03.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FListWorker.cs",
+              "DocumentMoniker": "E:\\winForm\\TimViec\\FListWorker.cs",
+              "RelativeDocumentMoniker": "FListWorker.cs",
+              "ToolTip": "E:\\winForm\\TimViec\\FListWorker.cs",
+              "RelativeToolTip": "FListWorker.cs",
+              "ViewState": "AQIAACIBAAAAAAAAAAAiwH8BAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T16:43:19.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FInformation.cs",
+              "DocumentMoniker": "E:\\winForm\\TimViec\\FInformation.cs",
+              "RelativeDocumentMoniker": "FInformation.cs",
+              "ToolTip": "E:\\winForm\\TimViec\\FInformation.cs",
+              "RelativeToolTip": "FInformation.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAcwBcAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T02:48:45.343Z",
               "EditorCaption": ""
             }
           ]

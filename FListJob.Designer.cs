@@ -52,7 +52,7 @@
             cbxPrice.IntegralHeight = false;
             cbxPrice.ItemHeight = 43;
             cbxPrice.Items.AddRange(new object[] { "ASC", "DESC" });
-            cbxPrice.Location = new Point(632, 163);
+            cbxPrice.Location = new Point(623, 156);
             cbxPrice.MaxDropDownItems = 4;
             cbxPrice.MouseState = MaterialSkin.MouseState.OUT;
             cbxPrice.Name = "cbxPrice";
@@ -65,7 +65,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label18.ForeColor = Color.LightGreen;
-            label18.Location = new Point(56, 92);
+            label18.Location = new Point(56, 89);
             label18.Name = "label18";
             label18.Size = new Size(182, 54);
             label18.TabIndex = 27;
@@ -78,7 +78,7 @@
             btnSearch.Depth = 0;
             btnSearch.HighEmphasis = true;
             btnSearch.Icon = (Image)resources.GetObject("btnSearch.Icon");
-            btnSearch.Location = new Point(821, 176);
+            btnSearch.Location = new Point(821, 170);
             btnSearch.Margin = new Padding(4, 6, 4, 6);
             btnSearch.MouseState = MaterialSkin.MouseState.HOVER;
             btnSearch.Name = "btnSearch";
@@ -99,9 +99,9 @@
             txtSearch.Depth = 0;
             txtSearch.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtSearch.HideSelection = true;
-            txtSearch.Hint = "Search for project";
+            txtSearch.Hint = "Search for job";
             txtSearch.LeadingIcon = null;
-            txtSearch.Location = new Point(56, 163);
+            txtSearch.Location = new Point(56, 157);
             txtSearch.MaxLength = 32767;
             txtSearch.MouseState = MaterialSkin.MouseState.OUT;
             txtSearch.Name = "txtSearch";

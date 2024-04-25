@@ -1286,12 +1286,12 @@
             materialCard9.Controls.Add(materialDivider5);
             materialCard9.Depth = 0;
             materialCard9.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard9.Location = new Point(14, 465);
+            materialCard9.Location = new Point(15, 438);
             materialCard9.Margin = new Padding(14, 13, 14, 13);
             materialCard9.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard9.Name = "materialCard9";
             materialCard9.Padding = new Padding(14, 13, 14, 13);
-            materialCard9.Size = new Size(1526, 364);
+            materialCard9.Size = new Size(1526, 395);
             materialCard9.TabIndex = 1;
             // 
             // flowLayoutPanel4
@@ -1299,7 +1299,7 @@
             flowLayoutPanel4.AutoScroll = true;
             flowLayoutPanel4.Location = new Point(0, 73);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(1509, 275);
+            flowLayoutPanel4.Size = new Size(1509, 306);
             flowLayoutPanel4.TabIndex = 27;
             // 
             // label32
@@ -1332,7 +1332,7 @@
             materialCard1.Controls.Add(materialDivider11);
             materialCard1.Depth = 0;
             materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard1.Location = new Point(14, 28);
+            materialCard1.Location = new Point(15, 13);
             materialCard1.Margin = new Padding(14, 13, 14, 13);
             materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard1.Name = "materialCard1";
@@ -1518,7 +1518,7 @@
             ForeColor = SystemColors.ActiveCaption;
             Name = "FClient";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "The Gioi Viec Lam";
+            Text = "The Gioi Tho - Nguoi Tim Tho";
             Load += Home_Load;
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();

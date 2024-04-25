@@ -84,8 +84,6 @@ namespace TimViec
             return workerId;
         }
 
-
-
         private void AddControlsToPanel(Image image, string label1Text, string label2Text, string label3Text, object job_id, object worker_id)
         {
 
