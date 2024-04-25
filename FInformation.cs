@@ -1,9 +1,11 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,9 +17,17 @@ namespace TimViec
     public partial class FInformation : MaterialForm
     {
         MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
-        public FInformation()
+        private DbConnection dbConnection;
+
+        private int workerId;
+        public FInformation(int workerId)
         {
             InitializeComponent();
+            dbConnection = new DbConnection();
+
+            this.workerId = workerId;
+            System.Diagnostics.Debug.WriteLine($"FInfor form: workerId = {this.workerId}");
+
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -30,90 +40,90 @@ namespace TimViec
 
         private void Information_Load(object sender, EventArgs e)
         {
-            AddPanelToFlowLayout();
+            AddPanelToFlowLayout(workerId);
         }
 
-        private void AddControlsToPanel(Image image, string label1Text, string label4Text)
-        {
 
-            //create and configure picture box
+        private Label CreateLabel(string text, Font font, Point location)
+        {
+            Label label = new Label();
+            label.Text = text;
+            label.Font = font;
+            label.AutoSize = true;
+            label.Location = location;
+            label.TextAlign = ContentAlignment.TopLeft;
+            return label;
+        }
+
+        private void AddControlsToPanel(Image image, string label1Text, string label4Text, string category, string price)
+        {
+            // Create and configure picture box
             PictureBox pictureBox = new PictureBox();
             pictureBox.Image = image;
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Set this to Zoom
-            pictureBox.Size = new Size(70, 70); // Set this to desired size
-            pictureBox.Location = new Point(20, 20);
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox.Size = new Size(180, 180);
+            pictureBox.Location = new Point(610, 20);
 
-
-
-            // Create and configure label 1
-            Label label1 = new Label();
-            label1.Text = label1Text;
-            label1.AutoSize = true;
+            // Create and configure labels
+            Label label1 = CreateLabel(label1Text, new Font("Nirmala UI", 14, FontStyle.Bold), new Point(40, 10));
             label1.ForeColor = Color.Chocolate;
-            label1.Font = new Font("Nirmala UI", 12, FontStyle.Bold);
-            label1.Location = new Point(120, 10);
 
+            Label label4 = CreateLabel(label4Text, new Font("Nirmala UI", 12), new Point(40, 50));
 
-            Label label4 = new Label();
-            label4.Text = label4Text;
-            label4.AutoSize = false; // Set AutoSize to false
-            label4.Width = 1300;
-            label4.Height = 90;
-            label4.Location = new Point(120, 40); // Set the location
-            label4.TextAlign = ContentAlignment.TopLeft;
+            Label lableCategory = CreateLabel("Category: " + category, new Font("Nirmala UI", 12), new Point(40, 90));
+
+            Label labelPrice = CreateLabel("Price: " + price, new Font("Nirmala UI", 12), new Point(40, 130));
 
             // Create a new panel
             MaterialCard card = new MaterialCard();
-            card.Width = 1450; // Set panel width as needed
-            card.Height = 120;
-            card.BackColor = Color.White; // Set panel background color if needed
+            card.Width = 820;
+            card.Height = 250;
+            card.BackColor = Color.White;
 
-
-
-            // add controls to the card
+            // Add controls to the card
             card.Controls.Add(label1);
-
             card.Controls.Add(label4);
-
             card.Controls.Add(pictureBox);
-
-
+            card.Controls.Add(lableCategory);
+            card.Controls.Add(labelPrice);
 
             flowLayoutPanel1.Controls.Add(card);
-
         }
 
 
-        private void AddPanelToFlowLayout()
+
+        private void AddPanelToFlowLayout(int workerId)
         {
-            // Example data for panels
-            List<(string, string, string, string)> labels = new List<(string, string, string, string)>
-            {
-                ("Duc AN Nbguyen ", "Python Developer : Django - Flask - RESTful APIs - Automation Scripts", "$10.00/hr", "Are you looking for a versatile Python Developer to help you with your Project? I'm a Python developer driven by a profound passion for technology. Offering a diverse range of services, I specialize in web scraping, data mining, data wrangling, data analysis, automation, and cloud services."),
-                ("Tijani-Ahmed O. t", "Python Programmer", "$5.00/hr", "I am a junior Python developer. I'm good at using Python to solve your use cases, be it web development, API development, machine learning, data analysis, scripting, web automation, etc.I am good at building backend applications and RESTful APIs using the Django Framework. I can. also build full-stack web applications.Apart from this, I'm also an automation expert in python. I can scrape, automate processes, manipulate different files, classify and predict data using ML, speed up applications with asynchronous programming etc."),
-                ("Akshay V.", "Python Machine Learning Developer | Expert in Flask & Django", "Label 3-3", "👋 Hey there! I'm akshay vayak, a seasoned Python and Machine Learning enthusiast with a passion for turning data into actionable insights. I'm here to supercharge your projects with cutting-edge technology and data-driven solutions.\r\n\r\nKey Skills:\r\n\r\n🐍 Python Expertise: I'm fluent in Python, leveraging its versatility to build robust applications, web scrapers, and automate tasks.\r\n🤖 Machine Learning Wizardry: I specialize in creating predictive models, natural language processing, computer vision, and recommendation systems.\r\n📊 Data Analysis & Visualization: I'll transform your data into meaningful insights using pandas, Matplotlib, and Seaborn.\r\n\U0001f9e0 Deep Learning: I have experience with TensorFlow and PyTorch for developing neural networks.\r\n💻 Full-Stack Familiarity: I can seamlessly integrate ML models into web apps, giving your users intelligent experiences.\r\n🌐 API Integration: I'll connect your applications with external APIs to fetch or deliver data.\r\n📈 Optimization: I optimize code and models for speed, scalability, and cost-effectiveness."),
-                ("Ismail P. ", "Mobile App Developer / Python Developer", "Label 3-3", "Label 3-4"),
-                ("code web", "Label 3-2", "Label 3-3", "Label 3-4"),
-                ("code web", "Label 3-2", "Label 3-3", "Label 3-4")
-            };
+            dbConnection.Open();
+            string query = @"
+                            SELECT J.JobTitle,
+		                            J.JobDescription,
+		                            J.Price,
+		                            J.Category,
+		                            J.ImagesJob
+                            FROM JobHistory J
+                            WHERE J.Worker_id = @workerId
+                            ";
 
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@workerId", workerId);
+            DataTable dataTable = dbConnection.ExecuteQuery(command);
 
-
-            // Example data for image indices in the ImageList
-            List<int> imageIndices = new List<int> { 0, 1, 2, 3, 4, 5 };
-
-            //loop all labels and images
-            for (int i = 0; i < 6; i++)
+            foreach (DataRow row in dataTable.Rows)
             {
 
-                // Get image from ImageList by index
-                Image image = imageList1.Images[imageIndices[i]];
+                var imagePath = row["ImagesJob"] as string;
+                var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
 
-                // Add controls to the panel with corresponding information
-                AddControlsToPanel(image, labels[i].Item1, labels[i].Item4);
+                string label1Text = row["JobTitle"].ToString();
+                string label2Text = row["JobDescription"].ToString();
+                string category = row["Category"].ToString();
+                string price = row["Price"].ToString();
 
 
+                AddControlsToPanel(image, label1Text, label2Text, category, price);
             }
+            dbConnection.Close();
         }
 
         private void materialButton5_Click(object sender, EventArgs e)

@@ -57,6 +57,8 @@
             // 
             materialCard5.BackColor = Color.FromArgb(255, 255, 255);
             materialCard5.Controls.Add(materialLabel5);
+            materialCard5.Controls.Add(materialButton5);
+            materialCard5.Controls.Add(materialButton1);
             materialCard5.Controls.Add(materialLabel1);
             materialCard5.Controls.Add(label6);
             materialCard5.Controls.Add(label5);
@@ -74,7 +76,7 @@
             materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard5.Name = "materialCard5";
             materialCard5.Padding = new Padding(14);
-            materialCard5.Size = new Size(527, 640);
+            materialCard5.Size = new Size(527, 749);
             materialCard5.TabIndex = 1;
             // 
             // materialLabel5
@@ -193,7 +195,7 @@
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(17, 17);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(187, 123);
+            pictureBox1.Size = new Size(216, 140);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -201,9 +203,9 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Location = new Point(721, 154);
+            flowLayoutPanel1.Location = new Point(630, 154);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(780, 640);
+            flowLayoutPanel1.Size = new Size(921, 749);
             flowLayoutPanel1.TabIndex = 24;
             // 
             // imageList1
@@ -225,7 +227,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Nirmala UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.LightGreen;
-            label8.Location = new Point(721, 87);
+            label8.Location = new Point(630, 87);
             label8.Name = "label8";
             label8.Size = new Size(180, 41);
             label8.TabIndex = 31;
@@ -238,7 +240,7 @@
             materialButton5.Depth = 0;
             materialButton5.HighEmphasis = false;
             materialButton5.Icon = null;
-            materialButton5.Location = new Point(880, 838);
+            materialButton5.Location = new Point(96, 693);
             materialButton5.Margin = new Padding(4, 6, 4, 6);
             materialButton5.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton5.Name = "materialButton5";
@@ -258,7 +260,7 @@
             materialButton1.Depth = 0;
             materialButton1.HighEmphasis = false;
             materialButton1.Icon = null;
-            materialButton1.Location = new Point(721, 838);
+            materialButton1.Location = new Point(24, 693);
             materialButton1.Margin = new Padding(4, 6, 4, 6);
             materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton1.Name = "materialButton1";
@@ -287,8 +289,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1600, 920);
             Controls.Add(label1);
-            Controls.Add(materialButton1);
-            Controls.Add(materialButton5);
             Controls.Add(label8);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(materialCard5);

@@ -59,6 +59,7 @@
             label7 = new Label();
             tabPage4 = new TabPage();
             materialCard19 = new MaterialSkin.Controls.MaterialCard();
+            flpWorkDone = new FlowLayoutPanel();
             label32 = new Label();
             materialDivider16 = new MaterialSkin.Controls.MaterialDivider();
             tabPage2 = new TabPage();
@@ -518,6 +519,7 @@
             // materialCard19
             // 
             materialCard19.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard19.Controls.Add(flpWorkDone);
             materialCard19.Controls.Add(label32);
             materialCard19.Controls.Add(materialDivider16);
             materialCard19.Depth = 0;
@@ -527,8 +529,16 @@
             materialCard19.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard19.Name = "materialCard19";
             materialCard19.Padding = new Padding(14);
-            materialCard19.Size = new Size(1558, 786);
+            materialCard19.Size = new Size(1498, 786);
             materialCard19.TabIndex = 8;
+            // 
+            // flpWorkDone
+            // 
+            flpWorkDone.AutoScroll = true;
+            flpWorkDone.Location = new Point(0, 73);
+            flpWorkDone.Name = "flpWorkDone";
+            flpWorkDone.Size = new Size(1498, 713);
+            flpWorkDone.TabIndex = 27;
             // 
             // label32
             // 
@@ -545,10 +555,10 @@
             // 
             materialDivider16.BackColor = Color.FromArgb(30, 0, 0, 0);
             materialDivider16.Depth = 0;
-            materialDivider16.Location = new Point(0, 57);
+            materialDivider16.Location = new Point(0, 51);
             materialDivider16.MouseState = MaterialSkin.MouseState.HOVER;
             materialDivider16.Name = "materialDivider16";
-            materialDivider16.Size = new Size(1415, 10);
+            materialDivider16.Size = new Size(1498, 16);
             materialDivider16.TabIndex = 3;
             materialDivider16.Text = "materialDivider16";
             // 
@@ -1802,5 +1812,6 @@
         private MaterialSkin.Controls.MaterialComboBox cbxCategory2;
         private MaterialSkin.Controls.MaterialTextBox2 txtSalary;
         private Label label33;
+        private FlowLayoutPanel flpWorkDone;
     }
 }

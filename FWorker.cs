@@ -55,7 +55,7 @@ namespace TimViec
 
         private void Worker_Load(object sender, EventArgs e)
         {
-            AddPanelToFlowLayoutAppointment(flowLayoutPanel2);
+            AddPanelToWorkDone(worker_id);
         }
 
         public int GetWorkerIdFromUserId(int userId)
@@ -161,67 +161,6 @@ namespace TimViec
             }
         }
 
-        private MaterialCard AddControlsToPanelAppointment(Image image, string label1Text, string label2Text, string label3Text, string label4Text)
-        {
-
-            //create and configure picture box
-            PictureBox pictureBox = new PictureBox();
-            pictureBox.Image = image;
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Set this to Zoom
-            pictureBox.Size = new Size(40, 40); // Set this to desired size
-            pictureBox.Location = new Point(20, 20);
-
-
-
-            // Create and configure label 1
-            Label label1 = new Label();
-            label1.Text = label1Text;
-            label1.AutoSize = true;
-            label1.ForeColor = Color.Chocolate;
-            label1.Font = new Font("Nirmala UI", 16, FontStyle.Bold);
-            label1.Location = new Point(10, 70);
-
-
-
-            // Create and configure label 2
-            Label label2 = new Label();
-            label2.Text = label2Text;
-            label2.AutoSize = true;
-            label2.ForeColor = Color.LightGreen;
-            label2.Font = new Font("Nirmala UI", 10, FontStyle.Bold);
-            label2.Location = new Point(10, 120);
-
-            // Create a new panel
-            MaterialCard card = new MaterialCard();
-            card.Width = 310; // Set panel width as needed
-            card.Height = 220;
-            card.BackColor = Color.White; // Set panel background color if needed
-
-            MaterialButton btnAccpet = new MaterialButton();
-            btnAccpet.Text = "Accept";
-            btnAccpet.Location = new Point(10, 170);
-
-            MaterialButton btnDecline = new MaterialButton();
-            btnDecline.Text = "Decline";
-            btnDecline.Location = new Point(100, 170);
-
-            // add controls to the card
-            card.Controls.Add(label1);
-            card.Controls.Add(label2);
-            card.Controls.Add(pictureBox);
-            card.Controls.Add(btnAccpet);
-            card.Controls.Add(btnDecline);
-
-            return card;
-
-        }
-
-        private void AddPanelToFlowLayoutAppointment(FlowLayoutPanel flowLayoutPanel)
-        {
-
-
-        }
-
         private string gender;
         private void ckbFemale_CheckedChanged(object sender, EventArgs e)
         {
@@ -266,6 +205,94 @@ namespace TimViec
         {
             imageJob = SelectImageFile(pictureBoxJob);
         }
+
+
+        private Label CreateLabel(string text, Font font, Point location)
+        {
+            Label label = new Label();
+            label.Text = text;
+            label.Font = font;
+            label.AutoSize = true;
+            label.MaximumSize = new Size(440, 0);
+            label.Location = location;
+            label.TextAlign = ContentAlignment.TopLeft;
+            return label;
+        }
+
+        private void AddControlsToPanel(Image image, string label1Text, string label4Text, string category, string price)
+        {
+            // Create and configure picture box
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Image = image;
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox.Size = new Size(150, 150);
+            pictureBox.Location = new Point(500, 20);
+
+            // Create and configure labels
+            Label label1 = CreateLabel(label1Text, new Font("Nirmala UI", 14, FontStyle.Bold), new Point(40, 10));
+            label1.ForeColor = Color.Chocolate;
+
+            Label label4 = CreateLabel(label4Text, new Font("Nirmala UI", 12), new Point(40, 50));
+
+            Label lableCategory = CreateLabel("Category: " + category, new Font("Nirmala UI", 12), new Point(40, 130));
+
+            Label labelPrice = CreateLabel("Price: " + price, new Font("Nirmala UI", 12), new Point(40, 190));
+
+            // Create a new panel
+            MaterialCard card = new MaterialCard();
+            card.Width = 680;
+            card.Height = 250;
+            card.BackColor = Color.White;
+
+            // Add controls to the card
+            card.Controls.Add(label1);
+            card.Controls.Add(label4);
+            card.Controls.Add(pictureBox);
+            card.Controls.Add(lableCategory);
+            card.Controls.Add(labelPrice);
+
+            flpWorkDone.Controls.Add(card);
+        }
+
+
+        private void AddPanelToWorkDone(int workerId)
+        {
+            dbConnection.Open();
+            string query = @"
+                            SELECT J.JobTitle,
+		                            J.JobDescription,
+		                            J.Price,
+		                            J.Category,
+		                            J.ImagesJob
+                            FROM JobHistory J
+                            WHERE J.Worker_id = @workerId
+                            ";
+
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@workerId", workerId);
+            DataTable dataTable = dbConnection.ExecuteQuery(command);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+
+                var imagePath = row["ImagesJob"] as string;
+                var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
+
+                string label1Text = row["JobTitle"].ToString();
+                string label2Text = row["JobDescription"].ToString();
+                string category = row["Category"].ToString();
+                string price = row["Price"].ToString();
+
+
+                AddControlsToPanel(image, label1Text, label2Text, category, price);
+            }
+            dbConnection.Close();
+        }
+
+
+
+
+
 
 
         private void btnSave_Click(object sender, EventArgs e)

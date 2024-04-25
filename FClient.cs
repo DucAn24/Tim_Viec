@@ -71,15 +71,16 @@ namespace TimViec
         {
             LoadDataHired();
             LoadDataFavourite();
+            LoadUserData();
         }
 
         //  Log out
         private void materialTabControl1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (this.materialTabControl1.SelectedIndex == 5) // Assuming the "Log out" tab is at index 5
+            if (this.materialTabControl1.SelectedIndex == 5) 
             {
-                this.Hide(); // Hide the current form
-                new FLogin().Show(); // Show the Login form
+                this.Hide(); 
+                new FLogin().Show(); 
             }
         }
 
@@ -205,6 +206,52 @@ namespace TimViec
                 gender = "Male";
             }
         }
+        private void LoadUserData()
+        {
+            // Open the database connection
+            dbConnection.Open();
+
+            // Create the SQL command to select the data
+            string selectQuery = @"
+                            SELECT Name, Email,Address, PhoneNumber, Address, Gender, DateOfBirth, imagePath
+                            FROM Users
+                            WHERE user_id = @UserId
+                        ";
+
+            SqlCommand selectCommand = new SqlCommand(selectQuery, dbConnection.Connection);
+
+            // Add the user ID parameter to the command
+            selectCommand.Parameters.AddWithValue("@UserId", userId);
+
+            // Execute the command and get the data
+            SqlDataReader reader = selectCommand.ExecuteReader();
+
+            // Check if data was returned
+            if (reader.Read())
+            {
+                // Assign the data to the text boxes
+                txtName.Text = reader["Name"].ToString();
+                txtEmail.Text = reader["Email"].ToString();
+                txtPhoneNumber.Text = reader["PhoneNumber"].ToString();
+                txtLocation.Text = reader["Address"].ToString();
+                picBoxUser.Image = Image.FromFile(reader["ImagePath"].ToString());
+
+                // Handle the gender checkbox
+                string gender = reader["Gender"].ToString();
+                ckbMale.Checked = gender == "Male";
+                ckbFemale.Checked = gender == "Female";
+
+                // Handle the birth date
+                if (reader["DateOfBirth"] != DBNull.Value)
+                {
+                    dtpBirth.Value = (DateTime)reader["DateOfBirth"];
+                }
+            }
+
+            // Close the database connection
+            dbConnection.Close();
+        }
+
 
         private void AddControlsToPanelHIred(Image image, string label1Text, string label2Text, string email, string phone)
         {
@@ -474,8 +521,6 @@ namespace TimViec
             else
             {
                 MessageBox.Show("Failed to update client information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
             }
 
         }

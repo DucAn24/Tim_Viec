@@ -56,6 +56,14 @@ namespace TimViec
         private void AddControlsToPanel(Image image, string label1Text, string label2Text, string label3Text, string label4Text, string salary, object userId, object Worker_id)
         {
 
+            // Create a new panel
+            MaterialCard card = new MaterialCard();
+            card.Width = 700; // Set panel width as needed
+            card.Height = 250;
+            card.BackColor = Color.White; 
+            card.BackColor = Color.White; 
+            card.Tag = new { UserId = this.userId, WorkerId = Worker_id };
+            card.Click += (sender, e) => OpenInformationForm((int)Worker_id);
 
             //create and configure picture box
             PictureBox pictureBox = new PictureBox();
@@ -63,7 +71,7 @@ namespace TimViec
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Set this to Zoom
             pictureBox.Size = new Size(90, 90); // Set this to desired size
             pictureBox.Location = new Point(20, 20);
-            pictureBox.Click += (sender, e) => OpenInformationForm();
+            pictureBox.Click += (sender, e) => OpenInformationForm((int)Worker_id);
 
 
             // Create and configure label 1
@@ -73,7 +81,7 @@ namespace TimViec
             label1.ForeColor = Color.Chocolate;
             label1.Font = new Font("Nirmala UI", 12, FontStyle.Bold);
             label1.Location = new Point(120, 20);
-            label1.Click += (sender, e) => OpenInformationForm();
+            label1.Click += (sender, e) => OpenInformationForm((int)Worker_id);
 
 
             // Create and configure label 2
@@ -83,14 +91,14 @@ namespace TimViec
             label2.ForeColor = Color.LightGreen;
             label2.Font = new Font("Nirmala UI", 16, FontStyle.Bold);
             label2.Location = new Point(120, 50);
-            label2.Click += (sender, e) => OpenInformationForm();
+            label2.Click += (sender, e) => OpenInformationForm((int)Worker_id);
 
             // Create and configure label 3
             Label label3 = new Label();
             label3.Text = "Age: " + label3Text;
             label3.AutoSize = true;
             label3.Location = new Point(20, 120);
-            label3.Click += (sender, e) => OpenInformationForm();
+            label3.Click += (sender, e) => OpenInformationForm((int)Worker_id);
 
             // Create and configure label 4
             Label label4 = new Label();
@@ -98,24 +106,14 @@ namespace TimViec
             label4.AutoSize = true; // Set AutoSize to false
             label4.Location = new Point(120, 100); // Set the location
             label4.TextAlign = ContentAlignment.TopLeft;
-            label4.Click += (sender, e) => OpenInformationForm();
+            label4.Click += (sender, e) => OpenInformationForm((int)Worker_id);
 
             Label salaryLable = new Label();
             salaryLable.Text = "Salary: " + salary;
             salaryLable.AutoSize = true; // Set AutoSize to false
             salaryLable.Location = new Point(120, 120); // Set the location
             salaryLable.TextAlign = ContentAlignment.TopLeft;
-            salaryLable.Click += (sender, e) => OpenInformationForm();
-
-            // Create a new panel
-            MaterialCard card = new MaterialCard();
-            card.Width = 700; // Set panel width as needed
-            card.Height = 250;
-            card.BackColor = Color.White; // Set panel background color if needed
-            card.Click += (sender, e) => OpenInformationForm();
-            card.BackColor = Color.White; // Set panel background color if needed
-            card.Tag = new { UserId = this.userId, WorkerId = Worker_id };
-
+            salaryLable.Click += (sender, e) => OpenInformationForm((int)Worker_id);
 
             MaterialButton btnHire = new MaterialButton();
             btnHire.Text = "Hire Talent";
@@ -263,8 +261,9 @@ namespace TimViec
 
 
             flowLayoutPanel1.Controls.Add(card);
-
         }
+
+
         private void LoadDataAndAddPanels(string category)
         {
             dbConnection.Open();
@@ -379,12 +378,12 @@ namespace TimViec
         }
 
 
-        private void OpenInformationForm()
+        private void OpenInformationForm(int workerId)
         {
-            // Open the Information form
-            FInformation informationForm = new FInformation();
+            FInformation informationForm = new FInformation(workerId);
             informationForm.Show();
         }
+
 
         private void OpenAppointmentForm()
         {

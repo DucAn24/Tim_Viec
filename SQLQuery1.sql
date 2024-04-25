@@ -26,6 +26,7 @@ CREATE TABLE Worker (
     Bio NVARCHAR(MAX),
     Skills NVARCHAR(MAX),
 	Category NVARCHAR(80),
+	Salary DECIMAL(18, 2),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 GO
@@ -74,7 +75,6 @@ CREATE TABLE JobList (
 );
 GO
 
-
 CREATE TABLE JobHistory (
     job_history_id INT IDENTITY PRIMARY KEY,
     Worker_id INT,
@@ -96,6 +96,7 @@ CREATE TABLE Applications (
 );
 GO
 
+
 CREATE TRIGGER trg_AcceptedJob
 ON Applications
 AFTER INSERT
@@ -108,13 +109,10 @@ BEGIN
     INNER JOIN JobList j ON i.job_id = j.job_id
     WHERE i.Worker_id IS NOT NULL; -- Ensuring that a worker has accepted the job
 END;
-
+GO
 
 SELECT COUNT(*) AS TriggerCount
 FROM sys.triggers;
-
-
-
 
 CREATE TABLE Ratings (
     rating_id INT IDENTITY PRIMARY KEY,
@@ -146,6 +144,11 @@ SELECT * FROM Worker
 SELECT * FROM Favourite
 SELECT * FROM HiredWorkers
 
+SELECT W.Worker_id
+FROM Users U
+JOIN Worker W
+ON U.user_id = W.user_id
+WHERE U.user_id = 6
 
 SELECT W.Category,
 		U.Name,
@@ -176,21 +179,23 @@ VALUES
     (1, 3);
 
 
-
 SELECT * FROM JobList
 SELECT * FROM Applications
 SELECT * FROM JobHistory
+
+
 SELECT * FROM Ratings
 SELECT * FROM Appointment
 
+SELECT J.JobTitle,
+		J.JobDescription,
+		J.Price,
+		J.Category,
+		J.ImagesJob
+FROM JobHistory J
+WHERE J.Worker_id = 3
+
+ 
 SELECT Worker_id, COUNT(*) as NumberOfJobs
 FROM JobHistory
 GROUP BY Worker_id;
-
-
-
-
-
-
-
-
