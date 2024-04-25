@@ -144,6 +144,12 @@ SELECT * FROM Worker
 SELECT * FROM Favourite
 SELECT * FROM HiredWorkers
 
+SELECT U.user_id
+FROM Users U
+JOIN Worker W
+ON U.user_id = W.user_id
+WHERE W.Worker_id = 16
+
 SELECT W.Worker_id
 FROM Users U
 JOIN Worker W
