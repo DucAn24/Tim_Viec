@@ -31,11 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FClient));
             imageList1 = new ImageList(components);
-            imageList2 = new ImageList(components);
             tabPage3 = new TabPage();
-            materialCard2 = new MaterialSkin.Controls.MaterialCard();
-            materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            switchTheme = new MaterialSkin.Controls.MaterialSwitch();
             label24 = new Label();
             materialCard5 = new MaterialSkin.Controls.MaterialCard();
             materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
@@ -116,17 +112,13 @@
             materialDivider11 = new MaterialSkin.Controls.MaterialDivider();
             materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             tabPage5 = new TabPage();
-            materialCard8 = new MaterialSkin.Controls.MaterialCard();
-            flowLayoutPanel3 = new FlowLayoutPanel();
-            label1 = new Label();
-            materialDivider4 = new MaterialSkin.Controls.MaterialDivider();
             materialCard7 = new MaterialSkin.Controls.MaterialCard();
-            flowLayoutPanel2 = new FlowLayoutPanel();
+            btnSearch = new MaterialSkin.Controls.MaterialButton();
+            cbxStatus = new MaterialSkin.Controls.MaterialComboBox();
+            panelAppointment = new FlowLayoutPanel();
             label5 = new Label();
-            materialDivider3 = new MaterialSkin.Controls.MaterialDivider();
             tabPage6 = new TabPage();
             tabPage3.SuspendLayout();
-            materialCard2.SuspendLayout();
             materialCard5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxUser).BeginInit();
             tabPage2.SuspendLayout();
@@ -154,7 +146,6 @@
             materialCard1.SuspendLayout();
             materialTabControl1.SuspendLayout();
             tabPage5.SuspendLayout();
-            materialCard8.SuspendLayout();
             materialCard7.SuspendLayout();
             SuspendLayout();
             // 
@@ -171,20 +162,11 @@
             imageList1.Images.SetKeyName(5, "icons8-hour-24.png");
             imageList1.Images.SetKeyName(6, "icons8-search-64.png");
             imageList1.Images.SetKeyName(7, "icons8-appointment-64.png");
-            // 
-            // imageList2
-            // 
-            imageList2.ColorDepth = ColorDepth.Depth32Bit;
-            imageList2.ImageStream = (ImageListStreamer)resources.GetObject("imageList2.ImageStream");
-            imageList2.TransparentColor = Color.Transparent;
-            imageList2.Images.SetKeyName(0, "68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f6867514f413661494a7255656b413d3d2d3830343936383231362e31356436633638646239313762626564383835323437373439303.jpg");
-            imageList2.Images.SetKeyName(1, "desktop-wallpaper-pfp-aesthetic-profile-for-instagram-instagram-profile-thumbnail.jpg");
-            imageList2.Images.SetKeyName(2, "326285595c45f11ba854.jpg");
+            imageList1.Images.SetKeyName(8, "icons8-log-out-100.png");
             // 
             // tabPage3
             // 
             tabPage3.BackColor = Color.White;
-            tabPage3.Controls.Add(materialCard2);
             tabPage3.Controls.Add(label24);
             tabPage3.Controls.Add(materialCard5);
             tabPage3.ImageKey = "profile.png";
@@ -193,49 +175,6 @@
             tabPage3.Size = new Size(1619, 842);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Profile";
-            // 
-            // materialCard2
-            // 
-            materialCard2.BackColor = Color.FromArgb(255, 255, 255);
-            materialCard2.Controls.Add(materialLabel2);
-            materialCard2.Controls.Add(switchTheme);
-            materialCard2.Depth = 0;
-            materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard2.Location = new Point(1073, 92);
-            materialCard2.Margin = new Padding(14, 13, 14, 13);
-            materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
-            materialCard2.Name = "materialCard2";
-            materialCard2.Padding = new Padding(14, 13, 14, 13);
-            materialCard2.Size = new Size(190, 51);
-            materialCard2.TabIndex = 25;
-            // 
-            // materialLabel2
-            // 
-            materialLabel2.AutoSize = true;
-            materialLabel2.Depth = 0;
-            materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel2.Location = new Point(17, 17);
-            materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel2.Name = "materialLabel2";
-            materialLabel2.Size = new Size(50, 19);
-            materialLabel2.TabIndex = 5;
-            materialLabel2.Text = "Theme";
-            // 
-            // switchTheme
-            // 
-            switchTheme.AutoSize = true;
-            switchTheme.BackColor = Color.RoyalBlue;
-            switchTheme.Depth = 0;
-            switchTheme.Location = new Point(70, 5);
-            switchTheme.Margin = new Padding(0);
-            switchTheme.MouseLocation = new Point(-1, -1);
-            switchTheme.MouseState = MaterialSkin.MouseState.HOVER;
-            switchTheme.Name = "switchTheme";
-            switchTheme.Ripple = true;
-            switchTheme.Size = new Size(115, 37);
-            switchTheme.TabIndex = 2;
-            switchTheme.Text = "LIGHT   ";
-            switchTheme.UseVisualStyleBackColor = false;
             // 
             // label24
             // 
@@ -615,7 +554,7 @@
             btnImportJob.Depth = 0;
             btnImportJob.HighEmphasis = true;
             btnImportJob.Icon = null;
-            btnImportJob.Location = new Point(957, 668);
+            btnImportJob.Location = new Point(886, 714);
             btnImportJob.Margin = new Padding(4, 6, 4, 6);
             btnImportJob.MouseState = MaterialSkin.MouseState.HOVER;
             btnImportJob.Name = "btnImportJob";
@@ -631,9 +570,9 @@
             // pictureBoxJob
             // 
             pictureBoxJob.Image = (Image)resources.GetObject("pictureBoxJob.Image");
-            pictureBoxJob.Location = new Point(957, 402);
+            pictureBoxJob.Location = new Point(886, 402);
             pictureBoxJob.Name = "pictureBoxJob";
-            pictureBoxJob.Size = new Size(386, 257);
+            pictureBoxJob.Size = new Size(424, 288);
             pictureBoxJob.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBoxJob.TabIndex = 36;
             pictureBoxJob.TabStop = false;
@@ -643,7 +582,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.LightGreen;
-            label8.Location = new Point(957, 333);
+            label8.Location = new Point(886, 320);
             label8.Name = "label8";
             label8.Size = new Size(276, 54);
             label8.TabIndex = 35;
@@ -656,7 +595,7 @@
             txtDescription.CharacterCasing = CharacterCasing.Normal;
             txtDescription.Depth = 0;
             txtDescription.HideSelection = true;
-            txtDescription.Location = new Point(121, 490);
+            txtDescription.Location = new Point(70, 501);
             txtDescription.MaxLength = 32767;
             txtDescription.MouseState = MaterialSkin.MouseState.OUT;
             txtDescription.Name = "txtDescription";
@@ -667,7 +606,7 @@
             txtDescription.SelectionLength = 0;
             txtDescription.SelectionStart = 0;
             txtDescription.ShortcutsEnabled = true;
-            txtDescription.Size = new Size(656, 234);
+            txtDescription.Size = new Size(634, 169);
             txtDescription.TabIndex = 31;
             txtDescription.TabStop = false;
             txtDescription.TextAlign = HorizontalAlignment.Left;
@@ -678,7 +617,7 @@
             label23.AutoSize = true;
             label23.Font = new Font("Nirmala UI Semilight", 10.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label23.ForeColor = SystemColors.ActiveCaptionText;
-            label23.Location = new Point(383, 443);
+            label23.Location = new Point(332, 454);
             label23.Name = "label23";
             label23.Size = new Size(394, 23);
             label23.TabIndex = 30;
@@ -689,7 +628,7 @@
             label22.AutoSize = true;
             label22.Font = new Font("Nirmala UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label22.ForeColor = SystemColors.ActiveCaptionText;
-            label22.Location = new Point(121, 431);
+            label22.Location = new Point(70, 442);
             label22.Name = "label22";
             label22.Size = new Size(240, 38);
             label22.TabIndex = 29;
@@ -700,7 +639,7 @@
             label21.AutoSize = true;
             label21.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label21.ForeColor = Color.LightGreen;
-            label21.Location = new Point(121, 374);
+            label21.Location = new Point(70, 385);
             label21.Name = "label21";
             label21.Size = new Size(377, 54);
             label21.TabIndex = 28;
@@ -711,7 +650,7 @@
             label20.AutoSize = true;
             label20.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label20.ForeColor = Color.LightGreen;
-            label20.Location = new Point(957, 99);
+            label20.Location = new Point(886, 39);
             label20.Name = "label20";
             label20.Size = new Size(266, 54);
             label20.TabIndex = 27;
@@ -733,7 +672,7 @@
             cbxCategory.IntegralHeight = false;
             cbxCategory.ItemHeight = 43;
             cbxCategory.Items.AddRange(new object[] { "Devlopment-IT", "AI-Services", "Design-Creative", "Sales-Marketing", "Writing-Traslation", "Admin-Custome Support", "Finance-Accounting", "Engineering-Architecture" });
-            cbxCategory.Location = new Point(121, 292);
+            cbxCategory.Location = new Point(64, 278);
             cbxCategory.MaxDropDownItems = 4;
             cbxCategory.MouseState = MaterialSkin.MouseState.OUT;
             cbxCategory.Name = "cbxCategory";
@@ -746,7 +685,7 @@
             label19.AutoSize = true;
             label19.Font = new Font("Nirmala UI Semilight", 10.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label19.ForeColor = SystemColors.ActiveCaptionText;
-            label19.Location = new Point(290, 263);
+            label19.Location = new Point(233, 249);
             label19.Name = "label19";
             label19.Size = new Size(452, 23);
             label19.TabIndex = 25;
@@ -757,7 +696,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Nirmala UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(121, 251);
+            label4.Location = new Point(64, 237);
             label4.Name = "label4";
             label4.Size = new Size(136, 38);
             label4.TabIndex = 24;
@@ -772,7 +711,7 @@
             txtTitle.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtTitle.HideSelection = true;
             txtTitle.LeadingIcon = null;
-            txtTitle.Location = new Point(121, 169);
+            txtTitle.Location = new Point(64, 155);
             txtTitle.MaxLength = 32767;
             txtTitle.MouseState = MaterialSkin.MouseState.OUT;
             txtTitle.Name = "txtTitle";
@@ -796,7 +735,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label18.ForeColor = Color.LightGreen;
-            label18.Location = new Point(121, 53);
+            label18.Location = new Point(64, 39);
             label18.Name = "label18";
             label18.Size = new Size(339, 54);
             label18.TabIndex = 22;
@@ -809,7 +748,7 @@
             materialButton2.Depth = 0;
             materialButton2.HighEmphasis = true;
             materialButton2.Icon = null;
-            materialButton2.Location = new Point(279, 750);
+            materialButton2.Location = new Point(228, 714);
             materialButton2.Margin = new Padding(5);
             materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
             materialButton2.Name = "materialButton2";
@@ -828,7 +767,7 @@
             btnSumitJob.Depth = 0;
             btnSumitJob.HighEmphasis = true;
             btnSumitJob.Icon = null;
-            btnSumitJob.Location = new Point(121, 750);
+            btnSumitJob.Location = new Point(70, 714);
             btnSumitJob.Margin = new Padding(5);
             btnSumitJob.MouseState = MaterialSkin.MouseState.HOVER;
             btnSumitJob.Name = "btnSumitJob";
@@ -850,12 +789,12 @@
             materialCard4.Controls.Add(materialLabel3);
             materialCard4.Depth = 0;
             materialCard4.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard4.Location = new Point(957, 169);
+            materialCard4.Location = new Point(886, 109);
             materialCard4.Margin = new Padding(14, 13, 14, 13);
             materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard4.Name = "materialCard4";
             materialCard4.Padding = new Padding(14, 13, 14, 13);
-            materialCard4.Size = new Size(384, 129);
+            materialCard4.Size = new Size(424, 147);
             materialCard4.TabIndex = 15;
             // 
             // materialDivider9
@@ -884,7 +823,7 @@
             materialComboBox1.IntegralHeight = false;
             materialComboBox1.ItemHeight = 43;
             materialComboBox1.Items.AddRange(new object[] { "USD", "VND", "EUR", "SGP", "AUD", "CAD" });
-            materialComboBox1.Location = new Point(223, 58);
+            materialComboBox1.Location = new Point(240, 69);
             materialComboBox1.MaxDropDownItems = 4;
             materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
             materialComboBox1.Name = "materialComboBox1";
@@ -900,7 +839,7 @@
             txtPrice.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtPrice.Hint = "From";
             txtPrice.LeadingIcon = null;
-            txtPrice.Location = new Point(26, 57);
+            txtPrice.Location = new Point(43, 68);
             txtPrice.Margin = new Padding(7, 3, 3, 3);
             txtPrice.MaxLength = 50;
             txtPrice.MouseState = MaterialSkin.MouseState.OUT;
@@ -928,7 +867,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Nirmala UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.ActiveCaptionText;
-            label3.Location = new Point(121, 118);
+            label3.Location = new Point(64, 104);
             label3.Name = "label3";
             label3.Size = new Size(75, 38);
             label3.TabIndex = 2;
@@ -939,7 +878,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Nirmala UI Semilight", 10.2F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(201, 130);
+            label2.Location = new Point(144, 116);
             label2.Name = "label2";
             label2.Size = new Size(454, 23);
             label2.TabIndex = 1;
@@ -972,7 +911,7 @@
             materialCard18.Controls.Add(label14);
             materialCard18.Depth = 0;
             materialCard18.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard18.Location = new Point(1135, 489);
+            materialCard18.Location = new Point(1135, 516);
             materialCard18.Margin = new Padding(14, 13, 14, 13);
             materialCard18.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard18.Name = "materialCard18";
@@ -1008,7 +947,7 @@
             materialCard17.Controls.Add(label15);
             materialCard17.Depth = 0;
             materialCard17.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard17.Location = new Point(760, 489);
+            materialCard17.Location = new Point(760, 516);
             materialCard17.Margin = new Padding(14, 13, 14, 13);
             materialCard17.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard17.Name = "materialCard17";
@@ -1044,7 +983,7 @@
             materialCard16.Controls.Add(label16);
             materialCard16.Depth = 0;
             materialCard16.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard16.Location = new Point(387, 489);
+            materialCard16.Location = new Point(387, 516);
             materialCard16.Margin = new Padding(14, 13, 14, 13);
             materialCard16.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard16.Name = "materialCard16";
@@ -1080,7 +1019,7 @@
             materialCard15.Controls.Add(label17);
             materialCard15.Depth = 0;
             materialCard15.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard15.Location = new Point(23, 489);
+            materialCard15.Location = new Point(23, 516);
             materialCard15.Margin = new Padding(14, 13, 14, 13);
             materialCard15.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard15.Name = "materialCard15";
@@ -1297,9 +1236,9 @@
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.AutoScroll = true;
-            flowLayoutPanel4.Location = new Point(0, 73);
+            flowLayoutPanel4.Location = new Point(17, 73);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(1509, 306);
+            flowLayoutPanel4.Size = new Size(1492, 306);
             flowLayoutPanel4.TabIndex = 27;
             // 
             // label32
@@ -1393,7 +1332,6 @@
             // 
             // tabPage5
             // 
-            tabPage5.Controls.Add(materialCard8);
             tabPage5.Controls.Add(materialCard7);
             tabPage5.ImageKey = "icons8-appointment-64.png";
             tabPage5.Location = new Point(4, 39);
@@ -1403,100 +1341,89 @@
             tabPage5.Text = "Appointment";
             tabPage5.UseVisualStyleBackColor = true;
             // 
-            // materialCard8
-            // 
-            materialCard8.BackColor = Color.FromArgb(255, 255, 255);
-            materialCard8.Controls.Add(flowLayoutPanel3);
-            materialCard8.Controls.Add(label1);
-            materialCard8.Controls.Add(materialDivider4);
-            materialCard8.Depth = 0;
-            materialCard8.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard8.Location = new Point(43, 415);
-            materialCard8.Margin = new Padding(14, 13, 14, 13);
-            materialCard8.MouseState = MaterialSkin.MouseState.HOVER;
-            materialCard8.Name = "materialCard8";
-            materialCard8.Padding = new Padding(14, 13, 14, 13);
-            materialCard8.Size = new Size(1413, 387);
-            materialCard8.TabIndex = 28;
-            // 
-            // flowLayoutPanel3
-            // 
-            flowLayoutPanel3.AutoScroll = true;
-            flowLayoutPanel3.Location = new Point(17, 73);
-            flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(1381, 298);
-            flowLayoutPanel3.TabIndex = 26;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Nirmala UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.LightGreen;
-            label1.Location = new Point(17, 13);
-            label1.Name = "label1";
-            label1.Size = new Size(242, 41);
-            label1.TabIndex = 25;
-            label1.Text = "Wait For Accept";
-            // 
-            // materialDivider4
-            // 
-            materialDivider4.BackColor = Color.FromArgb(30, 0, 0, 0);
-            materialDivider4.Depth = 0;
-            materialDivider4.Location = new Point(0, 56);
-            materialDivider4.MouseState = MaterialSkin.MouseState.HOVER;
-            materialDivider4.Name = "materialDivider4";
-            materialDivider4.Size = new Size(1414, 11);
-            materialDivider4.TabIndex = 3;
-            materialDivider4.Text = "materialDivider4";
-            // 
             // materialCard7
             // 
             materialCard7.BackColor = Color.FromArgb(255, 255, 255);
-            materialCard7.Controls.Add(flowLayoutPanel2);
+            materialCard7.Controls.Add(btnSearch);
+            materialCard7.Controls.Add(cbxStatus);
+            materialCard7.Controls.Add(panelAppointment);
             materialCard7.Controls.Add(label5);
-            materialCard7.Controls.Add(materialDivider3);
             materialCard7.Depth = 0;
             materialCard7.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            materialCard7.Location = new Point(42, 23);
+            materialCard7.Location = new Point(14, 23);
             materialCard7.Margin = new Padding(14, 13, 14, 13);
             materialCard7.MouseState = MaterialSkin.MouseState.HOVER;
             materialCard7.Name = "materialCard7";
             materialCard7.Padding = new Padding(14, 13, 14, 13);
-            materialCard7.Size = new Size(1413, 348);
+            materialCard7.Size = new Size(1547, 806);
             materialCard7.TabIndex = 27;
             // 
-            // flowLayoutPanel2
+            // btnSearch
             // 
-            flowLayoutPanel2.AutoScroll = true;
-            flowLayoutPanel2.Location = new Point(17, 73);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(1381, 248);
-            flowLayoutPanel2.TabIndex = 26;
+            btnSearch.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnSearch.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnSearch.Depth = 0;
+            btnSearch.HighEmphasis = true;
+            btnSearch.Icon = (Image)resources.GetObject("btnSearch.Icon");
+            btnSearch.Location = new Point(539, 31);
+            btnSearch.Margin = new Padding(4, 6, 4, 6);
+            btnSearch.MouseState = MaterialSkin.MouseState.HOVER;
+            btnSearch.Name = "btnSearch";
+            btnSearch.NoAccentTextColor = Color.Empty;
+            btnSearch.Size = new Size(106, 36);
+            btnSearch.TabIndex = 28;
+            btnSearch.Text = "search";
+            btnSearch.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnSearch.UseAccentColor = false;
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // cbxStatus
+            // 
+            cbxStatus.AutoResize = false;
+            cbxStatus.BackColor = Color.FromArgb(255, 255, 255);
+            cbxStatus.Depth = 0;
+            cbxStatus.DrawMode = DrawMode.OwnerDrawVariable;
+            cbxStatus.DropDownHeight = 174;
+            cbxStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxStatus.DropDownWidth = 121;
+            cbxStatus.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            cbxStatus.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            cbxStatus.FormattingEnabled = true;
+            cbxStatus.Hint = "Status";
+            cbxStatus.IntegralHeight = false;
+            cbxStatus.ItemHeight = 43;
+            cbxStatus.Items.AddRange(new object[] { "Pending", "Accepted", "Cancel" });
+            cbxStatus.Location = new Point(325, 18);
+            cbxStatus.MaxDropDownItems = 4;
+            cbxStatus.MouseState = MaterialSkin.MouseState.OUT;
+            cbxStatus.Name = "cbxStatus";
+            cbxStatus.Size = new Size(151, 49);
+            cbxStatus.StartIndex = 0;
+            cbxStatus.TabIndex = 27;
+            // 
+            // panelAppointment
+            // 
+            panelAppointment.AutoScroll = true;
+            panelAppointment.Location = new Point(17, 84);
+            panelAppointment.Name = "panelAppointment";
+            panelAppointment.Size = new Size(1513, 706);
+            panelAppointment.TabIndex = 26;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Nirmala UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.LightGreen;
-            label5.Location = new Point(17, 13);
+            label5.Location = new Point(17, 14);
             label5.Name = "label5";
             label5.Size = new Size(207, 41);
             label5.TabIndex = 25;
             label5.Text = "Appointment";
             // 
-            // materialDivider3
-            // 
-            materialDivider3.BackColor = Color.FromArgb(30, 0, 0, 0);
-            materialDivider3.Depth = 0;
-            materialDivider3.Location = new Point(0, 56);
-            materialDivider3.MouseState = MaterialSkin.MouseState.HOVER;
-            materialDivider3.Name = "materialDivider3";
-            materialDivider3.Size = new Size(1414, 11);
-            materialDivider3.TabIndex = 3;
-            materialDivider3.Text = "materialDivider3";
-            // 
             // tabPage6
             // 
+            tabPage6.ImageKey = "icons8-log-out-100.png";
             tabPage6.Location = new Point(4, 39);
             tabPage6.Name = "tabPage6";
             tabPage6.Size = new Size(1619, 842);
@@ -1522,8 +1449,6 @@
             Load += Home_Load;
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
-            materialCard2.ResumeLayout(false);
-            materialCard2.PerformLayout();
             materialCard5.ResumeLayout(false);
             materialCard5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picBoxUser).EndInit();
@@ -1565,8 +1490,6 @@
             materialCard1.PerformLayout();
             materialTabControl1.ResumeLayout(false);
             tabPage5.ResumeLayout(false);
-            materialCard8.ResumeLayout(false);
-            materialCard8.PerformLayout();
             materialCard7.ResumeLayout(false);
             materialCard7.PerformLayout();
             ResumeLayout(false);
@@ -1574,7 +1497,6 @@
 
         #endregion
         private ImageList imageList1;
-        private ImageList imageList2;
         private TabPage tabPage3;
         private Label label24;
         private MaterialSkin.Controls.MaterialCard materialCard5;
@@ -1648,20 +1570,12 @@
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private MaterialSkin.Controls.MaterialDivider materialDivider11;
         private MaterialSkin.Controls.MaterialTabControl materialTabControl1;
-        private MaterialSkin.Controls.MaterialCard materialCard2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialSwitch switchTheme;
         private Label label6;
         private FlowLayoutPanel flowLayoutPanel1;
         private TabPage tabPage5;
         private MaterialSkin.Controls.MaterialCard materialCard7;
-        private FlowLayoutPanel flowLayoutPanel2;
+        private FlowLayoutPanel panelAppointment;
         private Label label5;
-        private MaterialSkin.Controls.MaterialDivider materialDivider3;
-        private MaterialSkin.Controls.MaterialCard materialCard8;
-        private FlowLayoutPanel flowLayoutPanel3;
-        private Label label1;
-        private MaterialSkin.Controls.MaterialDivider materialDivider4;
         private MaterialSkin.Controls.MaterialCard materialCard9;
         private FlowLayoutPanel flowLayoutPanel4;
         private Label label32;
@@ -1670,5 +1584,7 @@
         private MaterialSkin.Controls.MaterialButton btnImportJob;
         private PictureBox pictureBoxJob;
         private Label label8;
+        private MaterialSkin.Controls.MaterialComboBox cbxStatus;
+        private MaterialSkin.Controls.MaterialButton btnSearch;
     }
 }

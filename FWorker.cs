@@ -1,6 +1,7 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
 using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,8 @@ namespace TimViec
         {
             this.userId = userId;
             dbConnection = new DbConnection();
-            this.worker_id = GetWorkerIdFromUserId(userId);
+            WorkerDAO workerDAO = new WorkerDAO();
+            this.worker_id = workerDAO.GetWorkerIdFromUserId(userId);
 
             InitializeComponent();
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
@@ -82,44 +84,34 @@ namespace TimViec
         private void Worker_Load(object sender, EventArgs e)
         {
             AddPanelToWorkDone(worker_id);
+            LoadWorkerData();
+            LoadAllDataAppointment();
+            LoadPendingAppointment();
         }
 
-        public int GetWorkerIdFromUserId(int userId)
+        private void LoadWorkerData()
         {
-            int workerId = -1; // Initialize to -1 to represent not found
+            Worker worker = workerDAO.LoadWorkerData(this.worker_id);
 
-            // Open the database connection
-            dbConnection.Open();
-
-            // Create the SQL command to get the worker_id
-            string query = @"
-                        SELECT W.Worker_id
-                        FROM Users U
-                        JOIN Worker W
-                        ON U.user_id = W.user_id
-                        WHERE U.user_id = @UserId
-                    ";
-
-            SqlCommand command = new SqlCommand(query, dbConnection.Connection);
-
-            // Add the user_id parameter to the command
-            command.Parameters.AddWithValue("@UserId", userId);
-
-            // Execute the command and get the result
-            object result = command.ExecuteScalar();
-
-            // If a result was returned, set the workerId
-            if (result != null)
+            if (worker != null)
             {
-                workerId = (int)result;
+                // Assign the data to the text boxes
+                txtName.Text = worker.Name;
+                txtEmail.Text = worker.Email;
+                txtPhone.Text = worker.Phone;
+                txtAddress.Text = worker.Address;
+                picBoxUser.Image = Image.FromFile(worker.ImagePath);
+                txtBio.Text = worker.Bio;
+                txtSkill.Text = worker.Skills;
+                cbxCategory2.Text = worker.Category;
+                txtSalary.Text = worker.Salary;
+
+                ckbMale.Checked = worker.Gender == "Male";
+                ckbFemale.Checked = worker.Gender == "Female";
+
+                dtpBirth.Value = worker.DateOfBirth;
             }
-
-            // Close the database connection
-            dbConnection.Close();
-
-            return workerId;
         }
-
 
         private void PictureBox_Click(object sender, EventArgs e)
         {
@@ -137,7 +129,6 @@ namespace TimViec
             }
         }
 
-
         private void OpenFListJob(string category, int userID)
         {
             FListJob jobList = new FListJob(category, userID);
@@ -146,10 +137,10 @@ namespace TimViec
 
         private void materialTabControl1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (this.materialTabControl1.SelectedIndex == 5) 
+            if (this.materialTabControl1.SelectedIndex == 5)
             {
-                this.Hide(); 
-                new FLogin().Show(); 
+                this.Hide();
+                new FLogin().Show();
             }
         }
 
@@ -198,7 +189,6 @@ namespace TimViec
             imageJob = SelectImageFile(pictureBoxJob);
         }
 
-
         private Label CreateLabel(string text, Font font, Point location)
         {
             Label label = new Label();
@@ -246,39 +236,248 @@ namespace TimViec
             flpWorkDone.Controls.Add(card);
         }
 
-
         private void AddPanelToWorkDone(int workerId)
         {
-            dbConnection.Open();
-            string query = @"
-                            SELECT J.JobTitle,
-		                            J.JobDescription,
-		                            J.Price,
-		                            J.Category,
-		                            J.ImagesJob
-                            FROM JobHistory J
-                            WHERE J.Worker_id = @workerId
-                            ";
+            List<JobInfor> jobs = jobDAO.LoadWorkDone(workerId);
 
-            SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@workerId", workerId);
-            DataTable dataTable = dbConnection.ExecuteQuery(command);
-
-            foreach (DataRow row in dataTable.Rows)
+            foreach (JobInfor job in jobs)
             {
-
-                var imagePath = row["ImagesJob"] as string;
+                var imagePath = job.ImageJob;
                 var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
 
-                string label1Text = row["JobTitle"].ToString();
-                string label2Text = row["JobDescription"].ToString();
-                string category = row["Category"].ToString();
-                string price = row["Price"].ToString();
-
+                string label1Text = job.JobTitle;
+                string label2Text = job.JobDescription;
+                string category = job.Category;
+                string price = job.Price;
 
                 AddControlsToPanel(image, label1Text, label2Text, category, price);
             }
-            dbConnection.Close();
+        }
+
+        public void AddControlsToAppointment(Image userImagePath, string userName, string content, string date, string status)
+        {
+            var pictureBox = new PictureBox
+            {
+                Image = userImagePath,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Size = new Size(100, 100),
+                Location = new Point(10, 10)
+            };
+
+            var labelWorkerName = new Label
+            {
+                Text = userName,
+                AutoSize = true,
+                ForeColor = Color.Chocolate,
+                Font = new Font("Nirmala UI", 16, FontStyle.Bold),
+                Location = new Point(130, 10)
+            };
+
+            var labelStatus = new Label
+            {
+                Text = status,
+                AutoSize = true,
+                ForeColor = Color.LightGreen,
+                Font = new Font("Nirmala UI", 14, FontStyle.Bold),
+                Location = new Point(130, 50),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var labelContent = new Label
+            {
+                Text = "Content: " + content,
+                AutoSize = true,
+                ForeColor = Color.DarkGray,
+                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Location = new Point(20, 120),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var labelDate = new Label
+            {
+                Text = "Date: " + date,
+                AutoSize = true,
+                ForeColor = Color.DarkGray,
+                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Location = new Point(20, 150),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var card = new MaterialCard
+            {
+                Width = 420,
+                Height = 220,
+                BackColor = Color.White
+            };
+
+            card.Controls.Add(pictureBox);
+            card.Controls.Add(labelWorkerName);
+            card.Controls.Add(labelStatus);
+            card.Controls.Add(labelContent);
+            card.Controls.Add(labelDate);
+            card.Controls.Add(labelContent);
+
+            panelAppointment.Controls.Add(card);
+
+        }
+
+        public void AddControlsToAppointmentPending(Image userImagePath, string userName, string content, string date, string status, string appointmentId)
+        {
+            var pictureBox = new PictureBox
+            {
+                Image = userImagePath,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Size = new Size(100, 100),
+                Location = new Point(10, 10)
+            };
+
+            var labelWorkerName = new Label
+            {
+                Text = userName,
+                AutoSize = true,
+                ForeColor = Color.Chocolate,
+                Font = new Font("Nirmala UI", 16, FontStyle.Bold),
+                Location = new Point(130, 10)
+            };
+
+            var labelStatus = new Label
+            {
+                Text = status,
+                AutoSize = true,
+                ForeColor = Color.LightGreen,
+                Font = new Font("Nirmala UI", 14, FontStyle.Bold),
+                Location = new Point(130, 50),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var labelContent = new Label
+            {
+                Text = "Content: " + content,
+                AutoSize = true,
+                ForeColor = Color.DarkGray,
+                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Location = new Point(20, 120),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var labelDate = new Label
+            {
+                Text = "Date: " + date,
+                AutoSize = true,
+                ForeColor = Color.DarkGray,
+                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Location = new Point(20, 150),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var btnAccept = new MaterialButton
+            {
+                Text = "Accept",
+                Location = new Point(20, 200),
+                Size = new Size(100, 30),
+                BackColor = Color.LightGreen,
+                ForeColor = Color.White
+            };
+
+
+            btnAccept.Click += (sender, e) =>
+            {
+                AppointmentDAO appointmentDAO = new AppointmentDAO();
+                bool isUpdated = appointmentDAO.UpdateAppointmentStatus(appointmentId, "Accepted");
+
+                if (isUpdated)
+                {
+                    MessageBox.Show("Appointment status updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update appointment status.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+
+            var btnCancel = new MaterialButton
+            {
+                Text = "Cancel",
+                Location = new Point(110, 200),
+                Size = new Size(100, 30),
+                BackColor = Color.LightGreen,
+                ForeColor = Color.White
+            };
+
+            btnCancel.Click += (sender, e) =>
+            {
+                AppointmentDAO appointmentDAO = new AppointmentDAO();
+                bool isUpdated = appointmentDAO.UpdateAppointmentStatus(appointmentId, "Cancel");
+
+                if (isUpdated)
+                {
+                    MessageBox.Show("Appointment status updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update appointment status.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+
+            var card = new MaterialCard
+            {
+                Width = 420,
+                Height = 250,
+                BackColor = Color.White
+            };
+
+            card.Controls.Add(pictureBox);
+            card.Controls.Add(labelWorkerName);
+            card.Controls.Add(labelStatus);
+            card.Controls.Add(labelContent);
+            card.Controls.Add(labelDate);
+            card.Controls.Add(labelContent);
+            card.Controls.Add(btnAccept);
+            card.Controls.Add(btnCancel);
+
+            panelPending.Controls.Add(card);
+
+        }
+
+        private void LoadAllDataAppointment()
+        {
+            AppointmentDAO appointmentDAO = new AppointmentDAO();
+            List<Appointment> appointments = appointmentDAO.AppointmentsForWorker(this.worker_id);
+
+            foreach (var appointment in appointments)
+            {
+                var userImage = !string.IsNullOrEmpty(appointment.UserImagePath) ? Image.FromFile(appointment.UserImagePath) : null;
+
+                AddControlsToAppointment(userImage, appointment.UserName, appointment.Content, appointment.DateTime.ToString(), appointment.Status);
+            }
+        }
+
+        private void LoadPendingAppointment()
+        {
+            AppointmentDAO appointmentDAO = new AppointmentDAO();
+            List<Appointment> appointments = appointmentDAO.SearchForWorker(this.worker_id, "Pending");
+
+            foreach (var appointment in appointments)
+            {
+                var userImage = !string.IsNullOrEmpty(appointment.UserImagePath) ? Image.FromFile(appointment.UserImagePath) : null;
+
+                AddControlsToAppointmentPending(userImage, appointment.UserName, appointment.Content, appointment.DateTime.ToString(), appointment.Status, appointment.AppointmentId);
+            }
+        }
+
+        private void SearchAppointment(int workerId)
+        {
+            string statusPick = cbxStatus.SelectedItem.ToString();
+            AppointmentDAO appointmentDAO = new AppointmentDAO();
+            List<Appointment> appointments = appointmentDAO.SearchForWorker(workerId, statusPick);
+            panelAppointment.Controls.Clear();
+
+            foreach (var appointment in appointments)
+            {
+                var usersImage = !string.IsNullOrEmpty(appointment.UserImagePath) ? Image.FromFile(appointment.UserImagePath) : null;
+
+                AddControlsToAppointment(usersImage, appointment.UserName, appointment.Content, appointment.DateTime.ToString(), appointment.Status);
+            }
         }
 
 
@@ -310,5 +509,9 @@ namespace TimViec
             }
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            SearchAppointment(this.worker_id);
+        }
     }
 }

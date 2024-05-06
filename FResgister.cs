@@ -49,7 +49,6 @@ namespace TimViec
             new FLogin().Show();
             this.Hide();
         }
-
         private void btnResgister_Click_1(object sender, EventArgs e)
         {
             // Check if password and confirm password are the same
@@ -66,32 +65,18 @@ namespace TimViec
                 return;
             }
 
-            // Open the connection
-            dbConnection.Open();
+            AccountDAO accountDAO = new AccountDAO();
+            bool success = accountDAO.RegisterUser(txtUserName.Text, txtPassWord.Text, ckbClient.Checked);
 
-            // Create a SQL command to insert a new user
-            using (SqlCommand command = new SqlCommand("INSERT INTO Users (Username, Password, Role) VALUES (@Username, @Password, @Role)", dbConnection.Connection))
+            if (success)
             {
-                command.Parameters.AddWithValue("@Username", txtUserName.Text);
-                command.Parameters.AddWithValue("@Password", txtPassWord.Text); // Consider hashing this!
-                command.Parameters.AddWithValue("@Role", ckbClient.Checked ? 0 : 1); // Assuming 0 is Client and 1 is Worker
-
-                // Execute the command
-                int result = dbConnection.ExecuteNonQuery(command);
-
-                // If the result is 1, the user was inserted successfully
-                if (result == 1)
-                {
-                    MessageBox.Show("User registered successfully.");
-                }
-                else
-                {
-                    MessageBox.Show("Error registering user.");
-                }
+                MessageBox.Show("User registered successfully.");
             }
-            dbConnection.Close();
+            else
+            {
+                MessageBox.Show("Error registering user.");
+            }
         }
-
 
         private void ckbClient_CheckedChanged(object sender, EventArgs e)
         {
@@ -109,7 +94,6 @@ namespace TimViec
             }
         }
 
-
         private void ckbShowPassWord_CheckedChanged_1(object sender, EventArgs e)
         {
             if (ckbShowPassWord.Checked)
@@ -122,7 +106,6 @@ namespace TimViec
                 txtPassWord.PasswordChar = '*';
                 txtConfirmPassword.PasswordChar = '*';
             }
-
         }
 
         private void btnClear_Click_1(object sender, EventArgs e)
@@ -132,10 +115,6 @@ namespace TimViec
             txtConfirmPassword.Text = "";
 
         }
-
-
-
-
 
     }
 }

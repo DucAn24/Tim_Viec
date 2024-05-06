@@ -28,10 +28,12 @@ namespace TimViec
         ClientDAO clientDAO = new ClientDAO();
         JobDAO jobDAO = new JobDAO();
 
+
         private int userId;
 
         private Dictionary<MaterialCard, string> cardToCategoryMap;
         private Dictionary<PictureBox, string> pictureToCategoryMap;
+
 
 
         public FClient(int userId)
@@ -87,6 +89,7 @@ namespace TimViec
             {
                 pair.Key.Click += PictureBox_Click;
             }
+
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -94,29 +97,16 @@ namespace TimViec
             LoadDataHired();
             LoadDataFavourite();
             LoadUserData();
+            LoadDataAppointment();
         }
 
         //  Log out
         private void materialTabControl1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (this.materialTabControl1.SelectedIndex == 5) 
+            if (this.materialTabControl1.SelectedIndex == 5)
             {
-                this.Hide(); 
-                new FLogin().Show(); 
-            }
-        }
-
-        private void materialSwitch2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (switchTheme.Checked)
-            {
-                materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-                switchTheme.Text = "DARK   ";
-            }
-            else
-            {
-                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                switchTheme.Text = "LIGHT   ";
+                this.Hide();
+                new FLogin().Show();
             }
         }
 
@@ -127,7 +117,6 @@ namespace TimViec
                 OpenWokerListForm(category, userId);
             }
         }
-
 
         private void MaterialCard_Click(object sender, EventArgs e)
         {
@@ -189,50 +178,40 @@ namespace TimViec
                 gender = "Male";
             }
         }
+
         private void LoadUserData()
         {
-            // Open the database connection
-            dbConnection.Open();
+            Client client = clientDAO.LoadUserData(this.userId);
 
-            // Create the SQL command to select the data
-            string selectQuery = @"
-                            SELECT Name, Email,Address, PhoneNumber, Address, Gender, DateOfBirth, imagePath
-                            FROM Users
-                            WHERE user_id = @UserId
-                        ";
-
-            SqlCommand selectCommand = new SqlCommand(selectQuery, dbConnection.Connection);
-
-            // Add the user ID parameter to the command
-            selectCommand.Parameters.AddWithValue("@UserId", userId);
-
-            // Execute the command and get the data
-            SqlDataReader reader = selectCommand.ExecuteReader();
-
-            // Check if data was returned
-            if (reader.Read())
+            if (client != null)
             {
                 // Assign the data to the text boxes
-                txtName.Text = reader["Name"].ToString();
-                txtEmail.Text = reader["Email"].ToString();
-                txtPhoneNumber.Text = reader["PhoneNumber"].ToString();
-                txtLocation.Text = reader["Address"].ToString();
-                picBoxUser.Image = Image.FromFile(reader["ImagePath"].ToString());
+                txtName.Text = client.Name;
+                txtEmail.Text = client.Email;
+                txtPhoneNumber.Text = client.Phone;
+                txtLocation.Text = client.Address;
 
-                // Handle the gender checkbox
-                string gender = reader["Gender"].ToString();
-                ckbMale.Checked = gender == "Male";
-                ckbFemale.Checked = gender == "Female";
-
-                // Handle the birth date
-                if (reader["DateOfBirth"] != DBNull.Value)
+                if (!string.IsNullOrEmpty(client.ImagePath) && File.Exists(client.ImagePath))
                 {
-                    dtpBirth.Value = (DateTime)reader["DateOfBirth"];
+                    picBoxUser.Image = Image.FromFile(client.ImagePath);
                 }
-            }
+                else
+                {
+                    picBoxUser.Image = null; // or set to a default image
+                }
 
-            // Close the database connection
-            dbConnection.Close();
+                ckbMale.Checked = client.Gender == "Male";
+                ckbFemale.Checked = client.Gender == "Female";
+                if (client.DateOfBirth >= dtpBirth.MinDate && client.DateOfBirth <= dtpBirth.MaxDate)
+                {
+                    dtpBirth.Value = client.DateOfBirth;
+                }
+                else
+                {
+                    dtpBirth.Value = DateTime.Now; // or set to another default value
+                }
+
+            }
         }
 
         private void AddControlsToPanelHIred(Image image, string label1Text, string label2Text, string email, string phone)
@@ -367,7 +346,7 @@ namespace TimViec
             var card = new MaterialCard
             {
                 Width = 300,
-                Height = 290,
+                Height = 270,
                 BackColor = Color.White
             };
 
@@ -382,30 +361,93 @@ namespace TimViec
             flowLayoutPanel4.Controls.Add(card);
         }
 
+
+        public void AddControlsToAppointment(Image workerImage, string workerName, string content, string date, string status)
+        {
+            var pictureBox = new PictureBox
+            {
+                Image = workerImage,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Size = new Size(100, 100),
+                Location = new Point(10, 10)
+            };
+
+            var labelWorkerName = new Label
+            {
+                Text = workerName,
+                AutoSize = true,
+                ForeColor = Color.Chocolate,
+                Font = new Font("Nirmala UI", 16, FontStyle.Bold),
+                Location = new Point(130, 10)
+            };
+
+            var labelStatus = new Label
+            {
+                Text = status,
+                AutoSize = true,
+                ForeColor = Color.LightGreen,
+                Font = new Font("Nirmala UI", 14, FontStyle.Bold),
+                Location = new Point(130, 50),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var labelContent = new Label
+            {
+                Text = "Content: " + content,
+                AutoSize = true,
+                ForeColor = Color.DarkGray,
+                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Location = new Point(20, 150),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var labelDate = new Label
+            {
+                Text = "Date: " + date,
+                AutoSize = true,
+                ForeColor = Color.DarkGray,
+                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Location = new Point(20, 200),
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            var card = new MaterialCard
+            {
+                Width = 420,
+                Height = 250,
+                BackColor = Color.White
+            };
+
+            card.Controls.Add(pictureBox);
+            card.Controls.Add(labelWorkerName);
+            card.Controls.Add(labelStatus);
+            card.Controls.Add(labelContent);
+            card.Controls.Add(labelDate);
+            card.Controls.Add(labelContent);
+
+            panelAppointment.Controls.Add(card);
+
+        }
+
+        private void LoadDataAppointment()
+        {
+            AppointmentDAO appointmentDAO = new AppointmentDAO();
+            List<Appointment> appointments = appointmentDAO.AppointmentsForClient(this.userId);
+
+            foreach (var appointment in appointments)
+            {
+                var workerImage = !string.IsNullOrEmpty(appointment.WorkerImagePath) ? Image.FromFile(appointment.WorkerImagePath) : null;
+
+                AddControlsToAppointment(workerImage, appointment.WorkerName, appointment.Content, appointment.DateTime.ToString(), appointment.Status);
+            }
+        }
+
         private void LoadDataHired()
         {
-            dbConnection.Open();
-            string query = @"
-                            SELECT W.Category,
-		                            U.Name,
-		                            U.ImagePath,
-                                    U.Email,
-                                    U.PhoneNumber
-                            FROM Worker W
-                            JOIN HiredWorkers H
-	                            ON W.Worker_id = H.Worker_id
-                            JOIN Users U
-	                            ON U.user_id = W.user_id
-                            WHERE H.user_id = @UserId
-                        ";
-
-            SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@UserId", userId);
-            DataTable dataTable = dbConnection.ExecuteQuery(command);
+            DataTable dataTable = clientDAO.LoadDataHired(this.userId);
 
             foreach (DataRow row in dataTable.Rows)
             {
-                // Process the data from the row
 
                 var imagePath = row["ImagePath"] as string;
                 var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
@@ -417,36 +459,14 @@ namespace TimViec
 
                 AddControlsToPanelHIred(image, label1Text, label2Text, email, phone);
             }
-            dbConnection.Close();
-
         }
 
         private void LoadDataFavourite()
         {
-            dbConnection.Open();
-            string query = @"
-                            SELECT W.Category,
-		                            U.Name,
-		                            U.ImagePath,
-		                            U.PhoneNumber,
-		                            U.Email,
-		                            U.DateOfBirth,
-		                            U.Address
-                            FROM Worker W
-                            JOIN Favourite F
-	                            ON W.Worker_id = F.Worker_id
-                            JOIN Users U
-	                            ON U.user_id = W.user_id                     
-                            WHERE F.user_id = @UserId
-                        ";
-
-            SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@UserId", userId);
-            DataTable dataTable = dbConnection.ExecuteQuery(command);
+            DataTable dataTable = clientDAO.LoadDataFavourite(this.userId);
 
             foreach (DataRow row in dataTable.Rows)
             {
-                // Process the data from the row
 
                 var imagePath = row["ImagePath"] as string;
                 var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
@@ -466,16 +486,22 @@ namespace TimViec
 
                 AddControlsToPanelFavourite(image, label1Text, label2Text, label3Text, label4Text, label5Text);
             }
-            dbConnection.Close();
-
         }
 
-        private void OpenAppointmentForm()
+        private void SearchAppointment(int userId)
         {
-            // Open the Appointment form
-            FAppointment appointmentForm = new FAppointment();
-            appointmentForm.Show();
+            string statusPick = cbxStatus.SelectedItem.ToString();
+            AppointmentDAO appointmentDAO = new AppointmentDAO();
+            List<Appointment> appointments = appointmentDAO.SearchForClient(userId, statusPick);
+            panelAppointment.Controls.Clear();
+            foreach (var appointment in appointments)
+            {
+                var workerImage = !string.IsNullOrEmpty(appointment.WorkerImagePath) ? Image.FromFile(appointment.WorkerImagePath) : null;
+
+                AddControlsToAppointment(workerImage, appointment.WorkerName, appointment.Content, appointment.DateTime.ToString(), appointment.Status);
+            }
         }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -506,7 +532,10 @@ namespace TimViec
 
         }
 
-
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            SearchAppointment(this.userId);
+        }
     }
 
 }

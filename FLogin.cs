@@ -33,10 +33,21 @@ namespace TimViec
 
         }
 
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void label6_Click(object sender, EventArgs e)
         {
             new FResgister().Show();
             this.Hide();
+        }
+
+        private (int UserId, int Role) GetUserIdAndRoleFromDatabase(string username, string password)
+        {
+            AccountDAO accountDAO = new AccountDAO();
+            return accountDAO.GetUserIdAndRole(username, password);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -54,65 +65,19 @@ namespace TimViec
                 if (role == 0)
                 {
                     new FClient(userId).Show();
-                    this.Hide(); // Hide the login form
+                    this.Hide(); 
                 }
                 else if (role == 1)
                 {
                     new FWorker(userId).Show();
-                    this.Hide(); // Hide the login form
+                    this.Hide(); 
                 }
             }
             else
             {
                 MessageBox.Show("Invalid username or password.");
-                // Don't close the form, let the user try again
             }
         }
-
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private (int UserId, int Role) GetUserIdAndRoleFromDatabase(string username, string password)
-        {
-            // Create an instance of DbConnection
-            DbConnection dbConnection = new DbConnection();
-
-            // Open the connection
-            dbConnection.Open();
-
-            // Create a SQL command to get the role based on the username and password
-            using (SqlCommand command = new SqlCommand("SELECT user_id, Role FROM Users WHERE Username = @Username AND Password = @Password", dbConnection.Connection))
-
-            {
-                command.Parameters.AddWithValue("@Username", username);
-                command.Parameters.AddWithValue("@Password", password); // Consider hashing this!
-
-                // Execute the command
-                DataTable result = dbConnection.ExecuteQuery(command);
-
-                // Close the connection
-                dbConnection.Close();
-
-
-                // If the result contains rows, return the user id and role
-                if (result.Rows.Count > 0)
-                {
-                    return (Convert.ToInt32(result.Rows[0]["user_id"]), Convert.ToInt32(result.Rows[0]["Role"]));
-                }
-                else
-                {
-                    // If the result does not contain any rows, return -1 to indicate an error
-                    return (-1, -1);
-                }
-            }
-        }
-
-
-
 
         private void ckbShowPassWord_CheckedChanged_1(object sender, EventArgs e)
         {

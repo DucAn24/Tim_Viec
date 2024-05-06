@@ -11,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using Font = System.Drawing.Font;
+using Image = System.Drawing.Image;
 
 namespace TimViec
 {
@@ -43,10 +46,10 @@ namespace TimViec
 
         private void Information_Load(object sender, EventArgs e)
         {
-            AddPanelToFlowLayout(workerId);
+            LoadWorkHistory(workerId);
+            LoadInformationWorker(workerId);
+            LoadWorkerReview(workerId);
         }
-
-
 
         private Label CreateLabel(string text, Font font, Point location)
         {
@@ -65,22 +68,22 @@ namespace TimViec
             PictureBox pictureBox = new PictureBox();
             pictureBox.Image = image;
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.Size = new Size(180, 180);
+            pictureBox.Size = new Size(170, 170);
             pictureBox.Location = new Point(610, 20);
 
             // Create and configure labels
-            Label label1 = CreateLabel(label1Text, new Font("Nirmala UI", 14, FontStyle.Bold), new Point(40, 10));
+            Label label1 = CreateLabel(label1Text, new Font("Nirmala UI", 14, FontStyle.Bold), new Point(35, 10));
             label1.ForeColor = Color.Chocolate;
 
-            Label label4 = CreateLabel(label4Text, new Font("Nirmala UI", 12), new Point(40, 50));
+            Label label4 = CreateLabel(label4Text, new Font("Nirmala UI", 12), new Point(35, 50));
 
-            Label lableCategory = CreateLabel("Category: " + category, new Font("Nirmala UI", 12), new Point(40, 90));
+            Label lableCategory = CreateLabel("Category: " + category, new Font("Nirmala UI", 12), new Point(35, 90));
 
-            Label labelPrice = CreateLabel("Price: " + price, new Font("Nirmala UI", 12), new Point(40, 130));
+            Label labelPrice = CreateLabel("Price: " + price, new Font("Nirmala UI", 12), new Point(35, 130));
 
             // Create a new panel
             MaterialCard card = new MaterialCard();
-            card.Width = 820;
+            card.Width = 800;
             card.Height = 250;
             card.BackColor = Color.White;
 
@@ -94,46 +97,103 @@ namespace TimViec
             flowLayoutPanel1.Controls.Add(card);
         }
 
-
-
-        private void AddPanelToFlowLayout(int workerId)
+        public void AddControlsToReview(Image userImage, string userName, string comment)
         {
-            dbConnection.Open();
-            string query = @"
-                            SELECT J.JobTitle,
-		                            J.JobDescription,
-		                            J.Price,
-		                            J.Category,
-		                            J.ImagesJob
-                            FROM JobHistory J
-                            WHERE J.Worker_id = @workerId
-                            ";
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Image = userImage;
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox.Size = new Size(80, 80);
+            pictureBox.Location = new Point(10, 20);
 
-            SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@workerId", workerId);
-            DataTable dataTable = dbConnection.ExecuteQuery(command);
+            Label labelUserName = CreateLabel(userName , new Font("Nirmala UI", 14, FontStyle.Bold), new Point(110, 30));
 
-            foreach (DataRow row in dataTable.Rows)
+            Label labelComment = CreateLabel(comment, new Font("Nirmala UI", 12), new Point(110, 70));
+
+            MaterialCard card = new MaterialCard();
+            card.Width = 640;
+            card.Height = 150;
+            card.BackColor = Color.White;
+
+            card.Controls.Add(pictureBox); 
+            card.Controls.Add(labelUserName);
+            card.Controls.Add(labelComment);
+
+            panelReview.Controls.Add(card);
+        }
+
+
+        public void LoadWorkerReview(int workerId)
+        {
+            WorkerDAO workerDAO = new WorkerDAO();
+            List<Ratings> reviews = workerDAO.LoadRatingInfo(workerId);
+
+            foreach (Ratings review in reviews)
             {
-
-                var imagePath = row["ImagesJob"] as string;
+                var imagePath = review.UserImagePath;
                 var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
 
-                string label1Text = row["JobTitle"].ToString();
-                string label2Text = row["JobDescription"].ToString();
-                string category = row["Category"].ToString();
-                string price = row["Price"].ToString();
+                string userName = review.UserName;
+                string comment = review.Comment;
 
+                // Debug output
+                System.Diagnostics.Debug.WriteLine($"userName: {userName}, imagePath: {imagePath}");
+
+                AddControlsToReview(image, userName, comment);
+            }
+        }
+
+
+        private void LoadWorkHistory(int workerId)
+        {
+            JobDAO jobDAO = new JobDAO();
+            List<JobInfor> jobs = jobDAO.LoadWorkHistory(workerId);
+
+            foreach (JobInfor job in jobs)
+            {
+                var imagePath = job.ImageJob;
+                var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
+
+                string label1Text = job.JobTitle;
+                string label2Text = job.JobDescription;
+                string category = job.Category;
+                string price = job.Price;
 
                 AddControlsToPanel(image, label1Text, label2Text, category, price);
             }
-            dbConnection.Close();
         }
 
         private void materialButton5_Click(object sender, EventArgs e)
         {
-            FReview reviewForm = new FReview();
+            FReview reviewForm = new FReview(this.userId, this.workerId);
             reviewForm.Show();
         }
+
+
+        private void LoadInformationWorker(int workerId)
+        {
+            WorkerDAO workerDAO = new WorkerDAO();
+            Worker worker = workerDAO.LoadInformationWorker(workerId);
+
+            if (worker != null)
+            {
+                // Process the data from the worker
+                var imagePath = worker.ImagePath;
+                var image = !string.IsNullOrEmpty(imagePath) ? Image.FromFile(imagePath) : null;
+                if (image != null)
+                {
+                    picBoxWorker.Image = image;
+                }
+
+                lbName.Text = worker.Name;
+                lbGender.Text = worker.Gender;
+                lbAddress.Text = worker.Address;
+                lbPhone.Text = worker.Phone;
+                lbEmail.Text = worker.Email;
+                lbSalary.Text = worker.Salary;
+                lbRate.Text = worker.AvgStars.ToString();
+            }
+        }
+
+
     }
 }

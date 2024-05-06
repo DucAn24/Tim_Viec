@@ -10,9 +10,6 @@
     <Compile Update="FListJob.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FReview.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="FClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -20,6 +17,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FReview.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FWorker.cs">

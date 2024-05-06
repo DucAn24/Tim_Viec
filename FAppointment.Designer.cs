@@ -30,9 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FAppointment));
             label5 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            dtpApointment = new DateTimePicker();
+            btnSend = new MaterialSkin.Controls.MaterialButton();
             pictureBox1 = new PictureBox();
+            label1 = new Label();
+            label2 = new Label();
+            txtContent = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -47,31 +50,32 @@
             label5.TabIndex = 25;
             label5.Text = "Appointment Schedule";
             // 
-            // dateTimePicker1
+            // dtpApointment
             // 
-            dateTimePicker1.Location = new Point(222, 227);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(248, 27);
-            dateTimePicker1.TabIndex = 26;
+            dtpApointment.Location = new Point(125, 217);
+            dtpApointment.Name = "dtpApointment";
+            dtpApointment.Size = new Size(248, 27);
+            dtpApointment.TabIndex = 26;
             // 
-            // materialButton1
+            // btnSend
             // 
-            materialButton1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            materialButton1.Depth = 0;
-            materialButton1.HighEmphasis = true;
-            materialButton1.Icon = null;
-            materialButton1.Location = new Point(193, 465);
-            materialButton1.Margin = new Padding(4, 6, 4, 6);
-            materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialButton1.Name = "materialButton1";
-            materialButton1.NoAccentTextColor = Color.Empty;
-            materialButton1.Size = new Size(64, 36);
-            materialButton1.TabIndex = 27;
-            materialButton1.Text = "Save";
-            materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            materialButton1.UseAccentColor = false;
-            materialButton1.UseVisualStyleBackColor = true;
+            btnSend.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnSend.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnSend.Depth = 0;
+            btnSend.HighEmphasis = true;
+            btnSend.Icon = null;
+            btnSend.Location = new Point(125, 455);
+            btnSend.Margin = new Padding(4, 6, 4, 6);
+            btnSend.MouseState = MaterialSkin.MouseState.HOVER;
+            btnSend.Name = "btnSend";
+            btnSend.NoAccentTextColor = Color.Empty;
+            btnSend.Size = new Size(64, 36);
+            btnSend.TabIndex = 27;
+            btnSend.Text = "Send";
+            btnSend.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnSend.UseAccentColor = false;
+            btnSend.UseVisualStyleBackColor = true;
+            btnSend.Click += btnSend_Click;
             // 
             // pictureBox1
             // 
@@ -83,16 +87,65 @@
             pictureBox1.TabIndex = 28;
             pictureBox1.TabStop = false;
             // 
-            // Appointment
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            label1.ForeColor = SystemColors.MenuHighlight;
+            label1.Location = new Point(125, 186);
+            label1.Name = "label1";
+            label1.Size = new Size(54, 28);
+            label1.TabIndex = 30;
+            label1.Text = "Time";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            label2.ForeColor = SystemColors.MenuHighlight;
+            label2.Location = new Point(125, 271);
+            label2.Name = "label2";
+            label2.Size = new Size(82, 28);
+            label2.TabIndex = 31;
+            label2.Text = "Content";
+            // 
+            // txtContent
+            // 
+            txtContent.AnimateReadOnly = false;
+            txtContent.BackgroundImageLayout = ImageLayout.None;
+            txtContent.CharacterCasing = CharacterCasing.Normal;
+            txtContent.Depth = 0;
+            txtContent.HideSelection = true;
+            txtContent.Location = new Point(125, 302);
+            txtContent.MaxLength = 32767;
+            txtContent.MouseState = MaterialSkin.MouseState.OUT;
+            txtContent.Name = "txtContent";
+            txtContent.PasswordChar = '\0';
+            txtContent.ReadOnly = false;
+            txtContent.ScrollBars = ScrollBars.None;
+            txtContent.SelectedText = "";
+            txtContent.SelectionLength = 0;
+            txtContent.SelectionStart = 0;
+            txtContent.ShortcutsEnabled = true;
+            txtContent.Size = new Size(329, 120);
+            txtContent.TabIndex = 32;
+            txtContent.TabStop = false;
+            txtContent.TextAlign = HorizontalAlignment.Left;
+            txtContent.UseSystemPasswordChar = false;
+            // 
+            // FAppointment
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(565, 547);
+            ClientSize = new Size(622, 535);
+            Controls.Add(txtContent);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(pictureBox1);
-            Controls.Add(materialButton1);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(btnSend);
+            Controls.Add(dtpApointment);
             Controls.Add(label5);
-            Name = "Appointment";
+            Name = "FAppointment";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Appointment";
             Load += Appointment_Load;
@@ -104,8 +157,11 @@
         #endregion
 
         private Label label5;
-        private DateTimePicker dateTimePicker1;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private DateTimePicker dtpApointment;
+        private MaterialSkin.Controls.MaterialButton btnSend;
         private PictureBox pictureBox1;
+        private Label label1;
+        private Label label2;
+        private MaterialSkin.Controls.MaterialMultiLineTextBox2 txtContent;
     }
 }

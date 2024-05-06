@@ -26,10 +26,11 @@ CREATE TABLE Worker (
     Bio NVARCHAR(MAX),
     Skills NVARCHAR(MAX),
 	Category NVARCHAR(80),
-	Salary DECIMAL(18, 2),
+	Salary NVARCHAR(MAX),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 GO
+
 
 CREATE TABLE HiredWorkers (
     hired_id INT IDENTITY PRIMARY KEY,
@@ -87,6 +88,16 @@ CREATE TABLE JobHistory (
 );
 GO
 
+
+CREATE TABLE Job (
+    job_id INT IDENTITY PRIMARY KEY,
+    JobTitle NVARCHAR(255),
+    JobDescription NVARCHAR(MAX),
+	Category NVARCHAR(80),
+	Price DECIMAL(18, 2),
+	ImagesJob NVARCHAR(MAX),
+);
+
 CREATE TABLE Applications (
     application_id INT IDENTITY PRIMARY KEY,
     job_id INT,
@@ -137,24 +148,10 @@ CREATE TABLE Appointment (
 );
 GO
 
-
-
 SELECT * FROM Users
 SELECT * FROM Worker
 SELECT * FROM Favourite
 SELECT * FROM HiredWorkers
-
-SELECT U.user_id
-FROM Users U
-JOIN Worker W
-ON U.user_id = W.user_id
-WHERE W.Worker_id = 16
-
-SELECT W.Worker_id
-FROM Users U
-JOIN Worker W
-ON U.user_id = W.user_id
-WHERE U.user_id = 6
 
 SELECT W.Category,
 		U.Name,
@@ -193,15 +190,28 @@ SELECT * FROM JobHistory
 SELECT * FROM Ratings
 SELECT * FROM Appointment
 
-SELECT J.JobTitle,
-		J.JobDescription,
-		J.Price,
-		J.Category,
-		J.ImagesJob
-FROM JobHistory J
-WHERE J.Worker_id = 3
+SELECT U.ImagePath,
+		U.Name,
+		A.Date,
+		A.Content,
+		A.Status
+FROM Appointment A
+JOIN Worker W ON A.Worker_id = W.Worker_id
+JOIN Users U ON W.user_id =  U.user_id
+WHERE A.user_id = 1
+
+
+SELECT U.ImagePath AS UserImagePath,
+        U.Name AS UserName,
+        A.Date,
+        A.Content,
+        A.Status
+FROM Appointment A
+JOIN Users U ON A.user_id = U.user_id
+WHERE A.Worker_id = 3 AND A.Status = 'Pending'
+
+
+
 
  
-SELECT Worker_id, COUNT(*) as NumberOfJobs
-FROM JobHistory
-GROUP BY Worker_id;
+

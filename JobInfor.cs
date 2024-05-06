@@ -28,7 +28,7 @@ namespace TimViec
         public string Price { get => price; set => price = value; }
 
         public string ImageJob { get => imageJob; set => imageJob = value; }
-
+        public int JobId { get; set; }
     }
 
 }

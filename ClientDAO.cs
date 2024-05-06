@@ -3,6 +3,7 @@ using Microsoft.Identity.Client;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,210 @@ namespace TimViec
                 return rowsAffected > 0;
             }
         }
+
+        public Client LoadUserData(int userId)
+        {
+            Client client = null;
+
+            string selectQuery = @"
+                    SELECT Name, Email, Address, PhoneNumber, Gender, DateOfBirth, ImagePath
+                    FROM Users
+                    WHERE user_id = @UserId
+                ";
+
+            using (SqlCommand selectCommand = new SqlCommand(selectQuery, connection.Connection))
+            {
+                selectCommand.Parameters.AddWithValue("@UserId", userId);
+                connection.Open();
+                SqlDataReader reader = selectCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    string name = reader["Name"].ToString();
+                    string email = reader["Email"].ToString();
+                    string address = reader["Address"].ToString();
+                    string phoneNumber = reader["PhoneNumber"].ToString();
+                    string gender = reader["Gender"].ToString();
+                    DateTime dateOfBirth = reader["DateOfBirth"] != DBNull.Value ? (DateTime)reader["DateOfBirth"] : default;
+                    string imagePath = reader["ImagePath"].ToString();
+
+                    client = new Client(name, email, dateOfBirth, imagePath, phoneNumber, address, gender);
+                }
+
+                connection.Close();
+            }
+
+            return client;
+        }
+
+        public bool HireWorker(int userId, int workerId)
+        {
+            bool success = false;
+
+            // Open the database connection
+            connection.Open();
+
+            // Check if the user has already hired the worker
+            string checkQuery = @"
+                SELECT COUNT(*)
+                FROM HiredWorkers
+                WHERE user_id = @UserId AND Worker_id = @WorkerId
+            ";
+
+            SqlCommand checkCommand = new SqlCommand(checkQuery, connection.Connection);
+            checkCommand.Parameters.AddWithValue("@UserId", userId);
+            checkCommand.Parameters.AddWithValue("@WorkerId", workerId);
+
+            int count = (int)checkCommand.ExecuteScalar();
+
+            if (count > 0)
+            {
+                success = false;
+            }
+            else
+            {
+                // Create the SQL command to insert the data
+                string insertQuery = @"
+                    INSERT INTO HiredWorkers (user_id, Worker_id)
+                    VALUES (@UserId, @WorkerId)
+                ";
+
+                SqlCommand insertCommand = new SqlCommand(insertQuery, connection.Connection);
+
+                // Add the parameters to the command
+                insertCommand.Parameters.AddWithValue("@UserId", userId);
+                insertCommand.Parameters.AddWithValue("@WorkerId", workerId);
+
+                // Execute the command
+                try
+                {
+                    insertCommand.ExecuteNonQuery();
+                    success = true;
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception
+                }
+            }
+
+            connection.Close();
+
+            return success;
+        }
+
+        public bool AddWorkerToFavourites(int userId, int workerId)
+        {
+            bool success = false;
+
+            // Open the database connection
+            connection.Open();
+
+            // Check if the user has already liked the worker
+            string checkQuery = @"
+                SELECT COUNT(*)
+                FROM Favourite
+                WHERE user_id = @UserId AND Worker_id = @WorkerId
+            ";
+
+            SqlCommand checkCommand = new SqlCommand(checkQuery, connection.Connection);
+            checkCommand.Parameters.AddWithValue("@UserId", userId);
+            checkCommand.Parameters.AddWithValue("@WorkerId", workerId);
+
+            int count = (int)checkCommand.ExecuteScalar();
+
+            if (count > 0)
+            {
+                success = false;
+            }
+            else
+            {
+                // Create the SQL command to insert the data
+                string insertQuery = @"
+                    INSERT INTO Favourite (user_id, Worker_id, isFavourite)
+                    VALUES (@UserId, @WorkerId, 'true')
+                ";
+
+                SqlCommand insertCommand = new SqlCommand(insertQuery, connection.Connection);
+
+                // Add the parameters to the command
+                insertCommand.Parameters.AddWithValue("@UserId", userId);
+                insertCommand.Parameters.AddWithValue("@WorkerId", workerId);
+
+                // Execute the command
+                try
+                {
+                    insertCommand.ExecuteNonQuery();
+                    success = true;
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception
+                }
+            }
+
+            connection.Close();
+
+            return success;
+        }
+
+        public DataTable LoadDataHired(int userId)
+        {
+            string query = @"
+                            SELECT W.Category,
+                                    U.Name,
+                                    U.ImagePath,
+                                    U.Email,
+                                    U.PhoneNumber
+                            FROM Worker W
+                            JOIN HiredWorkers H
+                                ON W.Worker_id = H.Worker_id
+                            JOIN Users U
+                                ON U.user_id = W.user_id
+                            WHERE H.user_id = @UserId
+                        ";
+
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@UserId", userId);
+
+            connection.Open();
+            DataTable dataTable = connection.ExecuteQuery(command);
+            connection.Close();
+
+            return dataTable;
+        }
+
+        public DataTable LoadDataFavourite(int userId)
+        {
+            string query = @"
+                            SELECT W.Category,
+                                    U.Name,
+                                    U.ImagePath,
+                                    U.PhoneNumber,
+                                    U.Email,
+                                    U.DateOfBirth,
+                                    U.Address
+                            FROM Worker W
+                            JOIN Favourite F
+                                ON W.Worker_id = F.Worker_id
+                            JOIN Users U
+                                ON U.user_id = W.user_id                     
+                            WHERE F.user_id = @UserId
+                        ";
+
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@UserId", userId);
+
+            connection.Open();
+            DataTable dataTable = connection.ExecuteQuery(command);
+            connection.Close();
+
+            return dataTable;
+        }
+
+
+
+
+
 
 
     }
