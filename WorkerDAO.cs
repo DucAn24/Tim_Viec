@@ -16,6 +16,7 @@ namespace TimViec
             {
                 string sqlStrUsers = "UPDATE Users SET Name = @Name, Email = @Email, DateOfBirth = @DateOfBirth, ImagePath = @ImagePath, PhoneNumber = @Phone, Address = @Address, Gender = @Gender WHERE user_id = @UserId";
                 string sqlStrWorker = "UPDATE Worker SET Bio = @Bio, Skills = @Skills, Category = @Category, Salary = @Salary WHERE user_id = @UserId";
+                string sqlStrInsertWorker = "INSERT INTO Worker (user_id, Bio, Skills, Category, Salary) VALUES (@UserId, @Bio, @Skills, @Category, @Salary)";
 
                 using (SqlCommand command = new SqlCommand(sqlStrUsers, connection.Connection))
                 {
@@ -45,6 +46,23 @@ namespace TimViec
                             connection.Open();
                             rowsAffected = commandWorker.ExecuteNonQuery();
                             connection.Close();
+
+                            // If no rows were affected, insert a new record
+                            if (rowsAffected == 0)
+                            {
+                                using (SqlCommand insertCommand = new SqlCommand(sqlStrInsertWorker, connection.Connection))
+                                {
+                                    insertCommand.Parameters.AddWithValue("@Bio", worker.Bio);
+                                    insertCommand.Parameters.AddWithValue("@Skills", worker.Skills);
+                                    insertCommand.Parameters.AddWithValue("@Category", worker.Category);
+                                    insertCommand.Parameters.AddWithValue("@Salary", worker.Salary);
+                                    insertCommand.Parameters.AddWithValue("@UserId", userId);
+
+                                    connection.Open();
+                                    rowsAffected = insertCommand.ExecuteNonQuery();
+                                    connection.Close();
+                                }
+                            }
                         }
                     }
 
@@ -62,6 +80,7 @@ namespace TimViec
                 return false;
             }
         }
+
 
         public List<Worker> GetWorkersByCategory(string category)
         {

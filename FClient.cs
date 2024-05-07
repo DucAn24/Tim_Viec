@@ -279,7 +279,10 @@ namespace TimViec
             flowLayoutPanel1.Controls.Add(card);
         }
 
-        private void AddControlsToPanelFavourite(Image image, string FullName, string PhoneNumber, string Address, string Email, string age)
+        private Dictionary<MaterialCard, int> cardToWorkerIdMap = new Dictionary<MaterialCard, int>();
+
+
+        private void AddControlsToPanelFavourite(Image image, string FullName, string PhoneNumber, string Address, string Email, string age, int workerId)
         {
             var pictureBox = new PictureBox
             {
@@ -342,6 +345,29 @@ namespace TimViec
             btnUnLike.Text = "Unlike";
             btnUnLike.Location = new Point(20, 220);
 
+            btnUnLike.Click += (sender, e) =>
+            {
+                // Get the card that the button is a part of
+                var card = ((Control)sender).Parent as MaterialCard;
+
+                // Get the workerId for this card
+                if (card != null && cardToWorkerIdMap.TryGetValue(card, out int workerId))
+                {
+                    // Remove the worker from favourites
+                    bool success = clientDAO.RemoveWorkerToFavourites(this.userId, workerId: workerId);
+
+                    if (success)
+                    {
+                        // Optionally, you can remove the card from the panel
+                        flowLayoutPanel4.Controls.Remove(card);
+                        MessageBox.Show( "Success");
+                    }
+                    else
+                    {
+                        // Handle the case where the worker could not be removed from favourites
+                    }
+                }
+            };
 
             var card = new MaterialCard
             {
@@ -357,6 +383,7 @@ namespace TimViec
             card.Controls.Add(label5);
             card.Controls.Add(pictureBox);
             card.Controls.Add(btnUnLike);
+            cardToWorkerIdMap[card] = workerId;
 
             flowLayoutPanel4.Controls.Add(card);
         }
@@ -475,6 +502,7 @@ namespace TimViec
                 string label2Text = row["PhoneNumber"].ToString();
                 string label3Text = row["Category"].ToString();
                 string label4Text = row["Email"].ToString();
+                int workerId = Convert.ToInt32(row["Worker_id"]);
 
                 // Calculate age from date of birth
                 DateTime dateOfBirth = Convert.ToDateTime(row["DateOfBirth"]);
@@ -484,7 +512,7 @@ namespace TimViec
 
                 string label5Text = age.ToString();
 
-                AddControlsToPanelFavourite(image, label1Text, label2Text, label3Text, label4Text, label5Text);
+                AddControlsToPanelFavourite(image, label1Text, label2Text, label3Text, label4Text, label5Text, workerId);
             }
         }
 

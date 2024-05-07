@@ -135,36 +135,52 @@ namespace TimViec
 
             // Check if the user has already liked the worker
             string checkQuery = @"
-                SELECT COUNT(*)
-                FROM Favourite
-                WHERE user_id = @UserId AND Worker_id = @WorkerId
-            ";
+                    SELECT isFavourite
+                    FROM Favourite
+                    WHERE user_id = @UserId AND Worker_id = @WorkerId
+                ";
 
             SqlCommand checkCommand = new SqlCommand(checkQuery, connection.Connection);
             checkCommand.Parameters.AddWithValue("@UserId", userId);
             checkCommand.Parameters.AddWithValue("@WorkerId", workerId);
 
-            int count = (int)checkCommand.ExecuteScalar();
+            object result = checkCommand.ExecuteScalar();
 
-            if (count > 0)
+            if (result != null && result.ToString() == "false")
             {
-                success = false;
+                // If the user has already liked the worker but isFavourite is 'false', update the record to set isFavourite to 'true'
+                string updateQuery = @"
+                                    UPDATE Favourite
+                                    SET isFavourite = 'true'
+                                    WHERE user_id = @UserId AND Worker_id = @WorkerId
+                                ";
+
+                SqlCommand updateCommand = new SqlCommand(updateQuery, connection.Connection);
+                updateCommand.Parameters.AddWithValue("@UserId", userId);
+                updateCommand.Parameters.AddWithValue("@WorkerId", workerId);
+
+                try
+                {
+                    updateCommand.ExecuteNonQuery();
+                    success = true;
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception
+                }
             }
-            else
+            else if (result == null)
             {
-                // Create the SQL command to insert the data
+                // If the user has not liked the worker yet, insert a new record with isFavourite set to 'true'
                 string insertQuery = @"
-                    INSERT INTO Favourite (user_id, Worker_id, isFavourite)
-                    VALUES (@UserId, @WorkerId, 'true')
-                ";
+                            INSERT INTO Favourite (user_id, Worker_id, isFavourite)
+                            VALUES (@UserId, @WorkerId, 'true')
+                        ";
 
                 SqlCommand insertCommand = new SqlCommand(insertQuery, connection.Connection);
-
-                // Add the parameters to the command
                 insertCommand.Parameters.AddWithValue("@UserId", userId);
                 insertCommand.Parameters.AddWithValue("@WorkerId", workerId);
 
-                // Execute the command
                 try
                 {
                     insertCommand.ExecuteNonQuery();
@@ -180,6 +196,95 @@ namespace TimViec
 
             return success;
         }
+
+
+
+        /*        public bool AddWorkerToFavourites(int userId, int workerId)
+                {
+                    bool success = false;
+
+                    // Open the database connection
+                    connection.Open();
+
+                    // Check if the user has already liked the worker
+                    string checkQuery = @"
+                        SELECT COUNT(*)
+                        FROM Favourite
+                        WHERE user_id = @UserId AND Worker_id = @WorkerId
+                    ";
+
+                    SqlCommand checkCommand = new SqlCommand(checkQuery, connection.Connection);
+                    checkCommand.Parameters.AddWithValue("@UserId", userId);
+                    checkCommand.Parameters.AddWithValue("@WorkerId", workerId);
+
+                    int count = (int)checkCommand.ExecuteScalar();
+
+                    if (count > 0)
+                    {
+                        success = false;
+                    }
+                    else
+                    {
+                        // Create the SQL command to insert the data
+                        string insertQuery = @"
+                            INSERT INTO Favourite (user_id, Worker_id, isFavourite)
+                            VALUES (@UserId, @WorkerId, 'true')
+                        ";
+
+                        SqlCommand insertCommand = new SqlCommand(insertQuery, connection.Connection);
+
+                        // Add the parameters to the command
+                        insertCommand.Parameters.AddWithValue("@UserId", userId);
+                        insertCommand.Parameters.AddWithValue("@WorkerId", workerId);
+
+                        // Execute the command
+                        try
+                        {
+                            insertCommand.ExecuteNonQuery();
+                            success = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            // Log the exception
+                        }
+                    }
+
+                    connection.Close();
+
+                    return success;
+                }*/
+
+        public bool RemoveWorkerToFavourites(int userId, int workerId)
+        {
+            bool success = false;
+            connection.Open();
+
+            // Create the SQL command to update the data
+            string query = @"
+                        UPDATE Favourite
+                        SET isFavourite = 'false'
+                        WHERE user_id = @UserId AND Worker_id = @WorkerId
+                    ";
+
+            SqlCommand updateCommand = new SqlCommand(query, connection.Connection);
+            updateCommand.Parameters.AddWithValue("@UserId", userId);
+            updateCommand.Parameters.AddWithValue("@WorkerId", workerId);
+
+            try
+            {
+                updateCommand.ExecuteNonQuery();
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+            }
+
+            connection.Close();
+
+            return success;
+        }
+
 
         public DataTable LoadDataHired(int userId)
         {
@@ -216,13 +321,14 @@ namespace TimViec
                                     U.PhoneNumber,
                                     U.Email,
                                     U.DateOfBirth,
-                                    U.Address
+                                    U.Address,
+                                    W.Worker_id                                    
                             FROM Worker W
                             JOIN Favourite F
                                 ON W.Worker_id = F.Worker_id
                             JOIN Users U
                                 ON U.user_id = W.user_id                     
-                            WHERE F.user_id = @UserId
+                            WHERE F.user_id = @UserId AND F.isFavourite = 'true'
                         ";
 
             SqlCommand command = new SqlCommand(query);

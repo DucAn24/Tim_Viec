@@ -110,6 +110,7 @@ namespace TimViec
                 ckbFemale.Checked = worker.Gender == "Female";
 
                 dtpBirth.Value = worker.DateOfBirth;
+                imagePath = worker.ImagePath;
             }
         }
 
