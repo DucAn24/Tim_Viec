@@ -2,6 +2,7 @@
 using MaterialSkin.Controls;
 using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
+using ScottPlot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Color = System.Drawing.Color;
+using Image = System.Drawing.Image;
+using Label = System.Windows.Forms.Label;
+using ScottPlot;
+
 
 namespace TimViec
 {
@@ -87,6 +93,8 @@ namespace TimViec
             LoadWorkerData();
             LoadAllDataAppointment();
             LoadPendingAppointment();
+            CreatePieChart();
+            LoadAnalytics();
         }
 
         private void LoadWorkerData()
@@ -138,7 +146,7 @@ namespace TimViec
 
         private void materialTabControl1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (this.materialTabControl1.SelectedIndex == 5)
+            if (this.materialTabControl1.SelectedIndex == 6)
             {
                 this.Hide();
                 new FLogin().Show();
@@ -212,7 +220,7 @@ namespace TimViec
             pictureBox.Location = new Point(500, 20);
 
             // Create and configure labels
-            Label label1 = CreateLabel(label1Text, new Font("Nirmala UI", 14, FontStyle.Bold), new Point(40, 10));
+            Label label1 = CreateLabel(label1Text, new Font("Nirmala UI", 14, System.Drawing.FontStyle.Bold), new Point(40, 10));
             label1.ForeColor = Color.Chocolate;
 
             Label label4 = CreateLabel(label4Text, new Font("Nirmala UI", 12), new Point(40, 50));
@@ -270,7 +278,7 @@ namespace TimViec
                 Text = userName,
                 AutoSize = true,
                 ForeColor = Color.Chocolate,
-                Font = new Font("Nirmala UI", 16, FontStyle.Bold),
+                Font = new Font("Nirmala UI", 16, System.Drawing.FontStyle.Bold),
                 Location = new Point(130, 10)
             };
 
@@ -279,7 +287,7 @@ namespace TimViec
                 Text = status,
                 AutoSize = true,
                 ForeColor = Color.LightGreen,
-                Font = new Font("Nirmala UI", 14, FontStyle.Bold),
+                Font = new Font("Nirmala UI", 14, System.Drawing.FontStyle.Bold),
                 Location = new Point(130, 50),
                 TextAlign = ContentAlignment.TopLeft
             };
@@ -289,7 +297,7 @@ namespace TimViec
                 Text = "Content: " + content,
                 AutoSize = true,
                 ForeColor = Color.DarkGray,
-                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Font = new Font("Nirmala UI", 12, System.Drawing.FontStyle.Bold),
                 Location = new Point(20, 120),
                 TextAlign = ContentAlignment.TopLeft
             };
@@ -299,7 +307,7 @@ namespace TimViec
                 Text = "Date: " + date,
                 AutoSize = true,
                 ForeColor = Color.DarkGray,
-                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Font = new Font("Nirmala UI", 12, System.Drawing.FontStyle.Bold),
                 Location = new Point(20, 150),
                 TextAlign = ContentAlignment.TopLeft
             };
@@ -337,7 +345,7 @@ namespace TimViec
                 Text = userName,
                 AutoSize = true,
                 ForeColor = Color.Chocolate,
-                Font = new Font("Nirmala UI", 16, FontStyle.Bold),
+                Font = new Font("Nirmala UI", 16, System.Drawing.FontStyle.Bold),
                 Location = new Point(130, 10)
             };
 
@@ -346,7 +354,7 @@ namespace TimViec
                 Text = status,
                 AutoSize = true,
                 ForeColor = Color.LightGreen,
-                Font = new Font("Nirmala UI", 14, FontStyle.Bold),
+                Font = new Font("Nirmala UI", 14, System.Drawing.FontStyle.Bold),
                 Location = new Point(130, 50),
                 TextAlign = ContentAlignment.TopLeft
             };
@@ -356,7 +364,7 @@ namespace TimViec
                 Text = "Content: " + content,
                 AutoSize = true,
                 ForeColor = Color.DarkGray,
-                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Font = new Font("Nirmala UI", 12, System.Drawing.FontStyle.Bold),
                 Location = new Point(20, 120),
                 TextAlign = ContentAlignment.TopLeft
             };
@@ -366,7 +374,7 @@ namespace TimViec
                 Text = "Date: " + date,
                 AutoSize = true,
                 ForeColor = Color.DarkGray,
-                Font = new Font("Nirmala UI", 12, FontStyle.Bold),
+                Font = new Font("Nirmala UI", 12, System.Drawing.FontStyle.Bold),
                 Location = new Point(20, 150),
                 TextAlign = ContentAlignment.TopLeft
             };
@@ -514,5 +522,50 @@ namespace TimViec
         {
             SearchAppointment(this.worker_id);
         }
+
+        private void CreatePieChart()
+        {
+            // Create an instance of WorkerDAO
+            WorkerDAO workerDAO = new WorkerDAO();
+
+            // Get the job count per category for the current worker
+            Dictionary<string, int> jobCountPerCategory = workerDAO.GetJobCountPerCategory(this.worker_id);
+
+            // Create a list of colors
+            System.Drawing.Color[] colors = new System.Drawing.Color[] { System.Drawing.Color.Red, System.Drawing.Color.Orange, System.Drawing.Color.Yellow, System.Drawing.Color.Green, System.Drawing.Color.Blue, System.Drawing.Color.Indigo, System.Drawing.Color.Violet };
+
+            // Create a list of PieSlice objects based on the data
+            List<PieSlice> slices = new List<PieSlice>();
+            int colorIndex = 0;
+            foreach (KeyValuePair<string, int> entry in jobCountPerCategory)
+            {
+                System.Drawing.Color systemColor = colors[colorIndex % colors.Length];
+                ScottPlot.Color scottPlotColor = new ScottPlot.Color(systemColor.R, systemColor.G, systemColor.B);
+                // Include the count in the label
+                slices.Add(new PieSlice() { Value = entry.Value, FillColor = scottPlotColor, Label = $"{entry.Key} ({entry.Value})" });
+                colorIndex++;
+            }
+
+            // Create the pie chart
+            var pie = pieChartPlot.Plot.Add.Pie(slices);
+            pie.DonutFraction = .5;
+            pie.ShowSliceLabels = true;
+
+            // Render the chart
+            pieChartPlot.Refresh();
+        }
+
+        private void LoadAnalytics()
+        {
+            WorkerDAO workerDAO = new WorkerDAO();
+            labelRevenue.Text = workerDAO.GetTotalRevenue(this.worker_id).ToString();
+            labelStar.Text = workerDAO.GetAverageRating(this.worker_id).ToString();
+            labelWorkDone.Text = workerDAO.GetTotalWorkDone(this.worker_id).ToString();
+        }
+
+
+
+
+
     }
 }

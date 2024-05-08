@@ -45,6 +45,14 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "LiveCharts": {
+              "target": "Package",
+              "version": "[0.9.7, )"
+            },
+            "LiveCharts.WinForms": {
+              "target": "Package",
+              "version": "[0.9.7.1, )"
+            },
             "MaterialSkin.2": {
               "target": "Package",
               "version": "[2.3.1, )"
@@ -52,6 +60,10 @@
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[5.2.0, )"
+            },
+            "ScottPlot.WinForms": {
+              "target": "Package",
+              "version": "[5.0.34, )"
             }
           },
           "imports": [

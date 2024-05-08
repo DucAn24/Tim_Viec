@@ -105,7 +105,7 @@ namespace TimViec
             pictureBox.Size = new Size(80, 80);
             pictureBox.Location = new Point(10, 20);
 
-            Label labelUserName = CreateLabel(userName , new Font("Nirmala UI", 14, FontStyle.Bold), new Point(110, 30));
+            Label labelUserName = CreateLabel(userName, new Font("Nirmala UI", 14, FontStyle.Bold), new Point(110, 30));
 
             Label labelComment = CreateLabel(comment, new Font("Nirmala UI", 12), new Point(110, 70));
 
@@ -114,7 +114,7 @@ namespace TimViec
             card.Height = 150;
             card.BackColor = Color.White;
 
-            card.Controls.Add(pictureBox); 
+            card.Controls.Add(pictureBox);
             card.Controls.Add(labelUserName);
             card.Controls.Add(labelComment);
 
@@ -194,6 +194,17 @@ namespace TimViec
             }
         }
 
-
+        private void btnHire_Click(object sender, EventArgs e)
+        {
+            ClientDAO clientDAO = new ClientDAO();
+            if (clientDAO.HireWorker(userId, workerId))
+            {
+                MessageBox.Show("Hire successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("You have already hired this worker.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

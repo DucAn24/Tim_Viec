@@ -31,6 +31,18 @@ CREATE TABLE Worker (
 );
 GO
 
+CREATE TRIGGER trg_AfterInsertUsers
+ON Users
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO Worker(user_id, Bio, Skills)
+    SELECT i.user_id, '', ''
+    FROM inserted i
+	WHERE Role = 1
+END
+GO
+
 
 CREATE TABLE HiredWorkers (
     hired_id INT IDENTITY PRIMARY KEY,
@@ -88,16 +100,6 @@ CREATE TABLE JobHistory (
 );
 GO
 
-
-CREATE TABLE Job (
-    job_id INT IDENTITY PRIMARY KEY,
-    JobTitle NVARCHAR(255),
-    JobDescription NVARCHAR(MAX),
-	Category NVARCHAR(80),
-	Price DECIMAL(18, 2),
-	ImagesJob NVARCHAR(MAX),
-);
-
 CREATE TABLE Applications (
     application_id INT IDENTITY PRIMARY KEY,
     job_id INT,
@@ -153,34 +155,8 @@ SELECT * FROM Worker
 SELECT * FROM Favourite
 SELECT * FROM HiredWorkers
 
-SELECT W.Category,
-		U.Name,
-		U.ImagePath
-FROM Worker W
-JOIN HiredWorkers H
-	ON W.Worker_id = H.Worker_id
-JOIN Users U
-	ON U.user_id = W.user_id
-WHERE H.user_id = 1
-
-SELECT W.Category,
-		U.Name,
-		U.ImagePath,
-		U.PhoneNumber,
-		U.Email,
-		U.DateOfBirth,
-		U.Address
-FROM Worker W
-JOIN Favourite F
-	ON W.Worker_id = F.Worker_id
-JOIN Users U
-	ON U.user_id = W.user_id
-WHERE F.user_id = 2
-
-INSERT INTO Applications (job_id,Worker_id)
-VALUES
-    (1, 3);
-
+DELETE FROM Worker
+Where user_id = 7 and Worker_id = 3
 
 SELECT * FROM JobList
 SELECT * FROM Applications
@@ -190,28 +166,28 @@ SELECT * FROM JobHistory
 SELECT * FROM Ratings
 SELECT * FROM Appointment
 
-SELECT U.ImagePath,
-		U.Name,
-		A.Date,
-		A.Content,
-		A.Status
-FROM Appointment A
-JOIN Worker W ON A.Worker_id = W.Worker_id
-JOIN Users U ON W.user_id =  U.user_id
-WHERE A.user_id = 1
+-- avg stars
+SELECT AVG(Stars) AS AvgRatings
+FROM Ratings
+WHERE Worker_id = @Worker_id
+GROUP BY Worker_id;
 
+--total earn
+SELECT SUM(Price) as TotalRevenue
+FROM JobHistory
+WHERE Worker_id =  @Worker_id;
 
-SELECT U.ImagePath AS UserImagePath,
-        U.Name AS UserName,
-        A.Date,
-        A.Content,
-        A.Status
-FROM Appointment A
-JOIN Users U ON A.user_id = U.user_id
-WHERE A.Worker_id = 3 AND A.Status = 'Pending'
+-- pie chart
+SELECT  
+    Category, 
+    COUNT(*) as JobsInCategory
+FROM JobHistory
+WHERE Worker_id =  3
+GROUP BY Category;
 
-
-
+SELECT COUNT(*) as TotalWorkDone
+FROM JobHistory
+WHERE Worker_id = 3
 
  
 

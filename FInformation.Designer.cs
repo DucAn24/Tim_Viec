@@ -49,7 +49,7 @@
             label2 = new Label();
             picBoxWorker = new PictureBox();
             materialButton5 = new MaterialSkin.Controls.MaterialButton();
-            materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            btnHire = new MaterialSkin.Controls.MaterialButton();
             flowLayoutPanel1 = new FlowLayoutPanel();
             imageList1 = new ImageList(components);
             label8 = new Label();
@@ -304,24 +304,25 @@
             materialButton5.UseVisualStyleBackColor = true;
             materialButton5.Click += materialButton5_Click;
             // 
-            // materialButton1
+            // btnHire
             // 
-            materialButton1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Dense;
-            materialButton1.Depth = 0;
-            materialButton1.HighEmphasis = false;
-            materialButton1.Icon = null;
-            materialButton1.Location = new Point(21, 865);
-            materialButton1.Margin = new Padding(4, 6, 4, 6);
-            materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialButton1.Name = "materialButton1";
-            materialButton1.NoAccentTextColor = Color.Empty;
-            materialButton1.Size = new Size(64, 36);
-            materialButton1.TabIndex = 33;
-            materialButton1.Text = "HIre";
-            materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
-            materialButton1.UseAccentColor = true;
-            materialButton1.UseVisualStyleBackColor = true;
+            btnHire.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnHire.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Dense;
+            btnHire.Depth = 0;
+            btnHire.HighEmphasis = false;
+            btnHire.Icon = null;
+            btnHire.Location = new Point(21, 865);
+            btnHire.Margin = new Padding(4, 6, 4, 6);
+            btnHire.MouseState = MaterialSkin.MouseState.HOVER;
+            btnHire.Name = "btnHire";
+            btnHire.NoAccentTextColor = Color.Empty;
+            btnHire.Size = new Size(64, 36);
+            btnHire.TabIndex = 33;
+            btnHire.Text = "HIre";
+            btnHire.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            btnHire.UseAccentColor = true;
+            btnHire.UseVisualStyleBackColor = true;
+            btnHire.Click += btnHire_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -395,7 +396,7 @@
             Controls.Add(label10);
             Controls.Add(label1);
             Controls.Add(materialButton5);
-            Controls.Add(materialButton1);
+            Controls.Add(btnHire);
             Controls.Add(label8);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(materialCard5);
@@ -429,7 +430,7 @@
         private MaterialSkin.Controls.MaterialLabel lbRate;
         private Label label9;
         private MaterialSkin.Controls.MaterialButton materialButton5;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialButton btnHire;
         private Label label1;
         private MaterialSkin.Controls.MaterialLabel lbEmail;
         private MaterialSkin.Controls.MaterialLabel lbName;

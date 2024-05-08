@@ -127,6 +127,21 @@
             btnSearch = new MaterialSkin.Controls.MaterialButton();
             label6 = new Label();
             panelAppointment = new FlowLayoutPanel();
+            tabPage7 = new TabPage();
+            label37 = new Label();
+            pieChartPlot = new ScottPlot.WinForms.FormsPlot();
+            materialCard9 = new MaterialSkin.Controls.MaterialCard();
+            labelWorkDone = new Label();
+            label36 = new Label();
+            pictureBox11 = new PictureBox();
+            materialCard8 = new MaterialSkin.Controls.MaterialCard();
+            labelStar = new Label();
+            label35 = new Label();
+            pictureBox10 = new PictureBox();
+            materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            labelRevenue = new Label();
+            label34 = new Label();
+            pictureBox1 = new PictureBox();
             tabPage6 = new TabPage();
             imageList1 = new ImageList(components);
             materialTabControl1.SuspendLayout();
@@ -159,6 +174,13 @@
             tabPage5.SuspendLayout();
             materialCard7.SuspendLayout();
             materialCard1.SuspendLayout();
+            tabPage7.SuspendLayout();
+            materialCard9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
+            materialCard8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
+            materialCard2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // materialTabControl1
@@ -168,6 +190,7 @@
             materialTabControl1.Controls.Add(tabPage2);
             materialTabControl1.Controls.Add(tabPage3);
             materialTabControl1.Controls.Add(tabPage5);
+            materialTabControl1.Controls.Add(tabPage7);
             materialTabControl1.Controls.Add(tabPage6);
             materialTabControl1.Depth = 0;
             materialTabControl1.Dock = DockStyle.Fill;
@@ -1608,6 +1631,185 @@
             panelAppointment.Size = new Size(1444, 301);
             panelAppointment.TabIndex = 26;
             // 
+            // tabPage7
+            // 
+            tabPage7.Controls.Add(label37);
+            tabPage7.Controls.Add(pieChartPlot);
+            tabPage7.Controls.Add(materialCard9);
+            tabPage7.Controls.Add(materialCard8);
+            tabPage7.Controls.Add(materialCard2);
+            tabPage7.ImageKey = "icons8-analytics-30.png";
+            tabPage7.Location = new Point(4, 39);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Size = new Size(1586, 810);
+            tabPage7.TabIndex = 6;
+            tabPage7.Text = "Analytics";
+            tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label37.ForeColor = Color.LightGreen;
+            label37.Location = new Point(929, 81);
+            label37.Name = "label37";
+            label37.Size = new Size(343, 54);
+            label37.TabIndex = 24;
+            label37.Text = "Job per category";
+            // 
+            // pieChartPlot
+            // 
+            pieChartPlot.DisplayScale = 1.25F;
+            pieChartPlot.Font = new Font("Nirmala UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            pieChartPlot.Location = new Point(929, 138);
+            pieChartPlot.Name = "pieChartPlot";
+            pieChartPlot.Size = new Size(523, 529);
+            pieChartPlot.TabIndex = 3;
+            // 
+            // materialCard9
+            // 
+            materialCard9.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard9.Controls.Add(labelWorkDone);
+            materialCard9.Controls.Add(label36);
+            materialCard9.Controls.Add(pictureBox11);
+            materialCard9.Depth = 0;
+            materialCard9.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard9.Location = new Point(448, 404);
+            materialCard9.Margin = new Padding(14);
+            materialCard9.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard9.Name = "materialCard9";
+            materialCard9.Padding = new Padding(14);
+            materialCard9.Size = new Size(372, 263);
+            materialCard9.TabIndex = 2;
+            // 
+            // labelWorkDone
+            // 
+            labelWorkDone.AutoSize = true;
+            labelWorkDone.Font = new Font("Nirmala UI", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelWorkDone.ForeColor = SystemColors.ActiveCaptionText;
+            labelWorkDone.Location = new Point(204, 124);
+            labelWorkDone.Name = "labelWorkDone";
+            labelWorkDone.Size = new Size(91, 106);
+            labelWorkDone.TabIndex = 25;
+            labelWorkDone.Text = "5";
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label36.ForeColor = Color.LightGreen;
+            label36.Location = new Point(39, 31);
+            label36.Name = "label36";
+            label36.Size = new Size(235, 54);
+            label36.TabIndex = 24;
+            label36.Text = "Work Done";
+            // 
+            // pictureBox11
+            // 
+            pictureBox11.Image = (Image)resources.GetObject("pictureBox11.Image");
+            pictureBox11.Location = new Point(39, 108);
+            pictureBox11.Name = "pictureBox11";
+            pictureBox11.Size = new Size(125, 122);
+            pictureBox11.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox11.TabIndex = 3;
+            pictureBox11.TabStop = false;
+            // 
+            // materialCard8
+            // 
+            materialCard8.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard8.Controls.Add(labelStar);
+            materialCard8.Controls.Add(label35);
+            materialCard8.Controls.Add(pictureBox10);
+            materialCard8.Depth = 0;
+            materialCard8.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard8.Location = new Point(61, 404);
+            materialCard8.Margin = new Padding(14);
+            materialCard8.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard8.Name = "materialCard8";
+            materialCard8.Padding = new Padding(14);
+            materialCard8.Size = new Size(359, 263);
+            materialCard8.TabIndex = 1;
+            // 
+            // labelStar
+            // 
+            labelStar.AutoSize = true;
+            labelStar.Font = new Font("Nirmala UI", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelStar.ForeColor = SystemColors.ActiveCaptionText;
+            labelStar.Location = new Point(208, 124);
+            labelStar.Name = "labelStar";
+            labelStar.Size = new Size(91, 106);
+            labelStar.TabIndex = 26;
+            labelStar.Text = "5";
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label35.ForeColor = Color.LightGreen;
+            label35.Location = new Point(28, 31);
+            label35.Name = "label35";
+            label35.Size = new Size(314, 54);
+            label35.TabIndex = 24;
+            label35.Text = "Average Rating";
+            // 
+            // pictureBox10
+            // 
+            pictureBox10.Image = (Image)resources.GetObject("pictureBox10.Image");
+            pictureBox10.Location = new Point(37, 108);
+            pictureBox10.Name = "pictureBox10";
+            pictureBox10.Size = new Size(125, 122);
+            pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox10.TabIndex = 3;
+            pictureBox10.TabStop = false;
+            // 
+            // materialCard2
+            // 
+            materialCard2.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard2.Controls.Add(labelRevenue);
+            materialCard2.Controls.Add(label34);
+            materialCard2.Controls.Add(pictureBox1);
+            materialCard2.Depth = 0;
+            materialCard2.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard2.Location = new Point(61, 81);
+            materialCard2.Margin = new Padding(14);
+            materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
+            materialCard2.Name = "materialCard2";
+            materialCard2.Padding = new Padding(14);
+            materialCard2.Size = new Size(759, 238);
+            materialCard2.TabIndex = 0;
+            // 
+            // labelRevenue
+            // 
+            labelRevenue.AutoSize = true;
+            labelRevenue.Font = new Font("Nirmala UI", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelRevenue.ForeColor = SystemColors.ActiveCaptionText;
+            labelRevenue.Location = new Point(241, 99);
+            labelRevenue.Name = "labelRevenue";
+            labelRevenue.Size = new Size(251, 106);
+            labelRevenue.TabIndex = 27;
+            labelRevenue.Text = "$ 500";
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Font = new Font("Nirmala UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label34.ForeColor = Color.LightGreen;
+            label34.Location = new Point(54, 14);
+            label34.Name = "label34";
+            label34.Size = new Size(287, 54);
+            label34.TabIndex = 23;
+            label34.Text = "Total Revenue";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(54, 99);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(125, 122);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
+            // 
             // tabPage6
             // 
             tabPage6.ImageKey = "icons8-log-out-100.png";
@@ -1645,6 +1847,7 @@
             imageList1.Images.SetKeyName(19, "icons8-upload-to-the-cloud-48.png");
             imageList1.Images.SetKeyName(20, "icons8-appointment-64.png");
             imageList1.Images.SetKeyName(21, "icons8-log-out-100.png");
+            imageList1.Images.SetKeyName(22, "icons8-analytics-30.png");
             // 
             // FWorker
             // 
@@ -1705,6 +1908,17 @@
             materialCard7.PerformLayout();
             materialCard1.ResumeLayout(false);
             materialCard1.PerformLayout();
+            tabPage7.ResumeLayout(false);
+            tabPage7.PerformLayout();
+            materialCard9.ResumeLayout(false);
+            materialCard9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox11).EndInit();
+            materialCard8.ResumeLayout(false);
+            materialCard8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
+            materialCard2.ResumeLayout(false);
+            materialCard2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -1809,5 +2023,20 @@
         private FlowLayoutPanel panelPending;
         private MaterialSkin.Controls.MaterialComboBox cbxStatus;
         private MaterialSkin.Controls.MaterialButton btnSearch;
+        private TabPage tabPage7;
+        private MaterialSkin.Controls.MaterialCard materialCard8;
+        private PictureBox pictureBox10;
+        private MaterialSkin.Controls.MaterialCard materialCard2;
+        private PictureBox pictureBox1;
+        private MaterialSkin.Controls.MaterialCard materialCard9;
+        private Label label36;
+        private PictureBox pictureBox11;
+        private Label label35;
+        private Label label34;
+        private ScottPlot.WinForms.FormsPlot pieChartPlot;
+        private Label labelWorkDone;
+        private Label labelStar;
+        private Label labelRevenue;
+        private Label label37;
     }
 }

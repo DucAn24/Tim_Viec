@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -388,6 +389,126 @@ namespace TimViec
             }
 
             return ratingInfo;
+        }
+
+        public Dictionary<string, int> GetJobCountPerCategory(int workerId)
+        {
+            Dictionary<string, int> jobCountPerCategory = new Dictionary<string, int>();
+
+            string query = @"
+                            SELECT  
+                                Category, 
+                                COUNT(*) as JobsInCategory
+                            FROM JobHistory
+                            WHERE Worker_id = @Worker_id
+                            GROUP BY Category;
+                        ";
+
+            using (SqlCommand command = new SqlCommand(query, connection.Connection))
+            {
+                command.Parameters.AddWithValue("@Worker_id", workerId);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string category = reader["Category"].ToString();
+                    int jobCount = Convert.ToInt32(reader["JobsInCategory"]);
+
+                    jobCountPerCategory.Add(category, jobCount);
+                }
+
+                connection.Close();
+            }
+
+            return jobCountPerCategory;
+        }
+
+        public int GetAverageRating(int workerId)
+        {
+            int AvgRatings = 0;
+            connection.Open();
+
+            string query = @"
+                SELECT AVG(Stars) AS AvgRatings
+                FROM Ratings
+                WHERE Worker_id = @Worker_id
+                GROUP BY Worker_id;
+            ";
+
+            SqlCommand command = new SqlCommand(query, connection.Connection);
+
+            // Add the user_id parameter to the command
+            command.Parameters.AddWithValue("@Worker_id", workerId);
+
+            // Execute the command and get the result
+            object result = command.ExecuteScalar();
+
+            // If a result was returned, set the workerId
+            if (result != null)
+            {
+                AvgRatings = (int)result;
+            }
+            connection.Close();
+
+            return AvgRatings;
+        }
+
+        public decimal GetTotalRevenue(int workerId)
+        {
+            decimal revenue = 0;
+            connection.Open();
+
+            string query = @"
+                        SELECT SUM(Price) as TotalRevenue
+                        FROM JobHistory
+                        WHERE Worker_id =  @Worker_id;
+            ";
+
+            SqlCommand command = new SqlCommand(query, connection.Connection);
+
+            // Add the user_id parameter to the command
+            command.Parameters.AddWithValue("@Worker_id", workerId);
+
+            // Execute the command and get the result
+            object result = command.ExecuteScalar();
+
+            // If a result was returned, set the workerId
+            if (result != null)
+            {
+                revenue = (decimal)result;
+            }
+            connection.Close();
+
+            return (decimal)revenue;
+        }
+
+        public int GetTotalWorkDone(int workerId)
+        {
+            int totalWorkDone = 0;
+            connection.Open();
+
+            string query = @"
+                        SELECT COUNT(*) as TotalWorkDone
+                        FROM JobHistory
+                        WHERE Worker_id = @Worker_id;
+            ";
+
+            SqlCommand command = new SqlCommand(query, connection.Connection);
+
+            // Add the user_id parameter to the command
+            command.Parameters.AddWithValue("@Worker_id", workerId);
+
+            // Execute the command and get the result
+            object result = command.ExecuteScalar();
+
+            // If a result was returned, set the workerId
+            if (result != null)
+            {
+                totalWorkDone = (int)result;
+            }
+            connection.Close();
+            return totalWorkDone;
         }
 
 
