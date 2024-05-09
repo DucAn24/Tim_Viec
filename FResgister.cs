@@ -72,10 +72,7 @@ namespace TimViec
             {
                 MessageBox.Show("User registered successfully.");
             }
-            else
-            {
-                MessageBox.Show("Error registering user.");
-            }
+
         }
 
         private void ckbClient_CheckedChanged(object sender, EventArgs e)

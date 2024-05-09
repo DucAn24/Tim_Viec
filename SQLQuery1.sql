@@ -2,6 +2,7 @@
 GO
 
 USE TimViec
+
 GO
 
 CREATE TABLE Users  (
@@ -61,18 +62,6 @@ CREATE TABLE Favourite (
     FOREIGN KEY (Worker_id) REFERENCES Worker(Worker_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
-GO
-
-CREATE TRIGGER trg_AfterInsertUsers
-ON Users
-AFTER INSERT
-AS
-BEGIN
-    INSERT INTO Worker(user_id, Bio, Skills)
-    SELECT i.user_id, '', ''
-    FROM inserted i
-	WHERE Role = 1
-END
 GO
 
 
@@ -166,28 +155,7 @@ SELECT * FROM JobHistory
 SELECT * FROM Ratings
 SELECT * FROM Appointment
 
--- avg stars
-SELECT AVG(Stars) AS AvgRatings
-FROM Ratings
-WHERE Worker_id = @Worker_id
-GROUP BY Worker_id;
 
---total earn
-SELECT SUM(Price) as TotalRevenue
-FROM JobHistory
-WHERE Worker_id =  @Worker_id;
-
--- pie chart
-SELECT  
-    Category, 
-    COUNT(*) as JobsInCategory
-FROM JobHistory
-WHERE Worker_id =  3
-GROUP BY Category;
-
-SELECT COUNT(*) as TotalWorkDone
-FROM JobHistory
-WHERE Worker_id = 3
 
  
 

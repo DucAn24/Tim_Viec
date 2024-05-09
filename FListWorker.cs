@@ -65,8 +65,8 @@ namespace TimViec
             //create and configure picture box
             PictureBox pictureBox = new PictureBox();
             pictureBox.Image = image;
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Set this to Zoom
-            pictureBox.Size = new Size(90, 90); // Set this to desired size
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; 
+            pictureBox.Size = new Size(90, 90); 
             pictureBox.Location = new Point(20, 20);
 
             // Create and configure labels
@@ -74,7 +74,7 @@ namespace TimViec
             Label label2 = CreateLabel(label2Text, new Point(120, 50), new Font("Nirmala UI", 16, FontStyle.Bold), Color.LightGreen);
             Label label3 = CreateLabel("Age: " + label3Text, new Point(20, 120));
             Label label4 = CreateLabel("Bio: " + label4Text, new Point(120, 100));
-            Label salaryLabel = CreateLabel("Salary: " + salary, new Point(120, 120));
+            Label salaryLabel = CreateLabel("Salary: $" + salary, new Point(120, 120));
 
             // Create and configure buttons
             MaterialButton btnHire = CreateButton("Hire Talent", new Point(120, 200), card, HireWorker);
@@ -108,6 +108,7 @@ namespace TimViec
             return button;
         }
 
+        public static event Action WorkerHired;
         private void HireWorker(object sender, EventArgs e)
         {
             // Get the panel from the Hire button's Tag property
@@ -121,12 +122,15 @@ namespace TimViec
             if (clientDAO.HireWorker(userId, workerId))
             {
                 MessageBox.Show("Hire successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                WorkerHired?.Invoke();
             }
             else
             {
                 MessageBox.Show("You have already hired this worker.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public static event Action WorkerAddedToFavourites;
 
         private void AddWorkerToFavourites(object sender, EventArgs e)
         {
@@ -140,13 +144,16 @@ namespace TimViec
             ClientDAO clientDAO = new ClientDAO();
             if (clientDAO.AddWorkerToFavourites(userId, workerId))
             {
+                
                 MessageBox.Show("Like successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                WorkerAddedToFavourites?.Invoke();
             }
             else
             {
                 MessageBox.Show("You have already like this worker.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void LoadDataAndAddPanels(string category)
@@ -162,7 +169,6 @@ namespace TimViec
                 string label1Text = worker.Name;
                 string label2Text = worker.Skills;
 
-                // Calculate age from date of birth
                 int age = DateTime.Now.Year - worker.DateOfBirth.Year;
                 if (DateTime.Now.DayOfYear < worker.DateOfBirth.DayOfYear)
                     age = age - 1;
@@ -182,7 +188,6 @@ namespace TimViec
             WorkerDAO workerDAO = new WorkerDAO();
             List<Worker> workers = workerDAO.SearchWorkers(skills, orderByPrice);
 
-            // Clear the existing panels
             flowLayoutPanel1.Controls.Clear();
 
             foreach (Worker worker in workers)
@@ -193,7 +198,6 @@ namespace TimViec
                 string label1Text = worker.Name;
                 string label2Text = worker.Skills;
 
-                // Calculate age from date of birth
                 int age = DateTime.Now.Year - worker.DateOfBirth.Year;
                 if (DateTime.Now.DayOfYear < worker.DateOfBirth.DayOfYear)
                     age = age - 1;
@@ -220,10 +224,8 @@ namespace TimViec
             informationForm.Show();
         }
 
-
         private void OpenAppointmentForm(int userId, int workerId)
         {
-            // Open the Appointment form
             FAppointment appointmentForm = new FAppointment(userId, workerId);
             appointmentForm.Show();
         }

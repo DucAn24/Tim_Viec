@@ -85,9 +85,21 @@ namespace TimViec
                 pair.Key.Click += PictureBox_Click;
             }
 
+
+            FListJob.OnJobApplied += RefeshData;
         }
 
         private void Worker_Load(object sender, EventArgs e)
+        {
+            AddPanelToWorkDone(worker_id);
+            LoadWorkerData();
+            LoadAllDataAppointment();
+            LoadPendingAppointment();
+            CreatePieChart();
+            LoadAnalytics();
+        }
+
+        private void RefeshData()
         {
             AddPanelToWorkDone(worker_id);
             LoadWorkerData();
@@ -108,7 +120,25 @@ namespace TimViec
                 txtEmail.Text = worker.Email;
                 txtPhone.Text = worker.Phone;
                 txtAddress.Text = worker.Address;
-                picBoxUser.Image = Image.FromFile(worker.ImagePath);
+                
+
+                if (!string.IsNullOrEmpty(worker.ImagePath))
+                {
+                    try
+                    {
+                        picBoxUser.Image = Image.FromFile(worker.ImagePath);
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        picBoxUser.Image = Image.FromFile("E:\\winForm\\TimViec\\Image\\profile.png");
+                        MessageBox.Show("Original image not found, using default image.", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    picBoxUser.Image = Image.FromFile("E:\\winForm\\TimViec\\Image\\profile.png");
+                }
+
                 txtBio.Text = worker.Bio;
                 txtSkill.Text = worker.Skills;
                 cbxCategory2.Text = worker.Category;
@@ -117,7 +147,14 @@ namespace TimViec
                 ckbMale.Checked = worker.Gender == "Male";
                 ckbFemale.Checked = worker.Gender == "Female";
 
-                dtpBirth.Value = worker.DateOfBirth;
+                if (worker.DateOfBirth >= dtpBirth.MinDate && worker.DateOfBirth <= dtpBirth.MaxDate)
+                {
+                    dtpBirth.Value = worker.DateOfBirth;
+                }
+                else
+                {
+                    dtpBirth.Value = DateTime.Now;
+                }
                 imagePath = worker.ImagePath;
             }
         }
@@ -212,14 +249,12 @@ namespace TimViec
 
         private void AddControlsToPanel(Image image, string label1Text, string label4Text, string category, string price)
         {
-            // Create and configure picture box
             PictureBox pictureBox = new PictureBox();
             pictureBox.Image = image;
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.Size = new Size(150, 150);
             pictureBox.Location = new Point(500, 20);
 
-            // Create and configure labels
             Label label1 = CreateLabel(label1Text, new Font("Nirmala UI", 14, System.Drawing.FontStyle.Bold), new Point(40, 10));
             label1.ForeColor = Color.Chocolate;
 
@@ -229,13 +264,12 @@ namespace TimViec
 
             Label labelPrice = CreateLabel("Price: " + price, new Font("Nirmala UI", 12), new Point(40, 190));
 
-            // Create a new panel
+
             MaterialCard card = new MaterialCard();
             card.Width = 680;
             card.Height = 250;
             card.BackColor = Color.White;
 
-            // Add controls to the card
             card.Controls.Add(label1);
             card.Controls.Add(label4);
             card.Controls.Add(pictureBox);
@@ -388,22 +422,6 @@ namespace TimViec
                 ForeColor = Color.White
             };
 
-
-            btnAccept.Click += (sender, e) =>
-            {
-                AppointmentDAO appointmentDAO = new AppointmentDAO();
-                bool isUpdated = appointmentDAO.UpdateAppointmentStatus(appointmentId, "Accepted");
-
-                if (isUpdated)
-                {
-                    MessageBox.Show("Appointment status updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Failed to update appointment status.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            };
-
             var btnCancel = new MaterialButton
             {
                 Text = "Cancel",
@@ -411,21 +429,6 @@ namespace TimViec
                 Size = new Size(100, 30),
                 BackColor = Color.LightGreen,
                 ForeColor = Color.White
-            };
-
-            btnCancel.Click += (sender, e) =>
-            {
-                AppointmentDAO appointmentDAO = new AppointmentDAO();
-                bool isUpdated = appointmentDAO.UpdateAppointmentStatus(appointmentId, "Cancel");
-
-                if (isUpdated)
-                {
-                    MessageBox.Show("Appointment status updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Failed to update appointment status.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             };
 
             var card = new MaterialCard
@@ -444,6 +447,40 @@ namespace TimViec
             card.Controls.Add(btnAccept);
             card.Controls.Add(btnCancel);
 
+            btnAccept.Click += (sender, e) =>
+            {
+                AppointmentDAO appointmentDAO = new AppointmentDAO();
+                bool isUpdated = appointmentDAO.UpdateAppointmentStatus(appointmentId, "Accepted");
+
+                if (isUpdated)
+                {
+                    panelPending.Controls.Remove(card);
+                    MessageBox.Show("Appointment status updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update appointment status.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+
+
+            btnCancel.Click += (sender, e) =>
+            {
+                AppointmentDAO appointmentDAO = new AppointmentDAO();
+                bool isUpdated = appointmentDAO.UpdateAppointmentStatus(appointmentId, "Cancel");
+
+                if (isUpdated)
+                {
+                    panelPending.Controls.Remove(card);
+                    MessageBox.Show("Appointment status updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update appointment status.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+
+
             panelPending.Controls.Add(card);
 
         }
@@ -459,6 +496,7 @@ namespace TimViec
 
                 AddControlsToAppointment(userImage, appointment.UserName, appointment.Content, appointment.DateTime.ToString(), appointment.Status);
             }
+
         }
 
         private void LoadPendingAppointment()
@@ -472,6 +510,7 @@ namespace TimViec
 
                 AddControlsToAppointmentPending(userImage, appointment.UserName, appointment.Content, appointment.DateTime.ToString(), appointment.Status, appointment.AppointmentId);
             }
+
         }
 
         private void SearchAppointment(int workerId)
@@ -525,40 +564,34 @@ namespace TimViec
 
         private void CreatePieChart()
         {
-            // Create an instance of WorkerDAO
             WorkerDAO workerDAO = new WorkerDAO();
 
-            // Get the job count per category for the current worker
             Dictionary<string, int> jobCountPerCategory = workerDAO.GetJobCountPerCategory(this.worker_id);
 
-            // Create a list of colors
             System.Drawing.Color[] colors = new System.Drawing.Color[] { System.Drawing.Color.Red, System.Drawing.Color.Orange, System.Drawing.Color.Yellow, System.Drawing.Color.Green, System.Drawing.Color.Blue, System.Drawing.Color.Indigo, System.Drawing.Color.Violet };
 
-            // Create a list of PieSlice objects based on the data
             List<PieSlice> slices = new List<PieSlice>();
             int colorIndex = 0;
             foreach (KeyValuePair<string, int> entry in jobCountPerCategory)
             {
                 System.Drawing.Color systemColor = colors[colorIndex % colors.Length];
                 ScottPlot.Color scottPlotColor = new ScottPlot.Color(systemColor.R, systemColor.G, systemColor.B);
-                // Include the count in the label
+
                 slices.Add(new PieSlice() { Value = entry.Value, FillColor = scottPlotColor, Label = $"{entry.Key} ({entry.Value})" });
                 colorIndex++;
             }
 
-            // Create the pie chart
             var pie = pieChartPlot.Plot.Add.Pie(slices);
             pie.DonutFraction = .5;
             pie.ShowSliceLabels = true;
 
-            // Render the chart
             pieChartPlot.Refresh();
         }
 
         private void LoadAnalytics()
         {
             WorkerDAO workerDAO = new WorkerDAO();
-            labelRevenue.Text = workerDAO.GetTotalRevenue(this.worker_id).ToString();
+            labelRevenue.Text ="$ " + workerDAO.GetTotalRevenue(this.worker_id).ToString();
             labelStar.Text = workerDAO.GetAverageRating(this.worker_id).ToString();
             labelWorkDone.Text = workerDAO.GetTotalWorkDone(this.worker_id).ToString();
         }

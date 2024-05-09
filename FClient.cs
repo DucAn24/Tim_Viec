@@ -90,9 +90,23 @@ namespace TimViec
                 pair.Key.Click += PictureBox_Click;
             }
 
+
+            FListWorker.WorkerAddedToFavourites += RefreshData;
+            FListWorker.WorkerHired += RefreshData;
+
         }
 
         private void Home_Load(object sender, EventArgs e)
+        {
+
+            LoadDataHired();
+            LoadDataFavourite();
+            LoadUserData();
+            LoadDataAppointment();
+
+        }
+
+        public void RefreshData()
         {
             LoadDataHired();
             LoadDataFavourite();
@@ -197,7 +211,7 @@ namespace TimViec
                 }
                 else
                 {
-                    picBoxUser.Image = null; // or set to a default image
+                    picBoxUser.Image = null;
                 }
 
                 ckbMale.Checked = client.Gender == "Male";
@@ -208,9 +222,8 @@ namespace TimViec
                 }
                 else
                 {
-                    dtpBirth.Value = DateTime.Now; // or set to another default value
+                    dtpBirth.Value = DateTime.Now;
                 }
-
             }
         }
 
@@ -347,24 +360,21 @@ namespace TimViec
 
             btnUnLike.Click += (sender, e) =>
             {
-                // Get the card that the button is a part of
                 var card = ((Control)sender).Parent as MaterialCard;
 
-                // Get the workerId for this card
                 if (card != null && cardToWorkerIdMap.TryGetValue(card, out int workerId))
                 {
-                    // Remove the worker from favourites
+
                     bool success = clientDAO.RemoveWorkerToFavourites(this.userId, workerId: workerId);
 
                     if (success)
                     {
-                        // Optionally, you can remove the card from the panel
                         flowLayoutPanel4.Controls.Remove(card);
                         MessageBox.Show( "Success");
                     }
                     else
                     {
-                        // Handle the case where the worker could not be removed from favourites
+
                     }
                 }
             };
@@ -467,6 +477,7 @@ namespace TimViec
 
                 AddControlsToAppointment(workerImage, appointment.WorkerName, appointment.Content, appointment.DateTime.ToString(), appointment.Status);
             }
+
         }
 
         private void LoadDataHired()

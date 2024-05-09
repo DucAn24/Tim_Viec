@@ -79,7 +79,7 @@ namespace TimViec
 
             Label lableCategory = CreateLabel("Category: " + category, new Font("Nirmala UI", 12), new Point(35, 90));
 
-            Label labelPrice = CreateLabel("Price: " + price, new Font("Nirmala UI", 12), new Point(35, 130));
+            Label labelPrice = CreateLabel("Price: $" + price, new Font("Nirmala UI", 12), new Point(35, 130));
 
             // Create a new panel
             MaterialCard card = new MaterialCard();

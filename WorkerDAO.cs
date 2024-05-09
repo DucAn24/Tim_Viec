@@ -300,10 +300,8 @@ namespace TimViec
         {
             try
             {
-                // Open the database connection
                 connection.Open();
 
-                // Check if the worker has already applied for this job
                 string checkQuery = @"
                             SELECT COUNT(*) 
                             FROM Applications 
@@ -323,7 +321,6 @@ namespace TimViec
                     }
                     else
                     {
-                        // Create the SQL command to insert the data
                         string query = @"
                                 INSERT INTO Applications (job_id, Worker_id)
                                 VALUES (@JobId, @WorkerId)
@@ -331,7 +328,6 @@ namespace TimViec
 
                         using (SqlCommand command = new SqlCommand(query, connection.Connection))
                         {
-                            // Add the parameters to the command
                             command.Parameters.AddWithValue("@JobId", jobId);
                             command.Parameters.AddWithValue("@WorkerId", workerId);
 
@@ -349,7 +345,6 @@ namespace TimViec
             }
             finally
             {
-                // Close the database connection
                 connection.Close();
             }
         }
@@ -438,13 +433,10 @@ namespace TimViec
 
             SqlCommand command = new SqlCommand(query, connection.Connection);
 
-            // Add the user_id parameter to the command
             command.Parameters.AddWithValue("@Worker_id", workerId);
 
-            // Execute the command and get the result
             object result = command.ExecuteScalar();
 
-            // If a result was returned, set the workerId
             if (result != null)
             {
                 AvgRatings = (int)result;
@@ -460,28 +452,26 @@ namespace TimViec
             connection.Open();
 
             string query = @"
-                        SELECT SUM(Price) as TotalRevenue
-                        FROM JobHistory
-                        WHERE Worker_id =  @Worker_id;
-            ";
+                SELECT SUM(Price) as TotalRevenue
+                FROM JobHistory
+                WHERE Worker_id =  @Worker_id;
+    ";
 
             SqlCommand command = new SqlCommand(query, connection.Connection);
 
-            // Add the user_id parameter to the command
             command.Parameters.AddWithValue("@Worker_id", workerId);
 
-            // Execute the command and get the result
             object result = command.ExecuteScalar();
 
-            // If a result was returned, set the workerId
-            if (result != null)
+            if (result != DBNull.Value)
             {
                 revenue = (decimal)result;
             }
             connection.Close();
 
-            return (decimal)revenue;
+            return revenue;
         }
+
 
         public int GetTotalWorkDone(int workerId)
         {
@@ -496,13 +486,10 @@ namespace TimViec
 
             SqlCommand command = new SqlCommand(query, connection.Connection);
 
-            // Add the user_id parameter to the command
             command.Parameters.AddWithValue("@Worker_id", workerId);
 
-            // Execute the command and get the result
             object result = command.ExecuteScalar();
 
-            // If a result was returned, set the workerId
             if (result != null)
             {
                 totalWorkDone = (int)result;
@@ -515,7 +502,7 @@ namespace TimViec
 
         public int GetWorkerIdFromUserId(int userId)
         {
-            int workerId = -1; // Initialize to -1 to represent not found
+            int workerId = -1;
 
             connection.Open();
 
@@ -529,13 +516,10 @@ namespace TimViec
 
             SqlCommand command = new SqlCommand(query, connection.Connection);
 
-            // Add the user_id parameter to the command
             command.Parameters.AddWithValue("@UserId", userId);
 
-            // Execute the command and get the result
             object result = command.ExecuteScalar();
 
-            // If a result was returned, set the workerId
             if (result != null)
             {
                 workerId = (int)result;

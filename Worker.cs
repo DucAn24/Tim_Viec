@@ -27,7 +27,6 @@ namespace TimViec
         public string Category { get => category; set => category = value; }
 
         public string Salary { get => salary; set => salary = value; }
-
         public int WorkerId { get; set; }
         public double AvgStars { get;  set; }
         public string Comment { get; set; }  

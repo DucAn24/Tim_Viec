@@ -30,7 +30,7 @@ namespace TimViec
             dbConnection = new DbConnection();
             WorkerDAO workerDAO = new WorkerDAO();
             this.worker_id = workerDAO.GetWorkerIdFromUserId(userID);
-            this.category = category; // Add this line
+            this.category = category; 
 
 
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
@@ -49,17 +49,26 @@ namespace TimViec
             LoadDataAndAddPanels(category);
         }
 
+        public static event Action OnJobApplied;
         private void AddControlsToPanel(Image image, string label1Text, string label2Text, string label3Text, object job_id, object worker_id)
         {
             // Create a new panel
             MaterialCard card = new MaterialCard();
-            card.Width = 700; // Set panel width as needed
+            card.Width = 700; 
             card.Height = 250;
-            card.BackColor = Color.White; // Set panel background color if needed
+            card.BackColor = Color.White; 
             card.Tag = new { WorkerId = this.worker_id, JobId = job_id };
-            card.Click += (sender, e) =>
+
+            PictureBox pictureBox = CreatePictureBox(image);
+
+            Label label1 = CreateLabel(label1Text, new Point(120, 20), new Font("Nirmala UI", 12, FontStyle.Bold), Color.Chocolate);
+            Label label2 = CreateLabel(label2Text, new Point(120, 50), new Font("Nirmala UI", 16, FontStyle.Bold), Color.LightGreen);
+            Label label3 = CreateLabel(label3Text, new Point(20, 120));
+
+            // Create and configure button
+            MaterialButton btnAcceptJob = CreateButton("Accept Job", new Point(20, 200));
+            btnAcceptJob.Click += (sender, e) =>
             {
-                // Get the job ID and worker ID from the panel's Tag property
                 var jobId = ((dynamic)card.Tag).JobId;
                 var workerId = ((dynamic)card.Tag).WorkerId;
 
@@ -69,6 +78,7 @@ namespace TimViec
                 if (success)
                 {
                     MessageBox.Show("Job application successfully submitted.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    OnJobApplied?.Invoke();
                 }
                 else
                 {
@@ -76,18 +86,6 @@ namespace TimViec
                 }
             };
 
-            // Create and configure picture box
-            PictureBox pictureBox = CreatePictureBox(image);
-
-            // Create and configure labels
-            Label label1 = CreateLabel(label1Text, new Point(120, 20), new Font("Nirmala UI", 12, FontStyle.Bold), Color.Chocolate);
-            Label label2 = CreateLabel(label2Text, new Point(120, 50), new Font("Nirmala UI", 16, FontStyle.Bold), Color.LightGreen);
-            Label label3 = CreateLabel(label3Text, new Point(20, 120));
-
-            // Create and configure button
-            MaterialButton btnAcceptJob = CreateButton("Accept Job", new Point(20, 200));
-
-            // add controls to the card
             card.Controls.AddRange(new Control[] { label1, label2, label3, pictureBox, btnAcceptJob });
 
             flowLayoutPanel1.Controls.Add(card);
@@ -97,8 +95,8 @@ namespace TimViec
         {
             PictureBox pictureBox = new PictureBox();
             pictureBox.Image = image;
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Set this to Zoom
-            pictureBox.Size = new Size(90, 90); // Set this to desired size
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; 
+            pictureBox.Size = new Size(90, 90); 
             pictureBox.Location = new Point(20, 20);
             return pictureBox;
         }
