@@ -91,8 +91,8 @@ namespace TimViec
             }
 
 
-            FListWorker.WorkerAddedToFavourites += RefreshData;
-            FListWorker.WorkerHired += RefreshData;
+            //FListWorker.WorkerAddedToFavourites += RefreshData;
+            //FListWorker.WorkerHired += RefreshData;
 
         }
 
@@ -544,6 +544,22 @@ namespace TimViec
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // Email validation
+            var emailRegex = new System.Text.RegularExpressions.Regex(@"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$");
+            if (!emailRegex.IsMatch(txtEmail.Text))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Invalid Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Phone validation
+            var phoneRegex = new System.Text.RegularExpressions.Regex(@"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$");
+            if (!phoneRegex.IsMatch(txtPhoneNumber.Text))
+            {
+                MessageBox.Show("Please enter a valid phone number.", "Invalid Phone Number", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             Client client = new Client(txtName.Text, txtEmail.Text, dtpBirth.Value, imagePath, txtPhoneNumber.Text, txtLocation.Text, gender);
             bool isUpdated = clientDAO.UpdateInformation(client, this.userId);
             if (isUpdated)
@@ -555,6 +571,7 @@ namespace TimViec
                 MessageBox.Show("Failed to update client information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnSumitJob_Click(object sender, EventArgs e)
         {

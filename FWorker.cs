@@ -120,24 +120,16 @@ namespace TimViec
                 txtEmail.Text = worker.Email;
                 txtPhone.Text = worker.Phone;
                 txtAddress.Text = worker.Address;
-                
 
-                if (!string.IsNullOrEmpty(worker.ImagePath))
+                if (!string.IsNullOrEmpty(worker.ImagePath) && File.Exists(worker.ImagePath))
                 {
-                    try
-                    {
-                        picBoxUser.Image = Image.FromFile(worker.ImagePath);
-                    }
-                    catch (FileNotFoundException)
-                    {
-                        picBoxUser.Image = Image.FromFile("E:\\winForm\\TimViec\\Image\\profile.png");
-                        MessageBox.Show("Original image not found, using default image.", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    picBoxUser.Image = Image.FromFile(worker.ImagePath);
                 }
                 else
                 {
-                    picBoxUser.Image = Image.FromFile("E:\\winForm\\TimViec\\Image\\profile.png");
+                    picBoxUser.Image = null;
                 }
+
 
                 txtBio.Text = worker.Bio;
                 txtSkill.Text = worker.Skills;
