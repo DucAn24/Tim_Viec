@@ -419,9 +419,9 @@ namespace TimViec
             return jobCountPerCategory;
         }
 
-        public int GetAverageRating(int workerId)
+        public double GetAverageRating(int workerId)
         {
-            int AvgRatings = 0;
+            double AvgRatings = 0;
             connection.Open();
 
             string query = @"
@@ -439,7 +439,7 @@ namespace TimViec
 
             if (result != null)
             {
-                AvgRatings = (int)result;
+                AvgRatings = (double)result;
             }
             connection.Close();
 
